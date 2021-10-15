@@ -1,0 +1,8 @@
+.main_header {
+    grid-area: header;
+    background: red;
+}
+
+.main-header img {
+    display: flex;
+}

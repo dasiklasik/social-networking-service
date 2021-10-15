@@ -5,24 +5,12 @@
     display: grid;
     grid-template-columns: 200px 1fr;
     grid-template-rows: 50px 1fr;
-    grid-template-areas: 'header header'
+    gap: 10px;
+    grid-template-areas:
+    'header header'
     'menu content';
 }
 
-.main-header {
-    grid-area: header;
-    background: red;
-}
-
-.main-menu {
-    grid-area: menu;
-    background: green;
-}
-
-.main-content {
-    grid-area: content;
-    background: pink;
-}
 
 /*
 #root div {

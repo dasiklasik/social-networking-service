@@ -1,0 +1,13 @@
+.main_menu {
+    grid-area: menu;
+    background: green;
+}
+
+.main_menu ul {
+    list-style: none;
+    padding-left: 10px;
+}
+
+.item {
+    color: white;
+}
