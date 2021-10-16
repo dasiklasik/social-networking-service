@@ -1,13 +1,14 @@
 import React from "react";
-import nature from '../nature.jpg';
+import nature from '../../nature.jpg';
 import s from './Profile.module.css'
+import {PostsWrapper} from "./MyPosts/PostsWrapper";
 
 export function Profile() {
     return (
         <main className={s.main_content}>
             <img src={nature} className={s.general_image}/>
             <ProfileInfo/>
-            <Posts/>
+            <PostsWrapper/>
         </main>
     )
 }
@@ -27,12 +28,4 @@ function ProfileInfo() {
     )
 }
 
-function Posts() {
-    return (
-        <div className={s.posts}>
-            <h3>My posts</h3>
-            <textarea>your news</textarea>
-            <button>Send</button>
-        </div>
-    )
-}
+
