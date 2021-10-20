@@ -1,7 +1,7 @@
 import React from "react";
 
 function Dialogs() {
-    return <div></div>
+    return <div>Dialogs</div>
 }
 
 export default Dialogs;

@@ -1,8 +1,3 @@
-.main_content {
-    grid-area: content;
-    background: pink;
-}
-
 .general_image {
     width: 100%;
     height: 250px;

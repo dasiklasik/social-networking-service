@@ -11,7 +11,10 @@
     'menu content';
 }
 
-
+.content-wrapper {
+    grid-area: content;
+    background: pink;
+}
 /*
 #root div {
   background-color: #282c34;
