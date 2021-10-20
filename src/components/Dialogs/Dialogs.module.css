@@ -1,0 +1,42 @@
+
+
+.dialogs_wrapper {
+    display: flex;
+}
+
+.dialogs_list_wrapper {
+    padding: 0 20px;
+}
+
+.dialogs_list {
+    margin-top: 0;
+}
+
+.dialog {
+    margin-top: 10px;
+}
+
+.dialog:nth-child(1) {
+    margin-top: 0;
+}
+
+.dialog.active {
+    font-size: 20px;
+    color: red;
+}
+
+.dialog_field_wrapper {
+    border-left: 1px solid gray;
+}
+
+.dialog_field {
+    list-style: none;
+}
+
+.message {
+    min-width: 100px;
+    min-height: 30px;
+    background: orange;
+    padding: 10px 20px;
+    margin-top: 20px;
+}
