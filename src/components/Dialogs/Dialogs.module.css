@@ -20,7 +20,7 @@
     margin-top: 0;
 }
 
-.dialog.active {
+.dialog .active {
     font-size: 20px;
     color: red;
 }
