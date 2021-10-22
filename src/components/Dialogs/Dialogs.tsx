@@ -25,8 +25,30 @@ function MessageItem(props: MessageItemPropsType) {
     )
 }
 
+type dialogsDataType = {
+    id: number
+    name: string
+}
+
+type messagesDataType = {
+    id: number
+    message: string
+}
+
 
 function Dialogs() {
+
+    const dialogsData: Array<dialogsDataType> = [
+        {id: 1, name: 'Kate'},
+        {id: 2, name: 'Dasha'},
+        {id: 3, name: 'Masha'}
+    ]
+
+    const messagesData: Array<messagesDataType> = [
+        {id: 1, message: 'Hi'},
+        {id: 2, message: 'Hello!'}
+    ]
+
     return (
         <div className={s.dialogs}>
             <h2>Dialogs</h2>
