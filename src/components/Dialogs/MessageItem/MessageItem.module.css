@@ -1,0 +1,18 @@
+.message {
+    min-width: 100px;
+    max-width: 200px;
+    min-height: 30px;
+    background: orange;
+    padding: 10px 20px;
+    margin-top: 20px;
+    border-radius: 20px;
+    display: block;
+}
+
+.message.left {
+
+}
+
+.message.right {
+    margin-left: auto;
+}

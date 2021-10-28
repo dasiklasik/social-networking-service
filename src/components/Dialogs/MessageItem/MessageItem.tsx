@@ -1,13 +1,17 @@
 import React from "react";
-import s from './../Dialogs.module.css'
+import s from './MessageItem.module.css'
+import {messagesDataType} from "../../../redux/state";
 
 type MessageItemPropsType = {
-    content: string
+    state: messagesDataType
 }
 
 function MessageItem(props: MessageItemPropsType) {
+
+    let whoseMessage = props.state.myMessage ? 'right' : 'left'
+
     return (
-        <li className={s.message}>{props.content}</li>
+        <li className={`${s.message} ${s[whoseMessage]}`} key={props.state.id}>{props.state.message}</li>
     )
 }
 

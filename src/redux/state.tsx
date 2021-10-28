@@ -2,11 +2,13 @@
 export type dialogsDataType = {
     id: number
     name: string
+    avatar: string
 }
 
 export type messagesDataType = {
     id: number
     message: string
+    myMessage: boolean
 }
 
 export type postDataType = {
@@ -39,13 +41,15 @@ export const state = {
     },
     dialogsPage: {
         dialogsData: [
-            {id: 1, name: 'Kate'},
-            {id: 2, name: 'Dasha'},
-            {id: 3, name: 'Masha'}
+            {id: 1, name: 'Kate', avatar: 'https://avatarko.ru/img/kartinka/17/kot_naushniki_16067.jpg'},
+            {id: 2, name: 'Dasha', avatar: 'https://avatarko.ru/img/kartinka/17/kot_naushniki_16067.jpg'},
+            {id: 3, name: 'Masha', avatar: 'https://avatarko.ru/img/kartinka/17/kot_naushniki_16067.jpg'}
         ],
         messagesData: [
-            {id: 1, message: 'Hi'},
-            {id: 2, message: 'Hello!'}
+            {id: 1, message: 'Hi', myMessage: true},
+            {id: 2, message: 'Hello!', myMessage: false},
+            {id: 3, message: 'How are you?', myMessage: true},
+            {id: 4, message: 'I havent seen you for 5 years', myMessage: true}
         ],
     },
 }
