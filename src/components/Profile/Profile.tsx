@@ -3,10 +3,10 @@ import nature from '../../nature.jpg';
 import s from './Profile.module.css'
 import {PostsWrapper} from "./MyPosts/PostsWrapper";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import {postDataType} from "../../index";
+import {profilePageType} from "../../redux/state";
 
 type profilePropsType = {
-    postData: Array<postDataType>
+    state: profilePageType
 }
 
 export function Profile(props: profilePropsType) {
@@ -15,7 +15,7 @@ export function Profile(props: profilePropsType) {
             <ProfileInfo firstName='Darya' lastName="Samsonovich" dateOfBirth='11.04.1999' city='Minsk'
             education='univercity' webSite='none'
             />
-            <PostsWrapper postData={props.postData}/>
+            <PostsWrapper postData={props.state.postData}/>
         </main>
     )
 }

@@ -2,7 +2,7 @@ import React from "react";
 import s from './PostsWrapper.module.css'
 import {Post} from "./Post/Post";
 import PostForm from "./PostForm/PostForm";
-import {postDataType} from "../../../index";
+import {postDataType} from "../../../redux/state";
 
 type PostsWrapperPropsType = {
     postData: Array<postDataType>
