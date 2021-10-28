@@ -1,4 +1,10 @@
 
+export type friendsDataType = {
+    id: number
+    name: string
+    avatar: string
+}
+
 export type dialogsDataType = {
     id: number
     name: string
@@ -17,6 +23,10 @@ export type postDataType = {
     likesCount: string
 }
 
+export type navbarType = {
+    friendsData: Array<friendsDataType>
+}
+
 export type profilePageType = {
     postData: Array<postDataType>
 }
@@ -27,12 +37,21 @@ export type dialogsPageType = {
 }
 
 export type stateType = {
+    navbar: navbarType
     profilePage: profilePageType
     dialogsPage: dialogsPageType
 
 }
 
 export const state = {
+    navbar: {
+        friendsData: [
+            {id: 1, name: 'Kate', avatar: 'https://avatarko.ru/img/kartinka/17/kot_naushniki_16067.jpg'},
+            {id: 2, name: 'Dasha', avatar: 'https://avatarko.ru/img/kartinka/17/kot_naushniki_16067.jpg'},
+            {id: 3, name: 'Max', avatar: 'https://avatarko.ru/img/kartinka/17/kot_naushniki_16067.jpg'},
+            {id: 4, name: 'Luck', avatar: 'https://avatarko.ru/img/kartinka/17/kot_naushniki_16067.jpg'}
+        ]
+    },
     profilePage: {
         postData: [
             {id: 1, message: 'Message', likesCount: '0' },

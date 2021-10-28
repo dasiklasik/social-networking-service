@@ -1,0 +1,13 @@
+.item {
+    margin-top: 10px;
+}
+
+.item img {
+    width: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.name {
+    text-align: center;
+}

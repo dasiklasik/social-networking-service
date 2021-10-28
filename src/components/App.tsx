@@ -19,7 +19,7 @@ function App(props: AppPropsType) {
         <BrowserRouter>
             <div className={'wrapper'}>
                 <Header/>
-                <Nav/>
+                <Nav state={props.state.navbar}/>
                 <div className={'content-wrapper'}>
                     <Route path="/profile" render={() => <Profile state={props.state.profilePage}/>} />
                     <Route path="/dialogs" render={() => {
