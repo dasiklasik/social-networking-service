@@ -1,0 +1,12 @@
+.message_form {
+    margin-top: 40px;
+    margin-right: 20px;
+    margin-left: 20px;
+    padding-bottom: 40px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.message_form textarea {
+    width: 100%;
+}

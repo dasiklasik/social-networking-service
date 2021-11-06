@@ -3,13 +3,12 @@ import s from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import MessageItem from "./MessageItem/MessageItem";
 import {dialogsPageType} from "../../redux/state";
+import {MessageForm} from "./MessageForm/MessageForm";
 
 
 type dialogsPropsType = {
     state: dialogsPageType
 }
-
-
 
 
 function Dialogs(props: dialogsPropsType) {
@@ -31,6 +30,7 @@ function Dialogs(props: dialogsPropsType) {
                     <ul className={s.dialog_field}>
                         {messageArray}
                     </ul>
+                    <MessageForm/>
                 </div>
             </div>
         </div>
