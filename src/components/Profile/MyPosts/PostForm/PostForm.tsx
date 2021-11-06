@@ -3,10 +3,18 @@ import s from './../PostsWrapper.module.css'
 
 
 function PostForm() {
+
+    const newPostRef = React.createRef<HTMLTextAreaElement>()
+
+    const onClickHandler = () => {
+        debugger
+        alert(newPostRef.current?.value)
+    }
+
     return (
         <div className={s.post_form}>
-            <textarea>your news</textarea>
-            <button>Send</button>
+            <textarea ref={newPostRef}>your news</textarea>
+            <button onClick={onClickHandler}>Send</button>
         </div>
     )
 }
