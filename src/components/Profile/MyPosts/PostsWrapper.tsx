@@ -6,17 +6,18 @@ import {postDataType} from "../../../redux/state";
 
 type PostsWrapperPropsType = {
     postData: Array<postDataType>
+    addPost: (postMessage: string) => void
 }
 
-export function PostsWrapper(props: PostsWrapperPropsType) {
+export function PostsWrapper({postData, addPost, ...props}: PostsWrapperPropsType) {
 
 
-    const postArray = props.postData.map(p => <Post id={p.id} message={p.message} likesCount={p.likesCount}/>)
+    const postArray = postData.map(p => <Post id={p.id} message={p.message} likesCount={p.likesCount}/>)
 
     return (
         <div className={s.posts}>
             <h3>My posts</h3>
-            <PostForm/>
+            <PostForm addPost={addPost}/>
             {postArray}
         </div>
     )

@@ -1,3 +1,4 @@
+import {rerenderCode} from "../render";
 
 export type friendsDataType = {
     id: number
@@ -71,4 +72,15 @@ export const state = {
             {id: 4, message: 'I havent seen you for 5 years', myMessage: true}
         ],
     },
+}
+
+export const addPost = (postMessage: string) => {
+    let newPost: postDataType = {
+        id: 5,
+        message: postMessage,
+        likesCount: '0'
+    }
+
+    state.profilePage.postData.push(newPost)
+    rerenderCode(state, addPost)
 }

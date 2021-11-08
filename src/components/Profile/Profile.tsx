@@ -7,15 +7,16 @@ import {profilePageType} from "../../redux/state";
 
 type profilePropsType = {
     state: profilePageType
+    addPost: (postMessage: string) => void
 }
 
-export function Profile(props: profilePropsType) {
+export function Profile({state, addPost, ...props}: profilePropsType) {
     return (
         <main className={s.main_content}>
             <ProfileInfo firstName='Darya' lastName="Samsonovich" dateOfBirth='11.04.1999' city='Minsk'
             education='univercity' webSite='none'
             />
-            <PostsWrapper postData={props.state.postData}/>
+            <PostsWrapper postData={state.postData} addPost={addPost}/>
         </main>
     )
 }

@@ -12,7 +12,7 @@ type PostPropsType = {
 export function Post(props: PostPropsType) {
 
     return (
-        <div className={s.item}>
+        <div className={s.item} key={props.id}>
             <img src={'https://avatarko.ru/img/kartinka/17/kot_naushniki_16067.jpg'}/>
             <div>{props.message}</div>
             <div>{props.likesCount} likes</div>
