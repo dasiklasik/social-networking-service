@@ -3,6 +3,8 @@ import s from './../PostsWrapper.module.css'
 
 type postFormPropsType = {
     addPost: (postMessage: string) => void
+    typedMessage: string
+    changeTypedMessage: (message: string) => void
 }
 
 function PostForm({addPost, ...props}: postFormPropsType) {
@@ -19,7 +21,13 @@ function PostForm({addPost, ...props}: postFormPropsType) {
 
     return (
         <div className={s.post_form}>
-            <textarea ref={newPostRef}></textarea>
+            <textarea value={props.typedMessage} ref={newPostRef}
+                      onChange={(e) => {
+                          debugger
+                          props.changeTypedMessage(e.currentTarget.value)}
+                      }>
+
+            </textarea>
             <button onClick={onClickHandler}>Send</button>
         </div>
     )

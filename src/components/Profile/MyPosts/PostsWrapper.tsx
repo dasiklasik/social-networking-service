@@ -7,6 +7,8 @@ import {postDataType} from "../../../redux/state";
 type PostsWrapperPropsType = {
     postData: Array<postDataType>
     addPost: (postMessage: string) => void
+    typedMessage: string
+    changeTypedMessage: (message: string) => void
 }
 
 export function PostsWrapper({postData, addPost, ...props}: PostsWrapperPropsType) {
@@ -17,7 +19,7 @@ export function PostsWrapper({postData, addPost, ...props}: PostsWrapperPropsTyp
     return (
         <div className={s.posts}>
             <h3>My posts</h3>
-            <PostForm addPost={addPost}/>
+            <PostForm addPost={addPost} typedMessage={props.typedMessage} changeTypedMessage={props.changeTypedMessage}/>
             {postArray}
         </div>
     )

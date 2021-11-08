@@ -74,6 +74,13 @@ export const state = {
     },
 }
 
+
+export const changeTypedMessage = (message: string) => {
+    typedMessage = message
+    rerenderCode(state, addPost, typedMessage, changeTypedMessage)
+}
+export let typedMessage = '';
+
 export const addPost = (postMessage: string) => {
     let newPost: postDataType = {
         id: 5,
@@ -82,5 +89,5 @@ export const addPost = (postMessage: string) => {
     }
 
     state.profilePage.postData.push(newPost)
-    rerenderCode(state, addPost)
+    rerenderCode(state, addPost, typedMessage, changeTypedMessage)
 }

@@ -2,11 +2,11 @@ import React from 'react';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import {rerenderCode} from "./render";
-import {addPost, state} from './redux/state';
+import {addPost, state, typedMessage, changeTypedMessage} from './redux/state';
 
 
 
-rerenderCode(state, addPost)
+rerenderCode(state, addPost, typedMessage, changeTypedMessage)
 
 
 
