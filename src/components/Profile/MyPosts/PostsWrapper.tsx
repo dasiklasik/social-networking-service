@@ -2,24 +2,24 @@ import React from "react";
 import s from './PostsWrapper.module.css'
 import {Post} from "./Post/Post";
 import PostForm from "./PostForm/PostForm";
-import {postDataType} from "../../../redux/state";
+import {profilePageType, store, storeType} from "../../../redux/state";
 
 type PostsWrapperPropsType = {
-    postData: Array<postDataType>
-    addPost: (postMessage: string) => void
-    typedMessage: string
+    // store: storeType
+    state: profilePageType
+    addPost: () => void
     changeTypedMessage: (message: string) => void
 }
 
-export function PostsWrapper({postData, addPost, ...props}: PostsWrapperPropsType) {
+export function PostsWrapper(props: PostsWrapperPropsType) {
 
 
-    const postArray = postData.map(p => <Post id={p.id} message={p.message} likesCount={p.likesCount}/>)
+    const postArray = store._state.profilePage.postData.map(p => <Post id={p.id} message={p.message} likesCount={p.likesCount}/>)
 
     return (
         <div className={s.posts}>
             <h3>My posts</h3>
-            <PostForm addPost={addPost} typedMessage={props.typedMessage} changeTypedMessage={props.changeTypedMessage}/>
+            <PostForm addPost={props.addPost} changeTypedMessage={props.changeTypedMessage} newPostText={props.state.newPostText}/>
             {postArray}
         </div>
     )

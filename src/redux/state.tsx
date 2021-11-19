@@ -1,4 +1,72 @@
-import {rerenderCode} from "../render";
+
+export type storeType = {
+    _state: stateType
+    getState: () => stateType
+    _subscriber: () => void
+    subscribe: (observer: () => void) => void
+    changeTypedMessage: (message: string) => void
+    addPost: () => void
+}
+
+export let store: storeType = {
+    _state: {
+        navbar: {
+            friendsData: [
+                {id: 1, name: 'Kate', avatar: 'https://avatarko.ru/img/kartinka/17/kot_naushniki_16067.jpg'},
+                {id: 2, name: 'Dasha', avatar: 'https://avatarko.ru/img/kartinka/17/kot_naushniki_16067.jpg'},
+                {id: 3, name: 'Max', avatar: 'https://avatarko.ru/img/kartinka/17/kot_naushniki_16067.jpg'},
+                {id: 4, name: 'Luck', avatar: 'https://avatarko.ru/img/kartinka/17/kot_naushniki_16067.jpg'}
+            ]
+        },
+        profilePage: {
+            postData: [
+                {id: 1, message: 'Message', likesCount: '0' },
+                {id: 2, message: 'Message 2', likesCount: '2' },
+            ],
+            newPostText: ''
+        },
+        dialogsPage: {
+            dialogsData: [
+                {id: 1, name: 'Kate', avatar: 'https://avatarko.ru/img/kartinka/17/kot_naushniki_16067.jpg'},
+                {id: 2, name: 'Dasha', avatar: 'https://avatarko.ru/img/kartinka/17/kot_naushniki_16067.jpg'},
+                {id: 3, name: 'Masha', avatar: 'https://avatarko.ru/img/kartinka/17/kot_naushniki_16067.jpg'}
+            ],
+            messagesData: [
+                {id: 1, message: 'Hi', myMessage: true},
+                {id: 2, message: 'Hello!', myMessage: false},
+                {id: 3, message: 'How are you?', myMessage: true},
+                {id: 4, message: 'I havent seen you for 5 years', myMessage: true}
+            ],
+        },
+    },
+    getState() {
+        return this._state
+    },
+    _subscriber() {
+        console.log('no subscribers')
+    },
+    subscribe(observer: () => void) {
+        this._subscriber = observer
+    },
+    changeTypedMessage(message: string) {
+        console.log(message)
+        this._state.profilePage.newPostText = message
+        this._subscriber()
+    },
+    addPost() {
+        let newPost = {
+            id: 5,
+            message: this._state.profilePage.newPostText,
+            likesCount: '0'
+        }
+        this._state.profilePage.newPostText = ''
+        this._state.profilePage.postData.push(newPost)
+        this._subscriber()
+    }
+}
+
+
+let renderEntireTree = () => {}
 
 export type friendsDataType = {
     id: number
@@ -30,6 +98,7 @@ export type navbarType = {
 
 export type profilePageType = {
     postData: Array<postDataType>
+    newPostText: string
 }
 
 export type dialogsPageType = {
@@ -42,6 +111,10 @@ export type stateType = {
     profilePage: profilePageType
     dialogsPage: dialogsPageType
 
+}
+
+export const callbackHandler = (observer: () => void) => {
+    renderEntireTree = observer
 }
 
 export const state = {
@@ -57,7 +130,8 @@ export const state = {
         postData: [
             {id: 1, message: 'Message', likesCount: '0' },
             {id: 2, message: 'Message 2', likesCount: '2' },
-        ]
+        ],
+        newPostText: ''
     },
     dialogsPage: {
         dialogsData: [
@@ -76,18 +150,18 @@ export const state = {
 
 
 export const changeTypedMessage = (message: string) => {
-    typedMessage = message
-    rerenderCode(state, addPost, typedMessage, changeTypedMessage)
+    state.profilePage.newPostText = message
+    renderEntireTree()
 }
-export let typedMessage = '';
 
-export const addPost = (postMessage: string) => {
+export const addPost = () => {
     let newPost: postDataType = {
         id: 5,
-        message: postMessage,
+        message: state.profilePage.newPostText,
         likesCount: '0'
     }
+    state.profilePage.newPostText = ''
 
     state.profilePage.postData.push(newPost)
-    rerenderCode(state, addPost, typedMessage, changeTypedMessage)
+    renderEntireTree()
 }

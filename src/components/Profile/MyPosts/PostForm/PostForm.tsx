@@ -1,30 +1,30 @@
 import React from "react";
 import s from './../PostsWrapper.module.css'
+import {storeType} from "../../../../redux/state";
 
 type postFormPropsType = {
-    addPost: (postMessage: string) => void
-    typedMessage: string
+    addPost: () => void
     changeTypedMessage: (message: string) => void
+    newPostText: string
+    // store: storeType
 }
 
-function PostForm({addPost, ...props}: postFormPropsType) {
+function PostForm({addPost, changeTypedMessage, newPostText, ...props}: postFormPropsType) {
 
     const newPostRef = React.createRef<HTMLTextAreaElement>()
 
     const onClickHandler = () => {
         if (newPostRef.current) {
-            addPost(newPostRef.current?.value)
-            newPostRef.current.value = ''
+            addPost()
         }
 
     }
 
     return (
         <div className={s.post_form}>
-            <textarea value={props.typedMessage} ref={newPostRef}
+            <textarea value={newPostText} ref={newPostRef}
                       onChange={(e) => {
-                          debugger
-                          props.changeTypedMessage(e.currentTarget.value)}
+                          changeTypedMessage(e.currentTarget.value)}
                       }>
 
             </textarea>

@@ -8,23 +8,26 @@ import {BrowserRouter, Route} from "react-router-dom";
 import News from './News/News';
 import Settings from './Settings/Settings'
 import Music from './Music/Music'
-import {stateType} from "../redux/state";
+import {stateType, storeType} from "../redux/state";
 
 type AppPropsType = {
-    state: stateType
-    addPost: (postMessage: string) => void
-    typedMessage: string
-    changeTypedMessage: (message: string) => void
+    store: storeType
+
 }
 
-function App({state, addPost, ...props}: AppPropsType) {
+function App(props: AppPropsType) {
+
+    const state = props.store.getState()
+
     return (
         <BrowserRouter>
             <div className={'wrapper'}>
                 <Header/>
                 <Nav state={state.navbar}/>
                 <div className={'content-wrapper'}>
-                    <Route path="/profile" render={() => <Profile state={state.profilePage} addPost={addPost} typedMessage={props.typedMessage} changeTypedMessage={props.changeTypedMessage}/>} />
+                    <Route path="/profile" render={() => <Profile state={state.profilePage}
+                                                                  addPost={props.store.addPost.bind(props.store)}
+                                                                  changeTypedMessage={props.store.changeTypedMessage.bind(props.store)}/>} />
                     <Route path="/dialogs" render={() => {
                         return <Dialogs
                             state={state.dialogsPage}
