@@ -12,10 +12,13 @@ import {stateType, storeType} from "../redux/state";
 
 type AppPropsType = {
     store: storeType
-
 }
 
 function App(props: AppPropsType) {
+
+    const test = (e: React.MouseEvent<HTMLButtonElement>) => {
+
+    }
 
     const state = props.store.getState()
 
