@@ -1,4 +1,33 @@
 
+const ADD_POST = 'ADD_POST'
+const CHANGE_TYPED_MESSAGE = 'CHANGE_TYPED_MESSAGE'
+
+export const addPostActionCreator = (): addPostActionType => {
+    return {
+        type: ADD_POST
+    }
+}
+
+export const changeTypedMessageActionCreator = (message: string): changeTypedMessageActionType => {
+    return {
+        type: CHANGE_TYPED_MESSAGE,
+        message
+    }
+}
+
+type addPostActionType = {
+    type: 'ADD_POST'
+}
+
+type changeTypedMessageActionType = {
+    type: 'CHANGE_TYPED_MESSAGE'
+    message: string
+}
+
+export type actionType = addPostActionType | changeTypedMessageActionType
+
+
+
 export type storeType = {
     _state: stateType
     getState: () => stateType
@@ -6,6 +35,7 @@ export type storeType = {
     subscribe: (observer: () => void) => void
     changeTypedMessage: (message: string) => void
     addPost: () => void
+    dispatch: (action: actionType) => void
 }
 
 export let store: storeType = {
@@ -49,7 +79,6 @@ export let store: storeType = {
         this._subscriber = observer
     },
     changeTypedMessage(message: string) {
-        console.log(message)
         this._state.profilePage.newPostText = message
         this._subscriber()
     },
@@ -62,11 +91,28 @@ export let store: storeType = {
         this._state.profilePage.newPostText = ''
         this._state.profilePage.postData.push(newPost)
         this._subscriber()
+    },
+    dispatch(action) {
+        if (action.type === ADD_POST) {
+            let newPost = {
+                id: 5,
+                message: this._state.profilePage.newPostText,
+                likesCount: '0'
+            }
+            this._state.profilePage.newPostText = ''
+            this._state.profilePage.postData.push(newPost)
+            this._subscriber()
+        } else if (action.type === CHANGE_TYPED_MESSAGE) {
+            if (action.message) {
+                this._state.profilePage.newPostText = action.message
+                this._subscriber()
+            }
+        }
     }
 }
 
 
-let renderEntireTree = () => {}
+// let renderEntireTree = () => {}
 
 export type friendsDataType = {
     id: number

@@ -16,10 +16,6 @@ type AppPropsType = {
 
 function App(props: AppPropsType) {
 
-    const test = (e: React.MouseEvent<HTMLButtonElement>) => {
-
-    }
-
     const state = props.store.getState()
 
     return (
@@ -29,8 +25,7 @@ function App(props: AppPropsType) {
                 <Nav state={state.navbar}/>
                 <div className={'content-wrapper'}>
                     <Route path="/profile" render={() => <Profile state={state.profilePage}
-                                                                  addPost={props.store.addPost.bind(props.store)}
-                                                                  changeTypedMessage={props.store.changeTypedMessage.bind(props.store)}/>} />
+                                                                  dispatch={props.store.dispatch.bind(props.store)}/>} />
                     <Route path="/dialogs" render={() => {
                         return <Dialogs
                             state={state.dialogsPage}
