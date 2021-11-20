@@ -1,6 +1,8 @@
 
 const ADD_POST = 'ADD_POST'
 const CHANGE_TYPED_MESSAGE = 'CHANGE_TYPED_MESSAGE'
+const CHANGE_TYPED_DIALOG_MESSAGE = 'CHANGE_TYPED_DIALOG_MESSAGE'
+const ADD_MESSAGE = 'ADD_MESSAGE'
 
 export const addPostActionCreator = (): addPostActionType => {
     return {
@@ -15,8 +17,26 @@ export const changeTypedMessageActionCreator = (message: string): changeTypedMes
     }
 }
 
+
+export const changeTypedDialogMessageActionCreator = (message: string): changeTypedDialogMessageActionType => {
+    return {
+        type: CHANGE_TYPED_DIALOG_MESSAGE,
+        message
+    }
+}
+
+export const addMessageActionCreator = (): addMessageActionType => {
+    return {
+        type: ADD_MESSAGE,
+    }
+}
+
 type addPostActionType = {
     type: 'ADD_POST'
+}
+
+type addMessageActionType = {
+    type: 'ADD_MESSAGE'
 }
 
 type changeTypedMessageActionType = {
@@ -24,7 +44,13 @@ type changeTypedMessageActionType = {
     message: string
 }
 
-export type actionType = addPostActionType | changeTypedMessageActionType
+type changeTypedDialogMessageActionType = {
+    type: 'CHANGE_TYPED_DIALOG_MESSAGE'
+    message: string
+}
+
+export type actionType = addPostActionType | changeTypedMessageActionType |
+    changeTypedDialogMessageActionType | addMessageActionType
 
 
 
@@ -67,6 +93,7 @@ export let store: storeType = {
                 {id: 3, message: 'How are you?', myMessage: true},
                 {id: 4, message: 'I havent seen you for 5 years', myMessage: true}
             ],
+            newDialogMessageText: ''
         },
     },
     getState() {
@@ -107,6 +134,18 @@ export let store: storeType = {
                 this._state.profilePage.newPostText = action.message
                 this._subscriber()
             }
+        } else if (action.type === CHANGE_TYPED_DIALOG_MESSAGE) {
+            this._state.dialogsPage.newDialogMessageText = action.message
+            this._subscriber()
+        } else if (action.type === ADD_MESSAGE) {
+            let newMessage: messagesDataType = {
+                id: 5,
+                message: this._state.dialogsPage.newDialogMessageText,
+                myMessage: true
+            }
+            this._state.dialogsPage.newDialogMessageText = ''
+            this._state.dialogsPage.messagesData.push(newMessage)
+            this._subscriber()
         }
     }
 }
@@ -150,6 +189,7 @@ export type profilePageType = {
 export type dialogsPageType = {
     dialogsData: Array<dialogsDataType>
     messagesData: Array<messagesDataType>
+    newDialogMessageText: string
 }
 
 export type stateType = {

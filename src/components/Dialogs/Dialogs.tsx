@@ -2,12 +2,13 @@ import React from "react";
 import s from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import MessageItem from "./MessageItem/MessageItem";
-import {dialogsPageType} from "../../redux/state";
+import {actionType, dialogsPageType} from "../../redux/state";
 import {MessageForm} from "./MessageForm/MessageForm";
 
 
 type dialogsPropsType = {
     state: dialogsPageType
+    dispatch: (action: actionType) => void
 }
 
 
@@ -30,7 +31,7 @@ function Dialogs(props: dialogsPropsType) {
                     <ul className={s.dialog_field}>
                         {messageArray}
                     </ul>
-                    <MessageForm/>
+                    <MessageForm dispatch={props.dispatch} newDialogMessageText={props.state.newDialogMessageText}/>
                 </div>
             </div>
         </div>
