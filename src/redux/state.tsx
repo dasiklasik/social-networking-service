@@ -1,53 +1,15 @@
-
-const ADD_POST = 'ADD_POST'
-const CHANGE_TYPED_MESSAGE = 'CHANGE_TYPED_MESSAGE'
-const CHANGE_TYPED_DIALOG_MESSAGE = 'CHANGE_TYPED_DIALOG_MESSAGE'
-const ADD_MESSAGE = 'ADD_MESSAGE'
-
-export const addPostActionCreator = (): addPostActionType => {
-    return {
-        type: ADD_POST
-    }
-}
-
-export const changeTypedMessageActionCreator = (message: string): changeTypedMessageActionType => {
-    return {
-        type: CHANGE_TYPED_MESSAGE,
-        message
-    }
-}
+import {addPostActionType, changeTypedMessageActionType, profileReducer} from "./profileReducer";
+import {addMessageActionType, changeTypedDialogMessageActionType, dialogsReducer} from "./dialogsReducer";
+import {navBarReducer} from "./navbarReducer";
 
 
-export const changeTypedDialogMessageActionCreator = (message: string): changeTypedDialogMessageActionType => {
-    return {
-        type: CHANGE_TYPED_DIALOG_MESSAGE,
-        message
-    }
-}
 
-export const addMessageActionCreator = (): addMessageActionType => {
-    return {
-        type: ADD_MESSAGE,
-    }
-}
 
-type addPostActionType = {
-    type: 'ADD_POST'
-}
 
-type addMessageActionType = {
-    type: 'ADD_MESSAGE'
-}
 
-type changeTypedMessageActionType = {
-    type: 'CHANGE_TYPED_MESSAGE'
-    message: string
-}
 
-type changeTypedDialogMessageActionType = {
-    type: 'CHANGE_TYPED_DIALOG_MESSAGE'
-    message: string
-}
+
+
 
 export type actionType = addPostActionType | changeTypedMessageActionType |
     changeTypedDialogMessageActionType | addMessageActionType
@@ -120,33 +82,10 @@ export let store: storeType = {
         this._subscriber()
     },
     dispatch(action) {
-        if (action.type === ADD_POST) {
-            let newPost = {
-                id: 5,
-                message: this._state.profilePage.newPostText,
-                likesCount: '0'
-            }
-            this._state.profilePage.newPostText = ''
-            this._state.profilePage.postData.push(newPost)
-            this._subscriber()
-        } else if (action.type === CHANGE_TYPED_MESSAGE) {
-            if (action.message) {
-                this._state.profilePage.newPostText = action.message
-                this._subscriber()
-            }
-        } else if (action.type === CHANGE_TYPED_DIALOG_MESSAGE) {
-            this._state.dialogsPage.newDialogMessageText = action.message
-            this._subscriber()
-        } else if (action.type === ADD_MESSAGE) {
-            let newMessage: messagesDataType = {
-                id: 5,
-                message: this._state.dialogsPage.newDialogMessageText,
-                myMessage: true
-            }
-            this._state.dialogsPage.newDialogMessageText = ''
-            this._state.dialogsPage.messagesData.push(newMessage)
-            this._subscriber()
-        }
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        this._state.navbar = navBarReducer(this._state.navbar, action)
+        this._subscriber()
     }
 }
 
