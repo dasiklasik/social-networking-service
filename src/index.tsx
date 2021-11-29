@@ -3,7 +3,7 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import ReactDOM from "react-dom";
 import App from "./components/App";
-import {store} from "./redux/state";
+import {store} from "./redux/redux-store";
 
 export const rerenderCode = () => {
     ReactDOM.render(
@@ -15,7 +15,7 @@ export const rerenderCode = () => {
 }
 
 rerenderCode()
-store.subscribe(rerenderCode)
+store.subscribe(rerenderCode);
 
 
 

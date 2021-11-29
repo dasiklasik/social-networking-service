@@ -1,6 +1,7 @@
 import React from "react";
 import s from './../PostsWrapper.module.css'
-import {actionType, addPostActionCreator, changeTypedMessageActionCreator} from "../../../../redux/state";
+import {actionType} from "../../../../redux/state";
+import { addPostActionCreator, changeTypedMessageActionCreator } from "../../../../redux/profileReducer";
 
 type postFormPropsType = {
     dispatch: (action: actionType) => void
@@ -13,10 +14,9 @@ function PostForm({dispatch, newPostText, ...props}: postFormPropsType) {
     const newPostRef = React.createRef<HTMLTextAreaElement>()
 
     const onClickHandler = () => {
-        // if (newPostRef.current) {
-        //
-        // }
+
         dispatch(addPostActionCreator())
+
 
     }
 

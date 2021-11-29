@@ -1,6 +1,7 @@
 import React, {ChangeEvent} from "react";
 import s from './MessageForm.module.css'
-import {actionType, addMessageActionCreator, changeTypedDialogMessageActionCreator} from "../../../redux/state";
+import {actionType} from "../../../redux/state";
+import { addMessageActionCreator, changeTypedDialogMessageActionCreator } from "../../../redux/dialogsReducer";
 
 type messageFormPropsType = {
     dispatch: (action: actionType) => void

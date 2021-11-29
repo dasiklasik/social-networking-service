@@ -9,13 +9,16 @@ import News from './News/News';
 import Settings from './Settings/Settings'
 import Music from './Music/Music'
 import {stateType, storeType} from "../redux/state";
+import { reduxStoreType } from '../redux/redux-store';
 
 type AppPropsType = {
-    store: storeType
+    store: reduxStoreType
+    // state: stateType
 }
 
 function App(props: AppPropsType) {
 
+    // const state = props.store.getState()
     const state = props.store.getState()
 
     return (
