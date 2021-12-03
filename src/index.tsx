@@ -6,6 +6,7 @@ import App from "./components/App";
 import {store} from "./redux/redux-store";
 
 export const rerenderCode = () => {
+    debugger
     ReactDOM.render(
         <React.StrictMode>
             <App store={store}/>

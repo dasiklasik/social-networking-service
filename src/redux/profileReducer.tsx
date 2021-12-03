@@ -33,21 +33,22 @@ const initialState: profilePageType = {
 }
 
 export const profileReducer = (state: profilePageType = initialState, action: actionType): profilePageType => {
-
+    let newState = {...state}
     switch (action.type) {
         case ADD_POST:
-            state.postData.push({id: 5, message: state.newPostText, likesCount: '0'})
-            state.newPostText = ''
-            console.log(state)
+            debugger
 
-            return state;
+            newState.postData.push({id: 5, message: state.newPostText, likesCount: '0'})
+            newState.newPostText = ''
+            console.log(newState)
+
+            return newState;
         case CHANGE_TYPED_MESSAGE:
-
             if (action.message) {
-                state.newPostText = action.message
+                newState.newPostText = action.message
             }
-            return state
+            return newState
         default:
-        return state
+        return newState
     }
 }

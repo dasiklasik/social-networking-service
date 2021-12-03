@@ -7,7 +7,7 @@ import {MessageForm} from "./MessageForm/MessageForm";
 
 
 type dialogsPropsType = {
-    state: dialogsPageType
+    dialogsPage: dialogsPageType
     dispatch: (action: actionType) => void
 }
 
@@ -15,8 +15,8 @@ type dialogsPropsType = {
 function Dialogs(props: dialogsPropsType) {
 
 
-    const dialogsArray = props.state.dialogsData.map(t => <DialogItem state={t}/>)
-    const messageArray = props.state.messagesData.map(t => <MessageItem state={t}/>)
+    const dialogsArray = props.dialogsPage.dialogsData.map(t => <DialogItem state={t}/>)
+    const messageArray = props.dialogsPage.messagesData.map(t => <MessageItem state={t}/>)
 
     return (
         <div className={s.dialogs}>
@@ -31,7 +31,7 @@ function Dialogs(props: dialogsPropsType) {
                     <ul className={s.dialog_field}>
                         {messageArray}
                     </ul>
-                    <MessageForm dispatch={props.dispatch} newDialogMessageText={props.state.newDialogMessageText}/>
+                    <MessageForm dispatch={props.dispatch} newDialogMessageText={props.dialogsPage.newDialogMessageText}/>
                 </div>
             </div>
         </div>

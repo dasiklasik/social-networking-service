@@ -18,6 +18,7 @@ type AppPropsType = {
 
 function App(props: AppPropsType) {
 
+    debugger
     // const state = props.store.getState()
     const state = props.store.getState()
 
@@ -27,11 +28,11 @@ function App(props: AppPropsType) {
                 <Header/>
                 <Nav state={state.navbar}/>
                 <div className={'content-wrapper'}>
-                    <Route path="/profile" render={() => <Profile state={state.profilePage}
+                    <Route path="/profile" render={() => <Profile profilePage={state.profilePage}
                                                                   dispatch={props.store.dispatch.bind(props.store)}/>} />
                     <Route path="/dialogs" render={() => {
                         return <Dialogs
-                            state={state.dialogsPage} dispatch={props.store.dispatch.bind(props.store)}
+                            dialogsPage={state.dialogsPage} dispatch={props.store.dispatch.bind(props.store)}
                         />
                     }}/>
                     <Route path="/news" render={() => <News/>}/>

@@ -82,7 +82,9 @@ export let store: storeType = {
         this._subscriber()
     },
     dispatch(action) {
+
         this._state.profilePage = profileReducer(this._state.profilePage, action)
+        debugger
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
         this._state.navbar = navBarReducer(this._state.navbar, action)
         this._subscriber()
