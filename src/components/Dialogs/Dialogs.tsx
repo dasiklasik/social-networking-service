@@ -2,21 +2,23 @@ import React from "react";
 import s from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import MessageItem from "./MessageItem/MessageItem";
-import {actionType, dialogsPageType} from "../../redux/state";
+import {actionType, dialogsDataType, dialogsPageType, messagesDataType} from "../../redux/state";
 import {MessageForm} from "./MessageForm/MessageForm";
 
 
 type dialogsPropsType = {
-    dialogsPage: dialogsPageType
-    dispatch: (action: actionType) => void
+    // dialogsPage: dialogsPageType
+    // dispatch: (action: actionType) => void
+    dialogsData: any
+    messageData: any
+    addMessage: () => void
+    changeMessage: (text: string) => void
+    newMessageText: string
 }
 
 
 function Dialogs(props: dialogsPropsType) {
 
-
-    const dialogsArray = props.dialogsPage.dialogsData.map(t => <DialogItem state={t}/>)
-    const messageArray = props.dialogsPage.messagesData.map(t => <MessageItem state={t}/>)
 
     return (
         <div className={s.dialogs}>
@@ -24,14 +26,15 @@ function Dialogs(props: dialogsPropsType) {
             <div className={s.dialogs_wrapper}>
                 <div className={s.dialogs_list_wrapper}>
                     <ul className={s.dialogs_list}>
-                        {dialogsArray}
+                        {props.dialogsData}
                     </ul>
                 </div>
                 <div className={s.dialog_field_wrapper}>
                     <ul className={s.dialog_field}>
-                        {messageArray}
+                        {props.messageData}
                     </ul>
-                    <MessageForm dispatch={props.dispatch} newDialogMessageText={props.dialogsPage.newDialogMessageText}/>
+                    <MessageForm addMessage={props.addMessage} changeMessage={props.changeMessage}
+                                 newDialogMessageText={props.newMessageText}/>
                 </div>
             </div>
         </div>

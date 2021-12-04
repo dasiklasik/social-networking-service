@@ -19,12 +19,3 @@ export type reduxStoreType = Store<EmptyObject & {navbar: navbarType, profilePag
 export const store = createStore(reducer)
 
 
-// let reducer = combineReducers({
-//     profilePage: profileReducer,
-//     dialogsPage: dialogsReducer,
-//     navbar: navBarReducer
-// })
-//
-// export type reduxStoreType = Store<EmptyObject & { profilePage: profilePageType; dialogsPage: dialogsPageType; navbar: navbarType; }, actionType>
-//
-// export let store = createStore(reducer)

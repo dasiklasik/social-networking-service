@@ -4,7 +4,8 @@ import {actionType} from "../../../redux/state";
 import { addMessageActionCreator, changeTypedDialogMessageActionCreator } from "../../../redux/dialogsReducer";
 
 type messageFormPropsType = {
-    dispatch: (action: actionType) => void
+    addMessage: () => void
+    changeMessage: (text: string) => void
     newDialogMessageText: string
 }
 
@@ -12,19 +13,18 @@ export const MessageForm = (props: messageFormPropsType) => {
 
     const newMessageRef = React.createRef<HTMLTextAreaElement>();
 
-    const changeMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    const onChangeMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let text = e.currentTarget.value
-        props.dispatch(changeTypedDialogMessageActionCreator(text))
+       props.changeMessage(text)
     }
 
     const addMessage = () => {
-        props.dispatch(addMessageActionCreator())
-        // alert(newMessageRef.current?.value)
+        props.addMessage()
     }
 
     return (
         <div className={s.message_form}>
-            <textarea value={props.newDialogMessageText} onChange={changeMessage} ref={newMessageRef}></textarea>
+            <textarea value={props.newDialogMessageText} onChange={onChangeMessage} ref={newMessageRef}></textarea>
             <button onClick={addMessage}>send</button>
         </div>
     )

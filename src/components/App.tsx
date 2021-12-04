@@ -3,13 +3,12 @@ import './App.css';
 import {Header} from "./Header/Header";
 import {Nav} from "./Nav/Nav";
 import {Profile} from "./Profile/Profile";
-import Dialogs from "./Dialogs/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
 import News from './News/News';
 import Settings from './Settings/Settings'
 import Music from './Music/Music'
-import {stateType, storeType} from "../redux/state";
 import { reduxStoreType } from '../redux/redux-store';
+import { DialogsContainer } from './Dialogs/DialogsContainer';
 
 type AppPropsType = {
     store: reduxStoreType
@@ -31,7 +30,7 @@ function App(props: AppPropsType) {
                     <Route path="/profile" render={() => <Profile profilePage={state.profilePage}
                                                                   dispatch={props.store.dispatch.bind(props.store)}/>} />
                     <Route path="/dialogs" render={() => {
-                        return <Dialogs
+                        return <DialogsContainer
                             dialogsPage={state.dialogsPage} dispatch={props.store.dispatch.bind(props.store)}
                         />
                     }}/>

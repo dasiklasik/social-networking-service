@@ -22,5 +22,9 @@ export const PostsWrapperContainer = (props: PostsWrapperContainerPropsType) => 
         props.dispatch(changeTypedMessageActionCreator(text))
     }
 
-    return <PostsWrapper posts={postArray} addPost={addPost} newPostText={props.profilePage.newPostText} changeTypedMessage={changeTypedMessage}/>
+    return <PostsWrapper
+        posts={postArray}
+        addPost={addPost}
+        newPostText={props.profilePage.newPostText}
+        changeTypedMessage={changeTypedMessage}/>
 }
