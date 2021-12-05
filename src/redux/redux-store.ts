@@ -19,3 +19,11 @@ export type reduxStoreType = Store<EmptyObject & {navbar: navbarType, profilePag
 export const store = createStore(reducer)
 
 
+declare global {
+    interface Window { store: reduxStoreType; }
+}
+
+window.store = store
+
+
+

@@ -44,8 +44,6 @@ export const profileReducer = (state: profilePageType = initialState, action: ac
     let newState = {...state}
     switch (action.type) {
         case ADD_POST:
-            debugger
-
             newState.postData.push({id: 5, message: state.newPostText, likesCount: '0'})
             newState.newPostText = ''
             console.log(newState)

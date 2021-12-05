@@ -11,5 +11,6 @@ const initialState: navbarType = {
 }
 
 export const navBarReducer = (state: navbarType = initialState, action: actionType) => {
-    return state;
+    let copyState = {...state}
+    return copyState;
 }
