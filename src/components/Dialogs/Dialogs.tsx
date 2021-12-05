@@ -1,14 +1,9 @@
 import React from "react";
 import s from './Dialogs.module.css'
-import DialogItem from "./DialogItem/DialogItem";
-import MessageItem from "./MessageItem/MessageItem";
-import {actionType, dialogsDataType, dialogsPageType, messagesDataType} from "../../redux/state";
 import {MessageForm} from "./MessageForm/MessageForm";
 
 
 type dialogsPropsType = {
-    // dialogsPage: dialogsPageType
-    // dispatch: (action: actionType) => void
     dialogsData: any
     messageData: any
     addMessage: () => void

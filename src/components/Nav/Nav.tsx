@@ -1,14 +1,9 @@
 import React from "react";
 import s from './Nav.module.css'
 import {NavLink} from "react-router-dom";
-import {navbarType} from "../../redux/state";
-import {Friends} from "./Friends/Friends";
+import {FriendsContainer} from "./Friends/FriendsContainer";
 
-type navPropsType = {
-    state: navbarType
-}
-
-export function Nav(props: navPropsType) {
+export function Nav() {
     return (
         <nav className={s.main_menu}>
             <ul>
@@ -18,7 +13,7 @@ export function Nav(props: navPropsType) {
                 <li className={s.item}><NavLink to="/music" activeClassName={s.active}>Music</NavLink></li>
                 <li className={s.item}><NavLink to="/settings" activeClassName={s.active}>Setting</NavLink></li>
             </ul>
-            <Friends state={props.state.friendsData}/>
+            <FriendsContainer/>
         </nav>
     )
 }

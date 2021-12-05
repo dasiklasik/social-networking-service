@@ -3,17 +3,8 @@ import {addMessageActionType, changeTypedDialogMessageActionType, dialogsReducer
 import {navBarReducer} from "./navbarReducer";
 
 
-
-
-
-
-
-
-
-
 export type actionType = addPostActionType | changeTypedMessageActionType |
     changeTypedDialogMessageActionType | addMessageActionType
-
 
 
 export type storeType = {
@@ -38,9 +29,17 @@ export let store: storeType = {
         },
         profilePage: {
             postData: [
-                {id: 1, message: 'Message', likesCount: '0' },
-                {id: 2, message: 'Message 2', likesCount: '2' },
+                {id: 1, message: 'Message', likesCount: '0'},
+                {id: 2, message: 'Message 2', likesCount: '2'},
             ],
+            profileInfo: {
+                firstName: 'Darya',
+                lastName: "Samsonovich",
+                dateOfBirth: '11.04.1999',
+                city: 'Minsk',
+                education: 'university',
+                webSite: 'none'
+            },
             newPostText: ''
         },
         dialogsPage: {
@@ -118,12 +117,22 @@ export type postDataType = {
     likesCount: string
 }
 
+export type profileInfoType = {
+    firstName: string
+    lastName: string
+    dateOfBirth: string
+    city: string
+    education: string
+    webSite: string
+}
+
 export type navbarType = {
     friendsData: Array<friendsDataType>
 }
 
 export type profilePageType = {
     postData: Array<postDataType>
+    profileInfo: profileInfoType
     newPostText: string
 }
 

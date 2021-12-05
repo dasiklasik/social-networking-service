@@ -29,6 +29,14 @@ const initialState: profilePageType = {
         {id: 1, message: 'Message', likesCount: '0' },
         {id: 2, message: 'Message 2', likesCount: '2' },
     ],
+    profileInfo: {
+        firstName: 'Darya',
+        lastName: "Samsonovich",
+        dateOfBirth: '11.04.1999',
+        city: 'Minsk',
+        education: 'university',
+        webSite: 'none'
+    },
     newPostText: ''
 }
 

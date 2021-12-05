@@ -5,12 +5,12 @@ import {Friend} from "./Friend/Friend";
 
 
 type friendsPropsType = {
-    state: Array<friendsDataType>
+    friendsData: Array<friendsDataType>
 }
 
 export const Friends = (props: friendsPropsType) => {
 
-    const friendsArray = props.state.map(t => <Friend state={t}/>)
+    const friendsArray = props.friendsData.map(t => <Friend state={t}/>)
 
     return (
         <div>
