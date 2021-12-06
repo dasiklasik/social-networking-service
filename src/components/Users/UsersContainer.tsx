@@ -1,13 +1,20 @@
 import React from "react";
 import {connect} from "react-redux";
 import {Users} from "./Users";
-import {stateType} from "../../redux/state";
-import {UserItem} from "./UserItem/UserItem";
+import {actionType, stateType, userItemType} from "../../redux/state";
+import {addFriendAC, navbarActionType} from "../../redux/navbarReducer";
 
 const mapStateToProps = (state: stateType) => {
+
     return {
-        usersData: state.usersPage.map(t => <UserItem userInfo={t}/>)
+        usersData: state.usersPage
     }
 }
 
-export const UsersContainer = connect(mapStateToProps)(Users)
+const mapDispatchToProps = (dispatch: (action: actionType) => void) => {
+    return {
+        addFriend: (friendInfo: userItemType) => dispatch(addFriendAC(friendInfo))
+    }
+}
+
+export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users)

@@ -1,18 +1,26 @@
 import React from "react";
 import s from './UserItem.module.css'
 import {userItemType} from "../../../redux/state";
+import {addFriendAC} from "../../../redux/navbarReducer";
 
 type userItemPropsType = {
     userInfo: userItemType
+    addFriend: (friendInfo: userItemType) => void
 }
 
 export const UserItem = (props: userItemPropsType) => {
+
+    const onClickHandler = () => {
+        debugger
+        addFriendAC(props.userInfo)
+    }
+
     return (
         <li>
             <div className={s.wrapper}>
                 <div>
                     <img className={s.avatar} src={props.userInfo.avatar} alt={''}/>
-                    <button>Follow</button>
+                    <button onClick={onClickHandler}>Follow</button>
                 </div>
                 <div className={s.desc}>
                     <div>

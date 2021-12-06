@@ -6,10 +6,6 @@ import App from "./components/App";
 import {store} from "./redux/redux-store";
 import {Provider} from "react-redux";
 
-export const rerenderCode = () => {
-
-
-}
 
 ReactDOM.render(
     <React.StrictMode>
@@ -20,8 +16,6 @@ ReactDOM.render(
     document.getElementById('root')
 );
 
-// rerenderCode()
-// store.subscribe(rerenderCode);
 
 
 

@@ -1,10 +1,10 @@
 import {addPostActionType, changeTypedMessageActionType, profileReducer} from "./profileReducer";
 import {addMessageActionType, changeTypedDialogMessageActionType, dialogsReducer} from "./dialogsReducer";
-import {navBarReducer} from "./navbarReducer";
+import {addFriendACType, navBarReducer} from "./navbarReducer";
 
 
 export type actionType = addPostActionType | changeTypedMessageActionType |
-    changeTypedDialogMessageActionType | addMessageActionType
+    changeTypedDialogMessageActionType | addMessageActionType | addFriendACType
 
 
 export type storeType = {
@@ -94,7 +94,7 @@ export type storeType = {
 // let renderEntireTree = () => {}
 
 export type friendsDataType = {
-    id: number
+    id: string
     name: string
     avatar: string
 }
@@ -143,6 +143,7 @@ export type dialogsPageType = {
 }
 
 export type userItemType = {
+    id: string
     avatar: string
     name: string
     status: string

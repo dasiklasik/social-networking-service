@@ -2,7 +2,7 @@ import {combineReducers, createStore, EmptyObject, Store} from "@reduxjs/toolkit
 import {profileReducer} from "./profileReducer";
 import {dialogsReducer} from "./dialogsReducer";
 import {navBarReducer} from "./navbarReducer";
-import {actionType, dialogsDataType, dialogsPageType, messagesDataType, navbarType, profilePageType} from "./state";
+import {actionType, dialogsDataType, messagesDataType, navbarType, profilePageType} from "./state";
 import {userReducer} from "./usersReducer";
 
 
