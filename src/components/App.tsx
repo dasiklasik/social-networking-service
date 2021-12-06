@@ -8,6 +8,7 @@ import News from './News/News';
 import Settings from './Settings/Settings'
 import Music from './Music/Music'
 import {DialogsContainer} from './Dialogs/DialogsContainer';
+import {UsersContainer} from "./Users/UsersContainer";
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
                     <Route path="/news" render={() => <News/>}/>
                     <Route path="/music" render={() => <Music/>}/>
                     <Route path="/settings" render={() => <Settings/>}/>
+                    <Route path="/users" render={() => <UsersContainer/>}/>
                 </div>
             </div>
         </BrowserRouter>

@@ -51,6 +51,7 @@ export const dialogsReducer = (state: dialogsPageType = initialState, action: ac
                 myMessage: true
             }
             newState.newDialogMessageText = ''
+            newState.messagesData = [...state.messagesData]
             newState.messagesData.push(newMessage)
             return newState
         default:

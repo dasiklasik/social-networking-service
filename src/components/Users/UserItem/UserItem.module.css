@@ -1,0 +1,21 @@
+.wrapper {
+    display: flex;
+}
+
+.wrapper button {
+    display: block;
+}
+
+.avatar {
+    width: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.desc {
+    display: flex;
+}
+
+li {
+    list-style-type: none;
+}
