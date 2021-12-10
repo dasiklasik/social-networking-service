@@ -1,10 +1,11 @@
 import {addPostActionType, changeTypedMessageActionType, profileReducer} from "./profileReducer";
 import {addMessageActionType, changeTypedDialogMessageActionType, dialogsReducer} from "./dialogsReducer";
 import {addFriendACType, navBarReducer} from "./navbarReducer";
+import {testACType} from "./usersReducer";
 
 
 export type actionType = addPostActionType | changeTypedMessageActionType |
-    changeTypedDialogMessageActionType | addMessageActionType | addFriendACType
+    changeTypedDialogMessageActionType | addMessageActionType | addFriendACType |testACType
 
 
 export type storeType = {

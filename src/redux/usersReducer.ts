@@ -1,4 +1,4 @@
-import {userItemType} from "./state";
+import {actionType, userItemType} from "./state";
 
 export const initialState: Array<userItemType> = [
     {id: '1',
@@ -25,7 +25,23 @@ export const initialState: Array<userItemType> = [
 ]
 
 
+export type testACType = ReturnType<typeof testAC>
 
-export const userReducer = (state = initialState, action: any) => {
+
+
+export const userReducer = (state = initialState, action: actionType) => {
+    switch (action.type) {
+        case 'TEST': {
+            console.log('test')
+            return [...state]
+        }
+    }
     return state
+}
+
+export const testAC = () => {
+    debugger
+    return {
+        type: 'TEST' as const
+    }
 }

@@ -39,7 +39,6 @@ const initialState: dialogsPageType = {
 }
 
 export const dialogsReducer = (state: dialogsPageType = initialState, action: actionType) => {
-    debugger
     let newState = {...state}
     switch (action.type) {
         case CHANGE_TYPED_DIALOG_MESSAGE:

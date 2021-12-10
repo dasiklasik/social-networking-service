@@ -6,13 +6,14 @@ import {addFriendAC} from "../../../redux/navbarReducer";
 type userItemPropsType = {
     userInfo: userItemType
     addFriend: (friendInfo: userItemType) => void
+    test: () => void
 }
 
 export const UserItem = (props: userItemPropsType) => {
 
     const onClickHandler = () => {
         debugger
-        addFriendAC(props.userInfo)
+        props.addFriend(props.userInfo)
     }
 
     return (

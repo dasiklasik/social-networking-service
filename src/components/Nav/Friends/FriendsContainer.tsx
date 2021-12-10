@@ -4,6 +4,7 @@ import {Friends} from "./Friends";
 import {stateType} from "../../../redux/state";
 
 const mapStateToProps = (state: stateType)=> {
+    debugger
     return {
         friendsData: state.navbar.friendsData
     }
