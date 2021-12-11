@@ -1,47 +1,62 @@
-import {actionType, userItemType} from "./state";
-
-export const initialState: Array<userItemType> = [
-    {id: '1',
-        avatar: 'https://avatarko.ru/img/kartinka/17/kot_naushniki_16067.jpg',
-        name: 'Dasha S.',
-        status: 'Everything is fine!',
-        country: 'Belarus',
-        city: 'Minsk'
-    },
-    {id: '2',
-        avatar: 'https://avatarko.ru/img/kartinka/17/kot_naushniki_16067.jpg',
-        name: 'Dasha S.',
-        status: 'Everything is fine!',
-        country: 'Belarus',
-        city: 'Minsk'
-    },
-    {id: '3',
-        avatar: 'https://avatarko.ru/img/kartinka/17/kot_naushniki_16067.jpg',
-        name: 'Dasha S.',
-        status: 'Everything is fine!',
-        country: 'Belarus',
-        city: 'Minsk'
-    }
-]
+import {actionType, usersInfo,} from "./state";
 
 
-export type testACType = ReturnType<typeof testAC>
-
-
-
-export const userReducer = (state = initialState, action: actionType) => {
-    switch (action.type) {
-        case 'TEST': {
-            console.log('test')
-            return [...state]
-        }
-    }
-    return state
+export type userItemType = {
+    id: string
+    followed: boolean
+    fullName: string
+    status: string
+    location: {country: string, city: string}
 }
 
-export const testAC = () => {
-    debugger
+export const initialState: usersInfo = {
+    users: []
+}
+
+
+export type followACType = ReturnType<typeof followAC>
+export type unfollowACType = ReturnType<typeof unfollowAC>
+export type setUsersACType = ReturnType<typeof setUsersAC>
+
+
+export const usersReducer = (state = initialState, action: actionType) => {
+    let copyState = {...state, users: [...state.users]}
+    switch (action.type) {
+        case 'FOLLOW': {
+            return {...copyState, users: copyState.users
+                    .map(t => t.id === action.userId? {...t, followed: true} : t)}
+        }
+        case 'UNFOLLOW': {
+            return {...copyState, users: copyState.users
+                    .map(t => t.id === action.userId? {...t, followed: false} : t)}
+        }
+        case 'SET-USERS': {
+            let newState =  {...state, users: [...state.users, ...action.users]}
+            debugger
+            return newState
+        }
+        default:
+            return copyState
+    }
+}
+
+export const followAC = (userId: string) => {
     return {
-        type: 'TEST' as const
+        type: 'FOLLOW' as const,
+        userId
+    }
+}
+
+export const unfollowAC = (userId: string) => {
+    return {
+        type: 'UNFOLLOW' as const,
+        userId
+    }
+}
+
+export const setUsersAC = (users: Array<userItemType>) => {
+    return {
+        type: 'SET-USERS' as const,
+        users
     }
 }

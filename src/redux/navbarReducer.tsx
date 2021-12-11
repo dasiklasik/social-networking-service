@@ -1,4 +1,4 @@
-import {actionType, navbarType, userItemType} from "./state";
+import {actionType, navbarType} from "./state";
 
 
 const initialState: navbarType = {
@@ -10,30 +10,7 @@ const initialState: navbarType = {
     ]
 }
 
-export type addFriendACType = ReturnType<typeof addFriendAC>
-
 
 export const navBarReducer = (state: navbarType = initialState, action: actionType) => {
-    debugger
-    let copyState = {...state}
-    switch (action.type) {
-        case "ADD-FRIEND": {
-            debugger
-            copyState.friendsData.push({id: "1", name: 'Kate', avatar: 'https://avatarko.ru/img/kartinka/17/kot_naushniki_16067.jpg'})
-            console.log(copyState)
-            debugger
-            return {...copyState}
-        }
-        default:
-            return copyState;
-    }
-
-}
-
-export const addFriendAC = (friendInfo: userItemType) => {
-    debugger
-    return {
-        type: 'ADD-FRIEND' as const,
-        friendInfo,
-    }
+    return state
 }

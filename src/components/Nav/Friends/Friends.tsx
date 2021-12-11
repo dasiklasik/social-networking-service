@@ -11,7 +11,6 @@ type friendsPropsType = {
 export const Friends = (props: friendsPropsType) => {
 
     const friendsArray = props.friendsData.map(t => <Friend state={t}/>)
-    debugger
     return (
         <div>
             <h2 className={s.header}>Friends</h2>

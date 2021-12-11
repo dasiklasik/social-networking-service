@@ -12,8 +12,6 @@ import {UsersContainer} from "./Users/UsersContainer";
 
 
 function App() {
-
-
     return (
         <BrowserRouter>
             <div className={'wrapper'}>
