@@ -4,7 +4,7 @@ import {actionType, usersInfo,} from "./state";
 export type userItemType = {
     id: string
     followed: boolean
-    fullName: string
+    name: string
     status: string
     location: {country: string, city: string}
 }

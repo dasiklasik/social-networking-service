@@ -28,12 +28,12 @@ export const UserItem = (props: userItemPropsType) => {
                 </div>
                 <div className={s.desc}>
                     <div>
-                        <div className={s.name}>{props.userInfo.fullName}</div>
+                        <div className={s.name}>{props.userInfo.name}</div>
                         <div className={s.status}>{props.userInfo.status}</div>
                     </div>
                     <div className={s.living}>
-                        <p>{props.userInfo.location.country}</p>
-                        <p>{props.userInfo.location.city}</p>
+                        <p>{"props.userInfo.location.country"}</p>
+                        <p>{"props.userInfo.location.city"}</p>
                     </div>
                 </div>
             </div>
