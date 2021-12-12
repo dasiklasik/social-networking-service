@@ -1,8 +1,8 @@
 import React from "react";
 import {connect} from "react-redux";
-import {Users} from "./Users";
 import {actionType, stateType} from "../../redux/state";
 import {followAC, setUsersAC, unfollowAC, userItemType} from "../../redux/usersReducer";
+import {Users} from "./Users";
 
 const mapStateToProps = (state: stateType) => {
     debugger
@@ -13,8 +13,8 @@ const mapStateToProps = (state: stateType) => {
 
 const mapDispatchToProps = (dispatch: (action: actionType) => void) => {
     return {
-        followUser: (userId: string) => dispatch(followAC(userId)),
-        unfollowUser: (userId: string) => dispatch(unfollowAC(userId)),
+        followUser: (userId: number) => dispatch(followAC(userId)),
+        unfollowUser: (userId: number) => dispatch(unfollowAC(userId)),
         setUsers: (users: Array<userItemType>) => {
             dispatch(setUsersAC(users))
         }

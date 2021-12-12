@@ -5,26 +5,31 @@ import axios from "axios";
 
 type usersPropsType = {
     users: Array<userItemType>
-    followUser: (userId: string) => void
-    unfollowUser: (userId: string) => void
+    followUser: (userId: number) => void
+    unfollowUser: (userId: number) => void
     setUsers: (users: Array<userItemType>) => void
 }
 
-export const Users = (props: usersPropsType) => {
+export class Users extends React.Component<usersPropsType> {
+    constructor(props: usersPropsType) {
+        super(props);
+        this.getUsers()
+    }
 
-    if (props.users.length === 0) {
+    getUsers = () => {
         axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
             debugger
-            props.setUsers(response.data.items)
+            this.props.setUsers(response.data.items)
         })
-
     }
-    return (
-        <div>
-            <h2>Users</h2>
-            {props.users.map(t => <UserItem userInfo={t}
-                                            followUser={props.followUser}
-                                            unfollowUser={props.unfollowUser}/>)}
-        </div>
-    )
+    render = () => {
+        return (
+            <div>
+                <h2>Users</h2>
+                {this.props.users.map(t => <UserItem userInfo={t}
+                                                     followUser={this.props.followUser}
+                                                     unfollowUser={this.props.unfollowUser}/>)}
+            </div>
+        )
+    }
 }

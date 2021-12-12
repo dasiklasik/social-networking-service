@@ -4,8 +4,8 @@ import {userItemType} from "../../../redux/usersReducer";
 
 type userItemPropsType = {
     userInfo: userItemType
-    followUser: (userId: string) => void
-    unfollowUser: (userId: string) => void
+    followUser: (userId: number) => void
+    unfollowUser: (userId: number) => void
 }
 
 export const UserItem = (props: userItemPropsType) => {
@@ -22,7 +22,8 @@ export const UserItem = (props: userItemPropsType) => {
         <li>
             <div className={s.wrapper}>
                 <div>
-                    <img className={s.avatar} src={'https://avatarko.ru/img/kartinka/17/kot_naushniki_16067.jpg'} alt={''}/>
+                    <img className={s.avatar} src={props.userInfo.photos.small ? props.userInfo.photos.small :
+                        'https://avatarko.ru/img/kartinka/17/kot_naushniki_16067.jpg'} alt={''}/>
                     {props.userInfo.followed ? <button onClick={onUnfollowHandler}>Unfollow</button> :
                          <button onClick={onFollowHandler}>Follow</button>}
                 </div>
@@ -32,8 +33,8 @@ export const UserItem = (props: userItemPropsType) => {
                         <div className={s.status}>{props.userInfo.status}</div>
                     </div>
                     <div className={s.living}>
-                        <p>{"props.userInfo.location.country"}</p>
-                        <p>{"props.userInfo.location.city"}</p>
+                        {/*<p>{"props.userInfo.location.country"}</p>*/}
+                        {/*<p>{"props.userInfo.location.city"}</p>*/}
                     </div>
                 </div>
             </div>

@@ -2,11 +2,12 @@ import {actionType, usersInfo,} from "./state";
 
 
 export type userItemType = {
-    id: string
-    followed: boolean
     name: string
-    status: string
-    location: {country: string, city: string}
+    id: number
+    uniqueUrlName: string | null
+    photos: { small: string | null, large: string | null }
+    status: string| null
+    followed: boolean
 }
 
 export const initialState: usersInfo = {
@@ -23,15 +24,19 @@ export const usersReducer = (state = initialState, action: actionType) => {
     let copyState = {...state, users: [...state.users]}
     switch (action.type) {
         case 'FOLLOW': {
-            return {...copyState, users: copyState.users
-                    .map(t => t.id === action.userId? {...t, followed: true} : t)}
+            return {
+                ...copyState, users: copyState.users
+                    .map(t => t.id === action.userId ? {...t, followed: true} : t)
+            }
         }
         case 'UNFOLLOW': {
-            return {...copyState, users: copyState.users
-                    .map(t => t.id === action.userId? {...t, followed: false} : t)}
+            return {
+                ...copyState, users: copyState.users
+                    .map(t => t.id === action.userId ? {...t, followed: false} : t)
+            }
         }
         case 'SET-USERS': {
-            let newState =  {...state, users: [...state.users, ...action.users]}
+            let newState = {...state, users: [...state.users, ...action.users]}
             debugger
             return newState
         }
@@ -40,14 +45,14 @@ export const usersReducer = (state = initialState, action: actionType) => {
     }
 }
 
-export const followAC = (userId: string) => {
+export const followAC = (userId: number) => {
     return {
         type: 'FOLLOW' as const,
         userId
     }
 }
 
-export const unfollowAC = (userId: string) => {
+export const unfollowAC = (userId: number) => {
     return {
         type: 'UNFOLLOW' as const,
         userId
