@@ -11,9 +11,14 @@ type usersPropsType = {
 }
 
 export class Users extends React.Component<usersPropsType> {
+
+    componentDidMount() {
+        this.getUsers()
+    }
+
     constructor(props: usersPropsType) {
         super(props);
-        this.getUsers()
+        // this.getUsers()
     }
 
     getUsers = () => {
