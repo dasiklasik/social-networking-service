@@ -1,11 +1,12 @@
 import React from "react";
 import s from './Dialogs.module.css'
 import {MessageForm} from "./MessageForm/MessageForm";
+import {dialogsDataType, messagesDataType} from "../../redux/state";
 
 
 type dialogsPropsType = {
-    dialogsData: any
-    messageData: any
+    dialogsData: JSX.Element[]
+    messageData: JSX.Element[]
     addMessage: () => void
     changeMessage: (text: string) => void
     newMessageText: string

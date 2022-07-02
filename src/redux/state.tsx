@@ -1,11 +1,18 @@
 import {addPostActionType, changeTypedMessageActionType} from "./profileReducer";
 import {addMessageActionType, changeTypedDialogMessageActionType} from "./dialogsReducer";
-import {followACType, setUsersACType, unfollowACType, userItemType} from "./usersReducer";
+import {
+    changeCurrentPageACType,
+    followACType,
+    setTotalUsersCountACType,
+    setUsersACType,
+    unfollowACType,
+    userItemType
+} from "./usersReducer";
 
 
 export type actionType = addPostActionType | changeTypedMessageActionType |
     changeTypedDialogMessageActionType | addMessageActionType | unfollowACType | followACType |
-    setUsersACType
+    setUsersACType | setTotalUsersCountACType | changeCurrentPageACType
 
 
 export type storeType = {
@@ -70,6 +77,9 @@ export type dialogsPageType = {
 
 export type usersInfo = {
     users: Array<userItemType>
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
 }
 
 

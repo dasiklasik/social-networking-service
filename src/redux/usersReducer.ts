@@ -11,13 +11,18 @@ export type userItemType = {
 }
 
 export const initialState: usersInfo = {
-    users: []
+    users: [],
+    pageSize: 5,
+    totalUsersCount: 0,
+    currentPage: 1,
 }
 
 
 export type followACType = ReturnType<typeof followAC>
 export type unfollowACType = ReturnType<typeof unfollowAC>
 export type setUsersACType = ReturnType<typeof setUsersAC>
+export type setTotalUsersCountACType = ReturnType<typeof setTotalUsersCountAC>
+export type changeCurrentPageACType = ReturnType<typeof changeCurrentPageAC>
 
 
 export const usersReducer = (state = initialState, action: actionType) => {
@@ -36,9 +41,14 @@ export const usersReducer = (state = initialState, action: actionType) => {
             }
         }
         case 'SET-USERS': {
-            let newState = {...state, users: [...state.users, ...action.users]}
-            debugger
-            return newState
+            return {...state, users: [...action.users]}
+        }
+        case 'SET-TOTAL-USERS-COUNT': {
+            let newState = {...state}
+            return {...newState, totalUsersCount: action.totalUsersCount}
+        }
+        case 'CHANGE-CURRENT-PAGE': {
+            return {...state, currentPage: action.pageNumber}
         }
         default:
             return copyState
@@ -48,20 +58,34 @@ export const usersReducer = (state = initialState, action: actionType) => {
 export const followAC = (userId: number) => {
     return {
         type: 'FOLLOW' as const,
-        userId
+        userId,
     }
 }
 
 export const unfollowAC = (userId: number) => {
     return {
         type: 'UNFOLLOW' as const,
-        userId
+        userId,
     }
 }
 
 export const setUsersAC = (users: Array<userItemType>) => {
     return {
         type: 'SET-USERS' as const,
-        users
+        users,
+    }
+}
+
+export const setTotalUsersCountAC = (totalUsersCount: number) => {
+    return {
+        type: 'SET-TOTAL-USERS-COUNT' as const,
+        totalUsersCount,
+    }
+}
+
+export const changeCurrentPageAC = (pageNumber: number) => {
+    return {
+        type: 'CHANGE-CURRENT-PAGE' as const,
+        pageNumber,
     }
 }

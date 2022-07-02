@@ -1,5 +1,4 @@
 import React from "react";
-import s from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import MessageItem from "./MessageItem/MessageItem";
 import {actionType, stateType} from "../../redux/state";
@@ -30,3 +29,5 @@ const mapDispatchToProps = (dispatch: (action: actionType) => void) => {
 }
 
 export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
+
+

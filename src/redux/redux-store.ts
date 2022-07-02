@@ -14,7 +14,9 @@ let reducer = combineReducers({
     usersPage: usersReducer
 })
 
-export type reduxStoreType = Store<EmptyObject & {navbar: navbarType, profilePage: profilePageType, dialogsPage: {dialogsData: dialogsDataType[], messagesData: messagesDataType[], newDialogMessageText: string}}, actionType>
+export type reduxStoreType = ReturnType<typeof reducer>
+
+// export type reduxStoreType = Store<EmptyObject & {navbar: navbarType, profilePage: profilePageType, dialogsPage: {dialogsData: dialogsDataType[], messagesData: messagesDataType[], newDialogMessageText: string}}, actionType>
 
 export const store = createStore(reducer)
 
