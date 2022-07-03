@@ -8,7 +8,7 @@ import News from './News/News';
 import Settings from './Settings/Settings'
 import Music from './Music/Music'
 import {DialogsContainer} from './Dialogs/DialogsContainer';
-import {UsersContainer} from "./Users/UsersContainer";
+import UsersContainer from './Users/UsersContainer';
 
 
 function App() {

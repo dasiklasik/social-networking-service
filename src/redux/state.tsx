@@ -2,7 +2,7 @@ import {addPostActionType, changeTypedMessageActionType} from "./profileReducer"
 import {addMessageActionType, changeTypedDialogMessageActionType} from "./dialogsReducer";
 import {
     changeCurrentPageACType,
-    followACType,
+    followACType, setIsFetchingACType,
     setTotalUsersCountACType,
     setUsersACType,
     unfollowACType,
@@ -12,7 +12,7 @@ import {
 
 export type actionType = addPostActionType | changeTypedMessageActionType |
     changeTypedDialogMessageActionType | addMessageActionType | unfollowACType | followACType |
-    setUsersACType | setTotalUsersCountACType | changeCurrentPageACType
+    setUsersACType | setTotalUsersCountACType | changeCurrentPageACType | setIsFetchingACType
 
 
 export type storeType = {
@@ -80,6 +80,7 @@ export type usersInfo = {
     pageSize: number
     totalUsersCount: number
     currentPage: number
+    isFetching: boolean
 }
 
 

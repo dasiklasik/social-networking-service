@@ -30,11 +30,24 @@ export const Users = (props: UsersPropsType) => {
     let pages = []
 
 
-    if (pagesCount > 5) {
-        let initialNum = currentPage
-        for (let i = initialNum; i <= initialNum + 5; i++) {
-            pages.push(i.toString())
+    if (currentPage >= pagesCount - 5) {
+        for (let i = currentPage; i <= pagesCount; i++) {
+            pages.push(i)
         }
+
+    } else if (pagesCount > 5) {
+       if (currentPage === 1) {
+           let initialNum = currentPage
+           for (let i = initialNum; i <= initialNum + 5; i++) {
+               pages.push(i)
+           }
+       } else {
+           let initialNum = currentPage
+           for (let i = initialNum-1; i <= initialNum + 5; i++) {
+               pages.push(i)
+           }
+       }
+
     } else {
         for (let i = 1; i <= pagesCount; i++) {
             pages.push(i)
@@ -45,7 +58,10 @@ export const Users = (props: UsersPropsType) => {
         <div>
             <h2>Users</h2>
             <div>
-                {currentPage !== 1 && pagesCount > 5 ? <span>... </span> : ''}
+                {currentPage !== 1 && pagesCount > 5 ? <>
+                    <span className={currentPage === 1 ? s.selected : ''}
+                          onClick={() => onPageChanged(1)}
+                    >1</span> <span>... </span></> : ''}
                 {
                     pages.map(i => {
 
@@ -60,7 +76,10 @@ export const Users = (props: UsersPropsType) => {
                     })
                 }
                 {
-                    pagesCount > 5 ? <span>...</span> : ''
+                    pagesCount > 5 && currentPage < pagesCount - 5 ? <>
+                        <span>...</span><span onClick={() => onPageChanged(pagesCount)}> {pagesCount}</span>
+
+                    </> : ''
                 }
             </div>
             {users.map(t => <UserItem userInfo={t}

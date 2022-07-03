@@ -15,6 +15,7 @@ export const initialState: usersInfo = {
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 1,
+    isFetching: false,
 }
 
 
@@ -23,6 +24,7 @@ export type unfollowACType = ReturnType<typeof unfollowAC>
 export type setUsersACType = ReturnType<typeof setUsersAC>
 export type setTotalUsersCountACType = ReturnType<typeof setTotalUsersCountAC>
 export type changeCurrentPageACType = ReturnType<typeof changeCurrentPageAC>
+export type setIsFetchingACType = ReturnType<typeof setIsFetchingAC>
 
 
 export const usersReducer = (state = initialState, action: actionType) => {
@@ -49,6 +51,9 @@ export const usersReducer = (state = initialState, action: actionType) => {
         }
         case 'CHANGE-CURRENT-PAGE': {
             return {...state, currentPage: action.pageNumber}
+        }
+        case 'SET-IS-FETCHING': {
+            return {...state, isFetching: action.isFetching}
         }
         default:
             return copyState
@@ -87,5 +92,12 @@ export const changeCurrentPageAC = (pageNumber: number) => {
     return {
         type: 'CHANGE-CURRENT-PAGE' as const,
         pageNumber,
+    }
+}
+
+export const setIsFetchingAC = (isFetching: boolean) => {
+    return {
+        type: 'SET-IS-FETCHING' as const,
+        isFetching,
     }
 }
