@@ -2,6 +2,7 @@ import {userItemType} from "../../redux/usersReducer";
 import s from "./Users.module.css";
 import {UserItem} from "./UserItem/UserItem";
 import React from "react";
+import {BrowserRouter} from "react-router-dom";
 
 type UsersPropsType = {
     currentPage: number

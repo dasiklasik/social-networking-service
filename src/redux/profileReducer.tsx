@@ -1,28 +1,26 @@
-import {actionType, profilePageType, stateType} from "./state";
+import {actionType, profilePageType} from "./state";
+
+enum PROFILE_TYPES {
+    ADD_POST= 'ADD_POST',
+    CHANGE_TYPED_MESSAGE = 'CHANGE_TYPED_MESSAGE',
+}
 
 
-export type addPostActionType = {
-    type: 'ADD_POST'
-}
-export type changeTypedMessageActionType = {
-    type: 'CHANGE_TYPED_MESSAGE'
-    message: string
-}
-export const addPostActionCreator = (): addPostActionType => {
+export type addPostType = ReturnType<typeof addPost>
+export type changeTypedMessageType = ReturnType<typeof changeTypedMessage>
+
+
+export const addPost = () => {
     return {
-        type: ADD_POST
+        type: PROFILE_TYPES.ADD_POST as const,
     }
 }
-export const changeTypedMessageActionCreator = (message: string): changeTypedMessageActionType => {
+export const changeTypedMessage = (message: string) => {
     return {
-        type: CHANGE_TYPED_MESSAGE,
-        message
+        type: PROFILE_TYPES.CHANGE_TYPED_MESSAGE as const,
+        message,
     }
 }
-
-const ADD_POST = 'ADD_POST'
-const CHANGE_TYPED_MESSAGE = 'CHANGE_TYPED_MESSAGE'
-
 
 const initialState: profilePageType = {
     postData: [
@@ -30,12 +28,26 @@ const initialState: profilePageType = {
         {id: 2, message: 'Message 2', likesCount: '2' },
     ],
     profileInfo: {
-        firstName: 'Darya',
-        lastName: "Samsonovich",
-        dateOfBirth: '11.04.1999',
-        city: 'Minsk',
-        education: 'university',
-        webSite: 'none'
+        aboutMe: '',
+        contacts: {
+            facebook: '',
+            website: '',
+            vk: '',
+            twitter: '',
+            instagram: '',
+            youtube: '',
+            github: '',
+            mainLink: '',
+        },
+        lookingForAJob: false,
+        lookingForAJobDescription: '',
+        fullName: '',
+        userId: '1',
+        photos: {
+            small: '',
+            large: '',
+        },
+
     },
     newPostText: ''
 }
@@ -43,13 +55,13 @@ const initialState: profilePageType = {
 export const profileReducer = (state: profilePageType = initialState, action: actionType): profilePageType => {
     let newState = {...state}
     switch (action.type) {
-        case ADD_POST:
+        case PROFILE_TYPES.ADD_POST:
             newState.postData = [...state.postData]
             newState.postData.push({id: 5, message: state.newPostText, likesCount: '0'})
             newState.newPostText = ''
 
             return newState;
-        case CHANGE_TYPED_MESSAGE:
+        case PROFILE_TYPES.CHANGE_TYPED_MESSAGE:
             if (action.message) {
                 newState.newPostText = action.message
             }

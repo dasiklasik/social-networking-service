@@ -1,7 +1,5 @@
 import React, {ChangeEvent} from "react";
 import s from './MessageForm.module.css'
-import {actionType} from "../../../redux/state";
-import { addMessageActionCreator, changeTypedDialogMessageActionCreator } from "../../../redux/dialogsReducer";
 
 type messageFormPropsType = {
     addMessage: () => void

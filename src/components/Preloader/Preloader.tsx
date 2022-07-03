@@ -1,4 +1,4 @@
-import s from 'Preloader.module.css'
+import s from './Preloader.module.css'
 import React from "react";
 
 

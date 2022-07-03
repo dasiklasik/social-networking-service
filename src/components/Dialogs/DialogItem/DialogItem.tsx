@@ -11,7 +11,9 @@ function DialogItem(props: DialogItemPropsType) {
     return (
         <li className={s.dialog} key={props.state.id}>
             <img src={props.state.avatar}/>
-            <NavLink to={`/dialogs/${props.state.id}`} activeClassName={s.active}>{props.state.name}</NavLink>
+            <NavLink to={`/dialogs/${props.state.id}`} className={({isActive}) =>
+            isActive ? s.active : ''
+            }>{props.state.name}</NavLink>
         </li>
     )
 }

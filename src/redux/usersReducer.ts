@@ -1,5 +1,14 @@
 import {actionType, usersInfo,} from "./state";
 
+enum USER_TYPES {
+    FOLLOW = 'FOLLOW',
+    UNFOLLOW = 'UNFOLLOW',
+    SET_USERS = 'SET_USERS',
+    SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT',
+    CHANGE_CURRENT_PAGE = 'CHANGE_CURRENT_PAGE',
+    SET_IS_FETCHING = 'SET_IS_FETCHING',
+}
+
 
 export type userItemType = {
     name: string
@@ -19,40 +28,40 @@ export const initialState: usersInfo = {
 }
 
 
-export type followACType = ReturnType<typeof followAC>
-export type unfollowACType = ReturnType<typeof unfollowAC>
-export type setUsersACType = ReturnType<typeof setUsersAC>
-export type setTotalUsersCountACType = ReturnType<typeof setTotalUsersCountAC>
-export type changeCurrentPageACType = ReturnType<typeof changeCurrentPageAC>
-export type setIsFetchingACType = ReturnType<typeof setIsFetchingAC>
+export type followType = ReturnType<typeof follow>
+export type unfollowType = ReturnType<typeof unfollow>
+export type setUsersType = ReturnType<typeof setUsers>
+export type setTotalUsersCountType = ReturnType<typeof setTotalUsersCount>
+export type changeCurrentPageType = ReturnType<typeof changeCurrentPage>
+export type setIsFetchingType = ReturnType<typeof setIsFetching>
 
 
 export const usersReducer = (state = initialState, action: actionType) => {
     let copyState = {...state, users: [...state.users]}
     switch (action.type) {
-        case 'FOLLOW': {
+        case USER_TYPES.FOLLOW: {
             return {
                 ...copyState, users: copyState.users
                     .map(t => t.id === action.userId ? {...t, followed: true} : t)
             }
         }
-        case 'UNFOLLOW': {
+        case USER_TYPES.UNFOLLOW: {
             return {
                 ...copyState, users: copyState.users
                     .map(t => t.id === action.userId ? {...t, followed: false} : t)
             }
         }
-        case 'SET-USERS': {
+        case USER_TYPES.SET_USERS: {
             return {...state, users: [...action.users]}
         }
-        case 'SET-TOTAL-USERS-COUNT': {
+        case USER_TYPES.SET_TOTAL_USERS_COUNT: {
             let newState = {...state}
             return {...newState, totalUsersCount: action.totalUsersCount}
         }
-        case 'CHANGE-CURRENT-PAGE': {
+        case USER_TYPES.CHANGE_CURRENT_PAGE: {
             return {...state, currentPage: action.pageNumber}
         }
-        case 'SET-IS-FETCHING': {
+        case USER_TYPES.SET_IS_FETCHING: {
             return {...state, isFetching: action.isFetching}
         }
         default:
@@ -60,44 +69,44 @@ export const usersReducer = (state = initialState, action: actionType) => {
     }
 }
 
-export const followAC = (userId: number) => {
+export const follow = (userId: number) => {
     return {
-        type: 'FOLLOW' as const,
+        type: USER_TYPES.FOLLOW as const,
         userId,
     }
 }
 
-export const unfollowAC = (userId: number) => {
+export const unfollow = (userId: number) => {
     return {
-        type: 'UNFOLLOW' as const,
+        type: USER_TYPES.UNFOLLOW as const,
         userId,
     }
 }
 
-export const setUsersAC = (users: Array<userItemType>) => {
+export const setUsers = (users: Array<userItemType>) => {
     return {
-        type: 'SET-USERS' as const,
+        type: USER_TYPES.SET_USERS as const,
         users,
     }
 }
 
-export const setTotalUsersCountAC = (totalUsersCount: number) => {
+export const setTotalUsersCount = (totalUsersCount: number) => {
     return {
-        type: 'SET-TOTAL-USERS-COUNT' as const,
+        type: USER_TYPES.SET_TOTAL_USERS_COUNT as const,
         totalUsersCount,
     }
 }
 
-export const changeCurrentPageAC = (pageNumber: number) => {
+export const changeCurrentPage = (pageNumber: number) => {
     return {
-        type: 'CHANGE-CURRENT-PAGE' as const,
+        type: USER_TYPES.CHANGE_CURRENT_PAGE as const,
         pageNumber,
     }
 }
 
-export const setIsFetchingAC = (isFetching: boolean) => {
+export const setIsFetching = (isFetching: boolean) => {
     return {
-        type: 'SET-IS-FETCHING' as const,
+        type: USER_TYPES.SET_IS_FETCHING as const,
         isFetching,
     }
 }

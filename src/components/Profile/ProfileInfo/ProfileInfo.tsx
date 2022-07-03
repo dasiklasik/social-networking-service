@@ -14,11 +14,8 @@ function ProfileInfo(props: ProfileInfoPropsType) {
             <div className={s.profile}>
                 <img src={''} className={s.avatar}/>
                 <div className={s.profile_info}>
-                    <div>{`${props.profileInfoData.firstName} ${props.profileInfoData.lastName}`}</div>
-                    <div>Date of birth: {props.profileInfoData.dateOfBirth}</div>
-                    <div>City: {props.profileInfoData.city}</div>
-                    <div>Education: {props.profileInfoData.education}</div>
-                    <div>Web Site: {props.profileInfoData.webSite}</div>
+                    <div>{`${props.profileInfoData.fullName} `}</div>
+                    <div>Web Site: {props.profileInfoData.contacts.website}</div>
                 </div>
             </div>
         </div>

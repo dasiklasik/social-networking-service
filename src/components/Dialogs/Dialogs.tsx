@@ -2,13 +2,14 @@ import React from "react";
 import s from './Dialogs.module.css'
 import {MessageForm} from "./MessageForm/MessageForm";
 import {dialogsDataType, messagesDataType} from "../../redux/state";
+import {changeDialogMessageType} from "../../redux/dialogsReducer";
 
 
 type dialogsPropsType = {
     dialogsData: JSX.Element[]
     messageData: JSX.Element[]
     addMessage: () => void
-    changeMessage: (text: string) => void
+    changeDialogMessage: (text: string) => void
     newMessageText: string
 }
 
@@ -29,7 +30,7 @@ function Dialogs(props: dialogsPropsType) {
                     <ul className={s.dialog_field}>
                         {props.messageData}
                     </ul>
-                    <MessageForm addMessage={props.addMessage} changeMessage={props.changeMessage}
+                    <MessageForm addMessage={props.addMessage} changeMessage={props.changeDialogMessage}
                                  newDialogMessageText={props.newMessageText}/>
                 </div>
             </div>

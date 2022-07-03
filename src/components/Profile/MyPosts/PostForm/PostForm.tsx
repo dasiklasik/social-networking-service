@@ -1,7 +1,5 @@
 import React, {ChangeEvent} from "react";
 import s from './../PostsWrapper.module.css'
-import {actionType} from "../../../../redux/state";
-import { addPostActionCreator, changeTypedMessageActionCreator } from "../../../../redux/profileReducer";
 
 type postFormPropsType = {
     addPost: () => void

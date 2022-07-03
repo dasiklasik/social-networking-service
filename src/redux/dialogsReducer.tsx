@@ -2,26 +2,27 @@ import React from "react";
 import {actionType, dialogsPageType, messagesDataType} from "./state";
 
 
-export type addMessageActionType = {
-    type: 'ADD_MESSAGE'
+enum DIALOGS_TYPES {
+    ADD_MESSAGE = 'ADD_MESSAGE',
+    CHANGE_TYPED_DIALOG_MESSAGE = 'CHANGE_TYPED_DIALOG_MESSAGE',
 }
-export type changeTypedDialogMessageActionType = {
-    type: 'CHANGE_TYPED_DIALOG_MESSAGE'
-    message: string
-}
-export const changeTypedDialogMessageActionCreator = (message: string): changeTypedDialogMessageActionType => {
+
+
+export type addMessageType = ReturnType<typeof addMessage>
+export type changeDialogMessageType = ReturnType<typeof changeDialogMessage>
+
+export const changeDialogMessage = (message: string) => {
     return {
-        type: CHANGE_TYPED_DIALOG_MESSAGE,
-        message
+        type: DIALOGS_TYPES.CHANGE_TYPED_DIALOG_MESSAGE as const,
+        message,
     }
 }
-export const addMessageActionCreator = (): addMessageActionType => {
+export const addMessage = () => {
     return {
-        type: ADD_MESSAGE,
+        type: DIALOGS_TYPES.ADD_MESSAGE as const,
     }
 }
-const CHANGE_TYPED_DIALOG_MESSAGE = 'CHANGE_TYPED_DIALOG_MESSAGE'
-const ADD_MESSAGE = 'ADD_MESSAGE'
+
 
 const initialState: dialogsPageType = {
     dialogsData: [
@@ -41,10 +42,10 @@ const initialState: dialogsPageType = {
 export const dialogsReducer = (state: dialogsPageType = initialState, action: actionType) => {
     let newState = {...state}
     switch (action.type) {
-        case CHANGE_TYPED_DIALOG_MESSAGE:
+        case DIALOGS_TYPES.CHANGE_TYPED_DIALOG_MESSAGE:
             newState.newDialogMessageText = action.message
             return newState
-        case ADD_MESSAGE:
+        case DIALOGS_TYPES.ADD_MESSAGE:
             let newMessage: messagesDataType = {
                 id: 5,
                 message: newState.newDialogMessageText,

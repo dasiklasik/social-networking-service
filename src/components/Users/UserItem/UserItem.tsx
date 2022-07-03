@@ -1,6 +1,7 @@
 import React from "react";
 import s from './UserItem.module.css'
 import {userItemType} from "../../../redux/usersReducer";
+import { NavLink } from "react-router-dom";
 
 type userItemPropsType = {
     userInfo: userItemType
@@ -19,13 +20,15 @@ export const UserItem = (props: userItemPropsType) => {
     }
 
     return (
-        <li>
+        <div>
             <div className={s.wrapper}>
                 <div>
-                    <img className={s.avatar} src={props.userInfo.photos.small ? props.userInfo.photos.small :
-                        'https://avatarko.ru/img/kartinka/17/kot_naushniki_16067.jpg'} alt={''}/>
+                    <NavLink to={`profile/${props.userInfo.id.toString()}`}>
+                        <img className={s.avatar} src={props.userInfo.photos.small ? props.userInfo.photos.small :
+                            'https://avatarko.ru/img/kartinka/17/kot_naushniki_16067.jpg'} alt={''}/>
+                    </NavLink>
                     {props.userInfo.followed ? <button onClick={onUnfollowHandler}>Unfollow</button> :
-                         <button onClick={onFollowHandler}>Follow</button>}
+                        <button onClick={onFollowHandler}>Follow</button>}
                 </div>
                 <div className={s.desc}>
                     <div>
@@ -38,6 +41,6 @@ export const UserItem = (props: userItemPropsType) => {
                     </div>
                 </div>
             </div>
-        </li>
+        </div>
     )
 }

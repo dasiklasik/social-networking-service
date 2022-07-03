@@ -1,18 +1,18 @@
-import {addPostActionType, changeTypedMessageActionType} from "./profileReducer";
-import {addMessageActionType, changeTypedDialogMessageActionType} from "./dialogsReducer";
+import {addPostType, changeTypedMessageType} from "./profileReducer";
+import {addMessageType, changeDialogMessageType} from "./dialogsReducer";
 import {
-    changeCurrentPageACType,
-    followACType, setIsFetchingACType,
-    setTotalUsersCountACType,
-    setUsersACType,
-    unfollowACType,
+    changeCurrentPageType,
+    followType, setIsFetchingType,
+    setTotalUsersCountType,
+    setUsersType,
+    unfollowType,
     userItemType
 } from "./usersReducer";
 
 
-export type actionType = addPostActionType | changeTypedMessageActionType |
-    changeTypedDialogMessageActionType | addMessageActionType | unfollowACType | followACType |
-    setUsersACType | setTotalUsersCountACType | changeCurrentPageACType | setIsFetchingACType
+export type actionType = addPostType | changeTypedMessageType |
+    addMessageType | changeDialogMessageType | unfollowType | followType |
+    setUsersType | setTotalUsersCountType | changeCurrentPageType | setIsFetchingType
 
 
 export type storeType = {
@@ -51,12 +51,25 @@ export type postDataType = {
 }
 
 export type profileInfoType = {
-    firstName: string
-    lastName: string
-    dateOfBirth: string
-    city: string
-    education: string
-    webSite: string
+    aboutMe: string|null
+    contacts: {
+        facebook: string|null
+        website: string|null
+        vk: string|null
+        twitter: string|null
+        instagram: string|null
+        youtube: string|null
+        github: string|null
+        mainLink: string|null
+    }
+    lookingForAJob: boolean
+    lookingForAJobDescription: string|null
+    fullName: string|null
+    userId: string
+    photos: {
+        small: string|null
+        large: string|null
+    }
 }
 
 export type navbarType = {
