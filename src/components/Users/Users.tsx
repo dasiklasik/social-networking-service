@@ -1,83 +1,71 @@
-import React from "react";
-import {UserItem} from "./UserItem/UserItem";
 import {userItemType} from "../../redux/usersReducer";
-import axios from "axios";
-import s from './Users.module.css'
+import s from "./Users.module.css";
+import {UserItem} from "./UserItem/UserItem";
+import React from "react";
 
-type usersPropsType = {
-    users: Array<userItemType>
+type UsersPropsType = {
+    currentPage: number
     pageSize: number
     totalUsersCount: number
-    currentPage: number
+    onPageChanged: (pageNumber: number) => void
+    users: Array<userItemType>
     followUser: (userId: number) => void
     unfollowUser: (userId: number) => void
-    setUsers: (users: Array<userItemType>) => void
-    setTotalUsersCount: (totalUsersCount: number) => void
-    changeCurrentPage: (pageNumber: number) => void
 }
+export const Users = (props: UsersPropsType) => {
 
-export class Users extends React.Component<usersPropsType> {
+    const {
+        currentPage,
+        onPageChanged,
+        users,
+        followUser,
+        unfollowUser,
+        pageSize,
+        totalUsersCount,
+    } = props
 
-    componentDidMount() {
-        this.getUsers()
-    }
 
-    constructor(props: usersPropsType) {
-        super(props);
-    }
+    let pagesCount = Math.ceil(totalUsersCount / pageSize)
 
-    getUsers = () => {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.currentPage}`)
-            .then(response => {
-                this.props.setUsers(response.data.items)
-                this.props.setTotalUsersCount(response.data.totalCount)
-            })
-    }
+    let pages = []
 
-    onPageChanged = (pageNumber: number) => {
-        this.props.changeCurrentPage(pageNumber)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${pageNumber}`)
-            .then(response => {
-                this.props.setUsers(response.data.items)
-            })
-    }
 
-    render = () => {
-
-        let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
-
-        let pages = []
-
-        if (pagesCount <= 5) {
-            for (let i = 1; i <= pagesCount; i++) {
-                pages.push(i)
-            }
-        } else {
-            for (let i = this.props.currentPage; i <= this.props.currentPage + 5; i++) {
-                pages.push(i.toString())
-            }
+    if (pagesCount > 5) {
+        let initialNum = currentPage
+        for (let i = initialNum; i <= initialNum + 5; i++) {
+            pages.push(i.toString())
         }
-
-        return (
-            <div>
-                <h2>Users</h2>
-                <div>
-                    {this.props.currentPage !== 1 && pagesCount >5 ? <span>... </span> : ''}
-                    {
-                        pages.map(i =>
-                            <span
-                                className={this.props.currentPage === i ? s.selected : ''}
-                                onClick={() => this.onPageChanged(+i)}
-                            >{i} </span>)
-                    }
-                    {
-                        pagesCount > 5 ? <span>...</span> : ''
-                    }
-                </div>
-                {this.props.users.map(t => <UserItem userInfo={t}
-                                                     followUser={this.props.followUser}
-                                                     unfollowUser={this.props.unfollowUser}/>)}
-            </div>
-        )
+    } else {
+        for (let i = 1; i <= pagesCount; i++) {
+            pages.push(i)
+        }
     }
+
+    return (
+        <div>
+            <h2>Users</h2>
+            <div>
+                {currentPage !== 1 && pagesCount > 5 ? <span>... </span> : ''}
+                {
+                    pages.map(i => {
+
+                        return (
+                            <span
+                                className={
+                                    currentPage === +i ? s.selected : ''
+                                }
+                                onClick={() => onPageChanged(+i)}
+                            >{i} </span>
+                        )
+                    })
+                }
+                {
+                    pagesCount > 5 ? <span>...</span> : ''
+                }
+            </div>
+            {users.map(t => <UserItem userInfo={t}
+                                      followUser={followUser}
+                                      unfollowUser={unfollowUser}/>)}
+        </div>
+    )
 }

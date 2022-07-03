@@ -9,7 +9,7 @@ import {
     unfollowAC,
     userItemType
 } from "../../redux/usersReducer";
-import {Users} from "./Users";
+import {UsersAPIComponent} from "./UsersAPIComponent";
 
 const mapStateToProps = (state: stateType) => {
     return {
@@ -38,4 +38,4 @@ const mapDispatchToProps = (dispatch: (action: actionType) => void) => {
 
 
 
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users)
+export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent)
