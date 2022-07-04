@@ -23,7 +23,7 @@ export const UserItem = (props: userItemPropsType) => {
         <div>
             <div className={s.wrapper}>
                 <div>
-                    <NavLink to={`profile/${props.userInfo.id.toString()}`}>
+                    <NavLink to={'profile/'+props.userInfo.id.toString()}>
                         <img className={s.avatar} src={props.userInfo.photos.small ? props.userInfo.photos.small :
                             'https://avatarko.ru/img/kartinka/17/kot_naushniki_16067.jpg'} alt={''}/>
                     </NavLink>

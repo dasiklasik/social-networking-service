@@ -1,4 +1,4 @@
-import {addPostType, changeTypedMessageType} from "./profileReducer";
+import {addPostType, changeTypedMessageType, setUserProfileType} from "./profileReducer";
 import {addMessageType, changeDialogMessageType} from "./dialogsReducer";
 import {
     changeCurrentPageType,
@@ -12,7 +12,7 @@ import {
 
 export type actionType = addPostType | changeTypedMessageType |
     addMessageType | changeDialogMessageType | unfollowType | followType |
-    setUsersType | setTotalUsersCountType | changeCurrentPageType | setIsFetchingType
+    setUsersType | setTotalUsersCountType | changeCurrentPageType | setIsFetchingType | setUserProfileType
 
 
 export type storeType = {
@@ -70,7 +70,7 @@ export type profileInfoType = {
         small: string|null
         large: string|null
     }
-}
+} | null
 
 export type navbarType = {
     friendsData: Array<friendsDataType>

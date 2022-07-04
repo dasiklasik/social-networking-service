@@ -1,13 +1,21 @@
 import React from "react";
 import s from './Profile.module.css'
 import { PostsWrapperContainer } from "./MyPosts/PostsWrapperContainer";
-import {ProfileInfoContainer} from "./ProfileInfo/ProfileInfoContainer";
+import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import {profileInfoType} from "../../redux/state";
+
+type ProfilePropsType = {
+    profile: profileInfoType;
+}
+
+export function Profile(props: ProfilePropsType) {
+
+    const {profile} = props
 
 
-export function Profile() {
     return (
         <main className={s.main_content}>
-            <ProfileInfoContainer />
+            <ProfileInfo profileInfoData={profile}/>
             <PostsWrapperContainer/>
         </main>
     )

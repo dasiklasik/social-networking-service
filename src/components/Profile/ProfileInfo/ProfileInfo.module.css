@@ -7,6 +7,16 @@
     display: flex;
 }
 
+.avatar_block {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: lightgray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .profile_info {}
 
 .avatar {}

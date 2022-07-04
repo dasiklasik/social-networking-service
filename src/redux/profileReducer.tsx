@@ -1,13 +1,15 @@
-import {actionType, profilePageType} from "./state";
+import {actionType, profileInfoType, profilePageType} from "./state";
 
 enum PROFILE_TYPES {
     ADD_POST= 'ADD_POST',
     CHANGE_TYPED_MESSAGE = 'CHANGE_TYPED_MESSAGE',
+    SET_USER_PROFILE = 'SET_USER_PROFILE',
 }
 
 
 export type addPostType = ReturnType<typeof addPost>
 export type changeTypedMessageType = ReturnType<typeof changeTypedMessage>
+export type setUserProfileType = ReturnType<typeof setUserProfile>
 
 
 export const addPost = () => {
@@ -19,6 +21,13 @@ export const changeTypedMessage = (message: string) => {
     return {
         type: PROFILE_TYPES.CHANGE_TYPED_MESSAGE as const,
         message,
+    }
+}
+
+export const setUserProfile = (profileInfo: profileInfoType) => {
+    return {
+        type: PROFILE_TYPES.SET_USER_PROFILE as const,
+        profileInfo,
     }
 }
 
@@ -66,6 +75,9 @@ export const profileReducer = (state: profilePageType = initialState, action: ac
                 newState.newPostText = action.message
             }
             return newState
+        case PROFILE_TYPES.SET_USER_PROFILE: {
+            return {...newState, profileInfo: action.profileInfo}
+        }
         default:
         return newState
     }
