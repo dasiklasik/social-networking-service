@@ -22,15 +22,14 @@ function App() {
             <div className={'content-wrapper'}>
                 <Routes>
                     <Route path={'/'} element={<ProfileContainerWithUrl/>}/>
-                    <Route path={'/profile'} element={<ProfileContainerWithUrl/>}/>
+                    <Route path={'/profile'} element={<ProfileContainerWithUrl/>}>
+                        <Route path=":userId" element={<ProfileContainerWithUrl/>}/>
+                    </Route>
                     <Route path="/dialogs/" element={<DialogsContainer/>}/>
                     <Route path="/news" element={<News/>}/>
                     <Route path="/music" element={<Music/>}/>
                     <Route path="/settings" element={<Settings/>}/>
                     <Route path="/users" element={<UsersContainer/>}/>
-                    <Route path="/users/profile" element={<ProfileContainerWithUrl/>}>
-                        <Route path=":userId" element={<ProfileContainerWithUrl/>}/>
-                    </Route>
                 </Routes>
             </div>
 

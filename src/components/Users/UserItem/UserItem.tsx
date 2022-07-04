@@ -1,7 +1,7 @@
 import React from "react";
 import s from './UserItem.module.css'
 import {userItemType} from "../../../redux/usersReducer";
-import { NavLink } from "react-router-dom";
+import {Link, NavLink } from "react-router-dom";
 
 type userItemPropsType = {
     userInfo: userItemType
@@ -23,7 +23,7 @@ export const UserItem = (props: userItemPropsType) => {
         <div>
             <div className={s.wrapper}>
                 <div>
-                    <NavLink to={'profile/'+props.userInfo.id.toString()}>
+                    <NavLink to={'/profile/'+props.userInfo.id.toString()}>
                         <img className={s.avatar} src={props.userInfo.photos.small ? props.userInfo.photos.small :
                             'https://avatarko.ru/img/kartinka/17/kot_naushniki_16067.jpg'} alt={''}/>
                     </NavLink>

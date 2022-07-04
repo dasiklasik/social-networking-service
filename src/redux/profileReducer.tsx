@@ -31,6 +31,7 @@ export const setUserProfile = (profileInfo: profileInfoType) => {
     }
 }
 
+
 const initialState: profilePageType = {
     postData: [
         {id: 1, message: 'Message', likesCount: '0' },
@@ -58,7 +59,7 @@ const initialState: profilePageType = {
         },
 
     },
-    newPostText: ''
+    newPostText: '',
 }
 
 export const profileReducer = (state: profilePageType = initialState, action: actionType): profilePageType => {
