@@ -3,11 +3,10 @@ import {connect} from "react-redux";
 import {stateType} from "../../redux/state";
 import {
     changeCurrentPage,
-    follow,
     setIsFetching,
     setTotalUsersCount,
     setUsers,
-    unfollow,
+    toggleFollow,
     userItemType
 } from "../../redux/usersReducer";
 import axios from "axios";
@@ -21,8 +20,7 @@ type usersPropsType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
-    follow: (userId: number) => void
-    unfollow: (userId: number) => void
+    toggleFollow: (userId: number, isFollowing: boolean) => void
     setUsers: (users: Array<userItemType>) => void
     setTotalUsersCount: (totalUsersCount: number) => void
     changeCurrentPage: (pageNumber: number) => void
@@ -70,8 +68,7 @@ class UsersContainer extends React.Component<usersPropsType> {
                             currentPage={this.props.currentPage}
                             onPageChanged={this.onPageChanged}
                             users={this.props.users}
-                            followUser={this.props.follow}
-                            unfollowUser={this.props.unfollow}
+                            toggleFollow={this.props.toggleFollow}
                             pageSize={this.props.pageSize}
                             totalUsersCount={this.props.totalUsersCount}
                         />
@@ -113,8 +110,7 @@ const mapStateToProps = (state: stateType) => {
 // }
 
 const propsFunctions = {
-    follow,
-    unfollow,
+    toggleFollow,
     setUsers,
     changeCurrentPage,
     setIsFetching,

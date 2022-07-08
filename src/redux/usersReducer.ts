@@ -1,6 +1,7 @@
 import {actionType, usersInfo,} from "./state";
 
 enum USER_TYPES {
+    TOGGLE_FOLLOW = 'TOGGLE_FOLLOW',
     FOLLOW = 'FOLLOW',
     UNFOLLOW = 'UNFOLLOW',
     SET_USERS = 'SET_USERS',
@@ -16,7 +17,7 @@ export type userItemType = {
     uniqueUrlName: string | null
     photos: { small: string | null, large: string | null }
     status: string| null
-    followed: boolean
+    isFollowing: boolean
 }
 
 export const initialState: usersInfo = {
@@ -28,6 +29,7 @@ export const initialState: usersInfo = {
 }
 
 
+export type toggleFollowType = ReturnType<typeof toggleFollow>
 export type followType = ReturnType<typeof follow>
 export type unfollowType = ReturnType<typeof unfollow>
 export type setUsersType = ReturnType<typeof setUsers>
@@ -39,16 +41,10 @@ export type setIsFetchingType = ReturnType<typeof setIsFetching>
 export const usersReducer = (state = initialState, action: actionType) => {
     let copyState = {...state, users: [...state.users]}
     switch (action.type) {
-        case USER_TYPES.FOLLOW: {
-            return {
-                ...copyState, users: copyState.users
-                    .map(t => t.id === action.userId ? {...t, followed: true} : t)
-            }
-        }
-        case USER_TYPES.UNFOLLOW: {
-            return {
-                ...copyState, users: copyState.users
-                    .map(t => t.id === action.userId ? {...t, followed: false} : t)
+        case USER_TYPES.TOGGLE_FOLLOW: {
+            return {...state,
+                users: state.users.map(u => u.id === action.userId ?
+                    {...u, isFollowing: action.isFollowing} : u)
             }
         }
         case USER_TYPES.SET_USERS: {
@@ -66,6 +62,15 @@ export const usersReducer = (state = initialState, action: actionType) => {
         }
         default:
             return copyState
+    }
+}
+
+
+export const toggleFollow = (userId: number, isFollowing: boolean) => {
+    return {
+        type: USER_TYPES.TOGGLE_FOLLOW as const,
+        userId,
+        isFollowing,
     }
 }
 

@@ -1,23 +1,23 @@
 import React from "react";
 import s from './UserItem.module.css'
 import {userItemType} from "../../../redux/usersReducer";
-import {Link, NavLink } from "react-router-dom";
+import {NavLink } from "react-router-dom";
 
 type userItemPropsType = {
     userInfo: userItemType
-    followUser: (userId: number) => void
-    unfollowUser: (userId: number) => void
+    toggleFollow: (userId: number, isFollowing: boolean) => void
 }
 
 export const UserItem = (props: userItemPropsType) => {
 
     const onFollowHandler = () => {
-        props.followUser(props.userInfo.id)
+        props.toggleFollow(props.userInfo.id, true)
     }
 
     const onUnfollowHandler = () => {
-      props.unfollowUser(props.userInfo.id)
+      props.toggleFollow(props.userInfo.id, false)
     }
+
 
     return (
         <div>
@@ -27,7 +27,7 @@ export const UserItem = (props: userItemPropsType) => {
                         <img className={s.avatar} src={props.userInfo.photos.small ? props.userInfo.photos.small :
                             'https://avatarko.ru/img/kartinka/17/kot_naushniki_16067.jpg'} alt={''}/>
                     </NavLink>
-                    {props.userInfo.followed ? <button onClick={onUnfollowHandler}>Unfollow</button> :
+                    {props.userInfo.isFollowing ? <button onClick={onUnfollowHandler}>Unfollow</button> :
                         <button onClick={onFollowHandler}>Follow</button>}
                 </div>
                 <div className={s.desc}>

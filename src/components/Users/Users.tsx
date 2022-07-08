@@ -3,6 +3,7 @@ import s from "./Users.module.css";
 import {UserItem} from "./UserItem/UserItem";
 import React from "react";
 import {BrowserRouter} from "react-router-dom";
+import {UserItemContainer} from "./UserItem/UserItemContainer";
 
 type UsersPropsType = {
     currentPage: number
@@ -10,8 +11,7 @@ type UsersPropsType = {
     totalUsersCount: number
     onPageChanged: (pageNumber: number) => void
     users: Array<userItemType>
-    followUser: (userId: number) => void
-    unfollowUser: (userId: number) => void
+    toggleFollow: (userId: number, isFollowing: boolean) => void
 }
 export const Users = (props: UsersPropsType) => {
 
@@ -19,8 +19,7 @@ export const Users = (props: UsersPropsType) => {
         currentPage,
         onPageChanged,
         users,
-        followUser,
-        unfollowUser,
+        toggleFollow,
         pageSize,
         totalUsersCount,
     } = props
@@ -83,9 +82,8 @@ export const Users = (props: UsersPropsType) => {
                     </> : ''
                 }
             </div>
-            {users.map(t => <UserItem userInfo={t}
-                                      followUser={followUser}
-                                      unfollowUser={unfollowUser}/>)}
+            {users.map(t => <UserItemContainer userInfo={t}
+                                      toggleFollow={toggleFollow}/>)}
         </div>
     )
 }

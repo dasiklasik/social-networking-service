@@ -4,7 +4,7 @@ import {
     changeCurrentPageType,
     followType, setIsFetchingType,
     setTotalUsersCountType,
-    setUsersType,
+    setUsersType, toggleFollowType,
     unfollowType,
     userItemType
 } from "./usersReducer";
@@ -12,9 +12,9 @@ import { setAuthUserDataType } from "./auth-reducer";
 
 
 export type actionType = addPostType | changeTypedMessageType |
-    addMessageType | changeDialogMessageType | unfollowType | followType |
+    addMessageType | changeDialogMessageType  |
     setUsersType | setTotalUsersCountType | changeCurrentPageType | setIsFetchingType | setUserProfileType
-    | setAuthUserDataType
+    | setAuthUserDataType |toggleFollowType
 
 
 
