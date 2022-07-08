@@ -4,6 +4,7 @@ import {dialogsReducer} from "./dialogsReducer";
 import {navBarReducer} from "./navbarReducer";
 import {actionType, dialogsDataType, messagesDataType, navbarType, profilePageType} from "./state";
 import {usersReducer} from "./usersReducer";
+import {authReducer} from "./auth-reducer";
 
 
 
@@ -11,7 +12,8 @@ let reducer = combineReducers({
     navbar: navBarReducer,
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
-    usersPage: usersReducer
+    usersPage: usersReducer,
+    auth: authReducer,
 })
 
 export type reduxStoreType = ReturnType<typeof reducer>

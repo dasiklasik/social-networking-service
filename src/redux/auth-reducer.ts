@@ -1,37 +1,42 @@
 import {actionType} from "./state";
 
 enum AUTH_TYPES {
-    SET_USER_DATA = 'SET_USER_DATA'
+    SET_AUTH_USER_DATA = 'SET_AUTH_USER_DATA'
 }
 
-type initialStateType = {
+export type authStateType = {
     id: number | null
     email: string | null
     login: string | null
-    isFetching: boolean
+    isAuth: boolean
 }
 
-const initialState: initialStateType = {
+const initialState: authStateType = {
     id: null,
     email: null,
     login: null,
-    isFetching: false,
+    isAuth: false
 }
 
 
 export const authReducer = (state = initialState, action: actionType) => {
     switch (action.type) {
-        case AUTH_TYPES.SET_USER_DATA:
-            return {...state, ...action.payload}
+        case AUTH_TYPES.SET_AUTH_USER_DATA:
+            debugger
+            return {
+                ...state,
+                ...action.payload,
+                isAuth: true,
+            }
         default: return state
     }
 }
 
 
-export type setUserDataType = ReturnType<typeof setUserData>
-const setUserData = (payload: {id: number, email: number, login: number}) => {
+export type setAuthUserDataType = ReturnType<typeof setAuthUserData>
+export const setAuthUserData = (payload: {id: number, email: string, login: string}) => {
     return {
-        type: AUTH_TYPES.SET_USER_DATA as const,
+        type: AUTH_TYPES.SET_AUTH_USER_DATA as const,
         payload,
     }
 }

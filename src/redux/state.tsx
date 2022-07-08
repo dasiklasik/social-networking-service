@@ -8,13 +8,13 @@ import {
     unfollowType,
     userItemType
 } from "./usersReducer";
-import { setUserDataType } from "./auth-reducer";
+import { setAuthUserDataType } from "./auth-reducer";
 
 
 export type actionType = addPostType | changeTypedMessageType |
     addMessageType | changeDialogMessageType | unfollowType | followType |
     setUsersType | setTotalUsersCountType | changeCurrentPageType | setIsFetchingType | setUserProfileType
-    | setUserDataType
+    | setAuthUserDataType
 
 
 
@@ -105,6 +105,5 @@ export type stateType = {
     profilePage: profilePageType
     dialogsPage: dialogsPageType
     usersPage: usersInfo
-
 }
 

@@ -44,7 +44,7 @@ type ProfileContainerWithUrlPropsType = {
 
 const ProfileContainerWithUrl = (props: ProfileContainerWithUrlPropsType) => {
     const url = useParams()
-debugger
+
     return (
         <ProfileContainer {...props} url={url}/>
     )
