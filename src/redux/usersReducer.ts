@@ -2,8 +2,6 @@ import {actionType, usersInfo,} from "./state";
 
 enum USER_TYPES {
     TOGGLE_FOLLOW = 'TOGGLE_FOLLOW',
-    FOLLOW = 'FOLLOW',
-    UNFOLLOW = 'UNFOLLOW',
     SET_USERS = 'SET_USERS',
     SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT',
     CHANGE_CURRENT_PAGE = 'CHANGE_CURRENT_PAGE',
@@ -17,7 +15,7 @@ export type userItemType = {
     uniqueUrlName: string | null
     photos: { small: string | null, large: string | null }
     status: string| null
-    isFollowing: boolean
+    followed: boolean
 }
 
 export const initialState: usersInfo = {
@@ -30,8 +28,6 @@ export const initialState: usersInfo = {
 
 
 export type toggleFollowType = ReturnType<typeof toggleFollow>
-export type followType = ReturnType<typeof follow>
-export type unfollowType = ReturnType<typeof unfollow>
 export type setUsersType = ReturnType<typeof setUsers>
 export type setTotalUsersCountType = ReturnType<typeof setTotalUsersCount>
 export type changeCurrentPageType = ReturnType<typeof changeCurrentPage>
@@ -44,10 +40,11 @@ export const usersReducer = (state = initialState, action: actionType) => {
         case USER_TYPES.TOGGLE_FOLLOW: {
             return {...state,
                 users: state.users.map(u => u.id === action.userId ?
-                    {...u, isFollowing: action.isFollowing} : u)
+                    {...u, followed: action.isFollowing} : u)
             }
         }
         case USER_TYPES.SET_USERS: {
+            debugger
             return {...state, users: [...action.users]}
         }
         case USER_TYPES.SET_TOTAL_USERS_COUNT: {
@@ -71,20 +68,6 @@ export const toggleFollow = (userId: number, isFollowing: boolean) => {
         type: USER_TYPES.TOGGLE_FOLLOW as const,
         userId,
         isFollowing,
-    }
-}
-
-export const follow = (userId: number) => {
-    return {
-        type: USER_TYPES.FOLLOW as const,
-        userId,
-    }
-}
-
-export const unfollow = (userId: number) => {
-    return {
-        type: USER_TYPES.UNFOLLOW as const,
-        userId,
     }
 }
 

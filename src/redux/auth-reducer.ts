@@ -22,7 +22,6 @@ const initialState: authStateType = {
 export const authReducer = (state = initialState, action: actionType) => {
     switch (action.type) {
         case AUTH_TYPES.SET_AUTH_USER_DATA:
-            debugger
             return {
                 ...state,
                 ...action.payload,

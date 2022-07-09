@@ -1,11 +1,9 @@
 import {addPostType, changeTypedMessageType, setUserProfileType} from "./profileReducer";
 import {addMessageType, changeDialogMessageType} from "./dialogsReducer";
 import {
-    changeCurrentPageType,
-    followType, setIsFetchingType,
+    changeCurrentPageType, setIsFetchingType,
     setTotalUsersCountType,
     setUsersType, toggleFollowType,
-    unfollowType,
     userItemType
 } from "./usersReducer";
 import { setAuthUserDataType } from "./auth-reducer";

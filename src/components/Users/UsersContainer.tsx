@@ -13,6 +13,7 @@ import axios from "axios";
 import {Users} from "./Users";
 import s from './Users.module.css'
 import { Preloader } from "../Preloader/Preloader";
+import {reduxStoreType} from "../../redux/redux-store";
 
 type usersPropsType = {
     users: Array<userItemType>
@@ -25,6 +26,7 @@ type usersPropsType = {
     setTotalUsersCount: (totalUsersCount: number) => void
     changeCurrentPage: (pageNumber: number) => void
     setIsFetching: (isFetching: boolean) => void
+    isAuth: boolean
 }
 
 class UsersContainer extends React.Component<usersPropsType> {
@@ -39,8 +41,10 @@ class UsersContainer extends React.Component<usersPropsType> {
 
     getUsers = () => {
         this.props.setIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.currentPage}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.currentPage}`,
+            {withCredentials: true})
             .then(response => {
+                debugger
                 this.props.setUsers(response.data.items)
                 this.props.setTotalUsersCount(response.data.totalCount)
                 this.props.setIsFetching(false)
@@ -50,7 +54,8 @@ class UsersContainer extends React.Component<usersPropsType> {
     onPageChanged = (pageNumber: number) => {
         this.props.changeCurrentPage(pageNumber)
         this.props.setIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${pageNumber}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${pageNumber}`,
+            {withCredentials: true})
             .then(response => {
                 this.props.setUsers(response.data.items)
                 this.props.setIsFetching(false)
@@ -71,6 +76,7 @@ class UsersContainer extends React.Component<usersPropsType> {
                             toggleFollow={this.props.toggleFollow}
                             pageSize={this.props.pageSize}
                             totalUsersCount={this.props.totalUsersCount}
+                            isAuth={this.props.isAuth}
                         />
                 }
             </>
@@ -80,13 +86,14 @@ class UsersContainer extends React.Component<usersPropsType> {
     }
 }
 
-const mapStateToProps = (state: stateType) => {
+const mapStateToProps = (state: reduxStoreType) => {
     return {
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
+        isAuth: state.auth.isAuth,
     }
 }
 

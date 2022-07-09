@@ -2,8 +2,6 @@ import {userItemType} from "../../redux/usersReducer";
 import s from "./Users.module.css";
 import {UserItem} from "./UserItem/UserItem";
 import React from "react";
-import {BrowserRouter} from "react-router-dom";
-import {UserItemContainer} from "./UserItem/UserItemContainer";
 
 type UsersPropsType = {
     currentPage: number
@@ -12,6 +10,7 @@ type UsersPropsType = {
     onPageChanged: (pageNumber: number) => void
     users: Array<userItemType>
     toggleFollow: (userId: number, isFollowing: boolean) => void
+    isAuth: boolean
 }
 export const Users = (props: UsersPropsType) => {
 
@@ -22,6 +21,7 @@ export const Users = (props: UsersPropsType) => {
         toggleFollow,
         pageSize,
         totalUsersCount,
+        isAuth,
     } = props
 
 
@@ -82,8 +82,8 @@ export const Users = (props: UsersPropsType) => {
                     </> : ''
                 }
             </div>
-            {users.map(t => <UserItemContainer userInfo={t}
-                                      toggleFollow={toggleFollow}/>)}
+            {users.map(t => <UserItem userInfo={t}
+                                      toggleFollow={toggleFollow} isAuth={isAuth}/>)}
         </div>
     )
 }
