@@ -1,11 +1,11 @@
 import React from "react";
-import axios from "axios";
 import {connect} from "react-redux";
 import {Header} from "./Header";
 import {setAuthUserData} from "../../redux/auth-reducer";
 import {reduxStoreType} from "../../redux/redux-store";
 import {setUserProfile} from "../../redux/profileReducer";
 import {profileInfoType} from "../../redux/state";
+import {authAPI, profileAPI} from "../../api/api";
 
 type HeaderContainerPropsType = {
     isAuth: boolean
@@ -17,19 +17,16 @@ type HeaderContainerPropsType = {
 class HeaderContainer extends React.Component<HeaderContainerPropsType> {
 
     componentDidMount() {
-        this.getAuth()
-    }
-
-    getAuth = () => {
-        axios.get('https://social-network.samuraijs.com/api/1.0/auth/me', {withCredentials: true})
+        authAPI.getAuth()
             .then(response => {
-                if (response.data.resultCode === 0) {
-                    this.props.setAuthUserData(response.data.data)
-                    return axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${response.data.data.id}`)
+                if (response.resultCode === 0) {
+                    this.props.setAuthUserData(response.data)
+                    return profileAPI.getProfileData(response.data.id)
                 }
             }).then((response) => {
             if (response) {
-                this.props.setUserProfile(response.data)
+                console.log(response)
+                this.props.setUserProfile(response)
             }
         })
     }

@@ -3,6 +3,7 @@ import s from './UserItem.module.css'
 import {userItemType} from "../../../redux/usersReducer";
 import {NavLink} from "react-router-dom";
 import axios from "axios";
+import {usersAPI} from "../../../api/api";
 
 type userItemPropsType = {
     userInfo: userItemType
@@ -12,13 +13,16 @@ type userItemPropsType = {
 
 export const UserItem = (props: userItemPropsType) => {
 
+    const {
+        userInfo,
+        toggleFollow,
+        isAuth,
+    } = props
+
     const onFollowHandler = () => {
-        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${props.userInfo.id}`,
-            {},
-            {withCredentials: true, headers: {'API-KEY': '2fb059af-d1d5-4375-a272-54a52b66ff13'}})
+        usersAPI.followUser(userInfo.id)
             .then((response) => {
-                console.log(response.data)
-                props.toggleFollow(props.userInfo.id, response.data)
+                toggleFollow(userInfo.id, true)
             })
             .catch((error) => {
                 console.log(error)
@@ -26,10 +30,10 @@ export const UserItem = (props: userItemPropsType) => {
     }
 
     const onUnfollowHandler = () => {
-        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${props.userInfo.id}`,
-            {withCredentials: true, headers: {'API-KEY': '2fb059af-d1d5-4375-a272-54a52b66ff13'}})
+        usersAPI.unFollowUser(userInfo.id)
             .then((response) => {
-                props.toggleFollow(props.userInfo.id, response.data)
+                debugger
+                props.toggleFollow(userInfo.id, false)
             })
             .catch((error) => {
                 console.log(error)
@@ -42,21 +46,21 @@ export const UserItem = (props: userItemPropsType) => {
         <div>
             <div className={s.wrapper}>
                 <div>
-                    <NavLink to={'/profile/' + props.userInfo.id.toString()}>
-                        <img className={s.avatar} src={props.userInfo.photos.small ? props.userInfo.photos.small :
+                    <NavLink to={'/profile/' + userInfo.id.toString()}>
+                        <img className={s.avatar} src={userInfo.photos.small ? userInfo.photos.small :
                             'https://avatarko.ru/img/kartinka/17/kot_naushniki_16067.jpg'} alt={''}/>
                     </NavLink>
 
-                    {props.isAuth && props.userInfo.followed ?
+                    {isAuth && userInfo.followed ?
                         <button onClick={onUnfollowHandler}>Unfollow</button> :
-                        props.isAuth ? <button onClick={onFollowHandler}>Follow</button> : null
+                        isAuth ? <button onClick={onFollowHandler}>Follow</button> : null
                     }
 
                 </div>
                 <div className={s.desc}>
                     <div>
-                        <div className={s.name}>{props.userInfo.name}</div>
-                        <div className={s.status}>{props.userInfo.status}</div>
+                        <div className={s.name}>{userInfo.name}</div>
+                        <div className={s.status}>{userInfo.status}</div>
                     </div>
                     <div className={s.living}>
                         {/*<p>{"props.userInfo.location.country"}</p>*/}
