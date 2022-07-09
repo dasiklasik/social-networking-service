@@ -1,7 +1,7 @@
 import {addPostType, changeTypedMessageType, setUserProfileType} from "./profileReducer";
 import {addMessageType, changeDialogMessageType} from "./dialogsReducer";
 import {
-    changeCurrentPageType, setIsFetchingType,
+    changeCurrentPageType, setFollowingInProgressType, setIsFetchingType,
     setTotalUsersCountType,
     setUsersType, toggleFollowType,
     userItemType
@@ -12,7 +12,7 @@ import { setAuthUserDataType } from "./auth-reducer";
 export type actionType = addPostType | changeTypedMessageType |
     addMessageType | changeDialogMessageType  |
     setUsersType | setTotalUsersCountType | changeCurrentPageType | setIsFetchingType | setUserProfileType
-    | setAuthUserDataType |toggleFollowType
+    | setAuthUserDataType |toggleFollowType | setFollowingInProgressType
 
 
 
@@ -95,6 +95,7 @@ export type usersInfo = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
+    followingInProgress: Array<number>
 }
 
 

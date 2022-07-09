@@ -6,6 +6,7 @@ enum USER_TYPES {
     SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT',
     CHANGE_CURRENT_PAGE = 'CHANGE_CURRENT_PAGE',
     SET_IS_FETCHING = 'SET_IS_FETCHING',
+    SET_FOLLOWING_IN_PROGRESS = 'SET_FOLLOWING_IN_PROGRESS',
 }
 
 
@@ -24,6 +25,7 @@ export const initialState: usersInfo = {
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: false,
+    followingInProgress: [],
 }
 
 
@@ -32,6 +34,7 @@ export type setUsersType = ReturnType<typeof setUsers>
 export type setTotalUsersCountType = ReturnType<typeof setTotalUsersCount>
 export type changeCurrentPageType = ReturnType<typeof changeCurrentPage>
 export type setIsFetchingType = ReturnType<typeof setIsFetching>
+export type setFollowingInProgressType = ReturnType<typeof setFollowingInProgress>
 
 
 export const usersReducer = (state = initialState, action: actionType) => {
@@ -56,6 +59,13 @@ export const usersReducer = (state = initialState, action: actionType) => {
         }
         case USER_TYPES.SET_IS_FETCHING: {
             return {...state, isFetching: action.isFetching}
+        }
+        case USER_TYPES.SET_FOLLOWING_IN_PROGRESS: {
+            if (action.isAdding) {
+                return {...state, followingInProgress: [...state.followingInProgress, action.userId]}
+            } else {
+                return {...state, followingInProgress: state.followingInProgress.filter(u => u !== action.userId)}
+            }
         }
         default:
             return copyState
@@ -96,5 +106,13 @@ export const setIsFetching = (isFetching: boolean) => {
     return {
         type: USER_TYPES.SET_IS_FETCHING as const,
         isFetching,
+    }
+}
+
+export const setFollowingInProgress = (userId: number, isAdding: boolean) => {
+    return {
+        type: USER_TYPES.SET_FOLLOWING_IN_PROGRESS as const,
+        userId,
+        isAdding,
     }
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import {
-    changeCurrentPage,
+    changeCurrentPage, setFollowingInProgress,
     setIsFetching,
     setTotalUsersCount,
     setUsers,
@@ -24,7 +24,9 @@ type usersPropsType = {
     setTotalUsersCount: (totalUsersCount: number) => void
     changeCurrentPage: (pageNumber: number) => void
     setIsFetching: (isFetching: boolean) => void
+    setFollowingInProgress: (userId: number, isAdding: boolean) => void
     isAuth: boolean
+    followingInProgress: Array<number>
 }
 
 class UsersContainer extends React.Component<usersPropsType> {
@@ -70,6 +72,8 @@ class UsersContainer extends React.Component<usersPropsType> {
                             pageSize={this.props.pageSize}
                             totalUsersCount={this.props.totalUsersCount}
                             isAuth={this.props.isAuth}
+                            setFollowingInProgress={this.props.setFollowingInProgress}
+                            followingInProgress={this.props.followingInProgress}
                         />
                 }
             </>
@@ -87,6 +91,7 @@ const mapStateToProps = (state: reduxStoreType) => {
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
         isAuth: state.auth.isAuth,
+        followingInProgress: state.usersPage.followingInProgress,
     }
 }
 
@@ -115,6 +120,7 @@ const propsFunctions = {
     changeCurrentPage,
     setIsFetching,
     setTotalUsersCount,
+    setFollowingInProgress,
 }
 
 

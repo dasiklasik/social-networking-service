@@ -10,7 +10,9 @@ type UsersPropsType = {
     onPageChanged: (pageNumber: number) => void
     users: Array<userItemType>
     toggleFollow: (userId: number, isFollowing: boolean) => void
+    setFollowingInProgress: (userId: number, isAdding: boolean) => void
     isAuth: boolean
+    followingInProgress: Array<number>
 }
 export const Users = (props: UsersPropsType) => {
 
@@ -22,6 +24,8 @@ export const Users = (props: UsersPropsType) => {
         pageSize,
         totalUsersCount,
         isAuth,
+        setFollowingInProgress,
+        followingInProgress,
     } = props
 
 
@@ -83,7 +87,11 @@ export const Users = (props: UsersPropsType) => {
                 }
             </div>
             {users.map(t => <UserItem userInfo={t}
-                                      toggleFollow={toggleFollow} isAuth={isAuth}/>)}
+                                      toggleFollow={toggleFollow}
+                                      isAuth={isAuth}
+                                      setFollowingInProgress={setFollowingInProgress}
+                                      followingInProgress={followingInProgress}
+            />)}
         </div>
     )
 }
