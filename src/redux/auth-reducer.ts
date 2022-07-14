@@ -1,4 +1,7 @@
 import {actionType} from "./state";
+import {Dispatch} from "@reduxjs/toolkit";
+import {authAPI, profileAPI} from "../api/api";
+import { setUserProfile } from "./profileReducer";
 
 enum AUTH_TYPES {
     SET_AUTH_USER_DATA = 'SET_AUTH_USER_DATA'
@@ -37,5 +40,23 @@ export const setAuthUserData = (payload: {id: number, email: string, login: stri
     return {
         type: AUTH_TYPES.SET_AUTH_USER_DATA as const,
         payload,
+    }
+}
+
+export const authUser = () => {
+    debugger
+    return (dispatch: Dispatch) => {
+        debugger
+        authAPI.getAuth()
+            .then(response => {
+                if (response.resultCode === 0) {
+                    dispatch(setAuthUserData(response.data))
+                    return profileAPI.getProfileData(response.data.id)
+                }
+            }).then((response) => {
+            if (response) {
+                dispatch(setUserProfile(response))
+            }
+        })
     }
 }

@@ -1,4 +1,6 @@
 import {actionType, usersInfo,} from "./state";
+import {Dispatch} from "@reduxjs/toolkit";
+import {usersAPI} from "../api/api";
 
 enum USER_TYPES {
     TOGGLE_FOLLOW = 'TOGGLE_FOLLOW',
@@ -114,5 +116,48 @@ export const setFollowingInProgress = (userId: number, isAdding: boolean) => {
         type: USER_TYPES.SET_FOLLOWING_IN_PROGRESS as const,
         userId,
         isAdding,
+    }
+}
+
+
+export const getUsers = (pageNumber: number, pageSize: number) => {
+    return (dispatch: Dispatch) => {
+        dispatch(setIsFetching(true))
+        usersAPI.getUsers(initialState.currentPage, initialState.pageSize)
+            .then(response => {
+                    dispatch(setUsers(response.items))
+                    dispatch(setTotalUsersCount(response.totalCount))
+                    dispatch(setIsFetching(false))
+                }
+            )
+    }
+}
+
+
+export const followUser = (userId: number) => {
+    return (dispatch: Dispatch) => {
+        dispatch(setFollowingInProgress(userId, true))
+        usersAPI.followUser(userId)
+            .then((response) => {
+                dispatch(setFollowingInProgress(userId, false))
+                dispatch(toggleFollow(userId, true))
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+}
+
+export const unfollowUser = (userId: number) => {
+    return (dispatch: Dispatch) => {
+        dispatch(setFollowingInProgress(userId, true))
+        usersAPI.unfollowUser(userId)
+            .then((response) => {
+                dispatch(setFollowingInProgress(userId, false))
+                dispatch(toggleFollow(userId, false))
+            })
+            .catch((error) => {
+                console.log(error)
+            })
     }
 }

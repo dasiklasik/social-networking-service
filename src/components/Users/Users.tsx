@@ -9,10 +9,10 @@ type UsersPropsType = {
     totalUsersCount: number
     onPageChanged: (pageNumber: number) => void
     users: Array<userItemType>
-    toggleFollow: (userId: number, isFollowing: boolean) => void
-    setFollowingInProgress: (userId: number, isAdding: boolean) => void
     isAuth: boolean
     followingInProgress: Array<number>
+    followUser: (userId: number) => void
+    unfollowUser: (userId: number) => void
 }
 export const Users = (props: UsersPropsType) => {
 
@@ -20,12 +20,12 @@ export const Users = (props: UsersPropsType) => {
         currentPage,
         onPageChanged,
         users,
-        toggleFollow,
         pageSize,
         totalUsersCount,
         isAuth,
-        setFollowingInProgress,
         followingInProgress,
+        followUser,
+        unfollowUser,
     } = props
 
 
@@ -87,10 +87,11 @@ export const Users = (props: UsersPropsType) => {
                 }
             </div>
             {users.map(t => <UserItem userInfo={t}
-                                      toggleFollow={toggleFollow}
                                       isAuth={isAuth}
-                                      setFollowingInProgress={setFollowingInProgress}
                                       followingInProgress={followingInProgress}
+                                      followUser={followUser}
+                                      unfollowUser={unfollowUser}
+
             />)}
         </div>
     )

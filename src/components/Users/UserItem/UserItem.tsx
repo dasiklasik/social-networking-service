@@ -2,49 +2,32 @@ import React from "react";
 import s from './UserItem.module.css'
 import {userItemType} from "../../../redux/usersReducer";
 import {NavLink} from "react-router-dom";
-import {usersAPI} from "../../../api/api";
 
 type userItemPropsType = {
     userInfo: userItemType
-    toggleFollow: (userId: number, isFollowing: boolean) => void
     isAuth: boolean
-    setFollowingInProgress: (userId: number, isAdding: boolean) => void
     followingInProgress: Array<number>
+    followUser: (userId: number) => void
+    unfollowUser: (userId: number) => void
 }
 
 export const UserItem = (props: userItemPropsType) => {
 
     const {
         userInfo,
-        toggleFollow,
         isAuth,
-        setFollowingInProgress,
         followingInProgress,
+        followUser,
+        unfollowUser,
     } = props
 
     const onFollowHandler = () => {
-        setFollowingInProgress(userInfo.id, true)
-        usersAPI.followUser(userInfo.id)
-            .then((response) => {
-                toggleFollow(userInfo.id, true)
-                setFollowingInProgress(userInfo.id, false)
-            })
-            .catch((error) => {
-                console.log(error)
-            })
+        followUser(userInfo.id)
     }
 
     const onUnfollowHandler = () => {
-        setFollowingInProgress(userInfo.id, true)
-        usersAPI.unFollowUser(userInfo.id)
-            .then((response) => {
-                setFollowingInProgress(userInfo.id, false)
-                props.toggleFollow(userInfo.id, false)
-            })
-            .catch((error) => {
-                console.log(error)
-            })
 
+        unfollowUser(userInfo.id)
     }
 
 
@@ -58,8 +41,10 @@ export const UserItem = (props: userItemPropsType) => {
                     </NavLink>
 
                     {isAuth && userInfo.followed ?
-                        <button disabled={followingInProgress.some(u => u === userInfo.id)} onClick={onUnfollowHandler}>Unfollow</button> :
-                        isAuth ? <button disabled={followingInProgress.some(u => u === userInfo.id)} onClick={onFollowHandler}>Follow</button> : null
+                        <button disabled={followingInProgress.some(u => u === userInfo.id)}
+                                onClick={onUnfollowHandler}>Unfollow</button> :
+                        isAuth ? <button disabled={followingInProgress.some(u => u === userInfo.id)}
+                                         onClick={onFollowHandler}>Follow</button> : null
                     }
 
                 </div>

@@ -1,7 +1,9 @@
 import {actionType, profileInfoType, profilePageType} from "./state";
+import {Dispatch} from "@reduxjs/toolkit";
+import {profileAPI} from "../api/api";
 
 enum PROFILE_TYPES {
-    ADD_POST= 'ADD_POST',
+    ADD_POST = 'ADD_POST',
     CHANGE_TYPED_MESSAGE = 'CHANGE_TYPED_MESSAGE',
     SET_USER_PROFILE = 'SET_USER_PROFILE',
 }
@@ -31,11 +33,21 @@ export const setUserProfile = (profileInfo: profileInfoType) => {
     }
 }
 
+export const getProfileData = (userId: number) => {
+    return (dispatch: Dispatch) => {
+        profileAPI.getProfileData(userId)
+            .then(response => {
+                dispatch(setUserProfile(response.data))
+            })
+    }
+
+}
+
 
 const initialState: profilePageType = {
     postData: [
-        {id: 1, message: 'Message', likesCount: '0' },
-        {id: 2, message: 'Message 2', likesCount: '2' },
+        {id: 1, message: 'Message', likesCount: '0'},
+        {id: 2, message: 'Message 2', likesCount: '2'},
     ],
     profileInfo: {
         aboutMe: '',
@@ -80,6 +92,8 @@ export const profileReducer = (state: profilePageType = initialState, action: ac
             return {...newState, profileInfo: action.profileInfo}
         }
         default:
-        return newState
+            return newState
     }
 }
+
+
