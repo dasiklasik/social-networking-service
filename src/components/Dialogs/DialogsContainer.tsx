@@ -6,6 +6,7 @@ import {connect} from "react-redux";
 import {addMessage, changeDialogMessage} from "../../redux/dialogsReducer";
 import {reduxStoreType} from "../../redux/redux-store";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "@reduxjs/toolkit";
 
 
 
@@ -22,10 +23,12 @@ const propsFunctions = {
     addMessage,
     changeDialogMessage,
 }
-debugger
-const DialogsWithRedirect = withAuthRedirect(Dialogs)
 
 
-export const DialogsContainer = connect(mapStateToProps, propsFunctions)(DialogsWithRedirect)
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, propsFunctions),
+    withAuthRedirect,
+)(Dialogs)
+
 
 

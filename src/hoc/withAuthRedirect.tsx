@@ -14,11 +14,11 @@ const mapStateToProps = (state: reduxStoreType) => {
 }
 
 export function withAuthRedirect<T> (Component: ComponentType<T>) {
-    debugger
+
     function RedirectComponent(props: mapStateToPropsType) {
 
         const {isAuth, ...restProps} = props
-        debugger
+
         if (!isAuth) return <Navigate to={'/login'}/>
         return <Component {...restProps as T}/>;
     }

@@ -3,9 +3,10 @@ import {Profile} from "./Profile";
 import {connect} from "react-redux";
 import {getProfileData} from "../../redux/profileReducer";
 import {profileInfoType} from "../../redux/state";
-import {Navigate, Params, useParams} from "react-router-dom";
+import {Params, useParams} from "react-router-dom";
 import {reduxStoreType} from "../../redux/redux-store";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import { compose } from "@reduxjs/toolkit";
 
 type ProfileContainerPropsType = {
     profile: profileInfoType
@@ -56,9 +57,7 @@ const ProfileContainerWithUrl = (props: ProfileContainerWithUrlPropsType) => {
     )
 }
 
-
-const ProfileWithRedirect = withAuthRedirect(ProfileContainerWithUrl)
-
-
-
-export default connect(mapStateToProps, {getProfileData})(ProfileWithRedirect)
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, {getProfileData}),
+    withAuthRedirect,
+)(ProfileContainerWithUrl)
