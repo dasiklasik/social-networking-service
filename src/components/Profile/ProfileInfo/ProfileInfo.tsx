@@ -3,6 +3,7 @@ import s from './ProfileInfo.module.css'
 import nature from "../../../nature.jpg";
 import {profileInfoType} from "../../../redux/state";
 import {Preloader} from "../../Preloader/Preloader";
+import {ProfileStatus} from "./ProfileStatus/ProfileStatus";
 
 type ProfileInfoPropsType = {
     profileInfoData: profileInfoType
@@ -21,7 +22,6 @@ function ProfileInfo(props: ProfileInfoPropsType) {
 
     return (
         <div>
-            <img src={nature} className={s.general_image}/>
             <div className={s.profile}>
                 {profileInfoData.photos.small
                     ? <img src={profileInfoData.photos.small} className={s.avatar}/>
@@ -30,6 +30,7 @@ function ProfileInfo(props: ProfileInfoPropsType) {
                 <div className={s.profile_info}>
                     <div>{`${profileInfoData.fullName} `}</div>
                     <div>Web Site: {profileInfoData.contacts.website}</div>
+                    <ProfileStatus status={'Hello'}/>
                 </div>
             </div>
         </div>
