@@ -25,7 +25,9 @@ function Dialogs(props: dialogsPropsType) {
         isAuth,
     } = props
 
-    if(!isAuth) return <Navigate to={'/login'}/>
+    debugger
+
+    if(isAuth) return <Navigate to={'/login'}/>
 
     return (
         <div className={s.dialogs}>

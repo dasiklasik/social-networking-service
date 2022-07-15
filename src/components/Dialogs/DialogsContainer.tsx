@@ -5,6 +5,7 @@ import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {addMessage, changeDialogMessage} from "../../redux/dialogsReducer";
 import {reduxStoreType} from "../../redux/redux-store";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 
 
@@ -21,7 +22,10 @@ const propsFunctions = {
     addMessage,
     changeDialogMessage,
 }
+debugger
+const DialogsWithRedirect = withAuthRedirect(Dialogs)
 
-export const DialogsContainer = connect(mapStateToProps, propsFunctions)(Dialogs)
+
+export const DialogsContainer = connect(mapStateToProps, propsFunctions)(DialogsWithRedirect)
 
 
