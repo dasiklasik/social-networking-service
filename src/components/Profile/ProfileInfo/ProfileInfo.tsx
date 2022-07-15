@@ -12,11 +12,12 @@ function ProfileInfo(props: ProfileInfoPropsType) {
 
     const {profileInfoData} = props
 
+    console.log(profileInfoData)
+    console.log(!profileInfoData)
+
     if (!profileInfoData) {
         return <Preloader/>
     }
-
-    console.log()
 
     return (
         <div>

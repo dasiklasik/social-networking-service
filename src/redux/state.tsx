@@ -6,7 +6,7 @@ import {
     setUsersType, toggleFollowType,
     userItemType
 } from "./usersReducer";
-import { setAuthUserDataType } from "./auth-reducer";
+import {setAuthUserDataType} from "./auth-reducer";
 
 
 export type actionType = addPostType | changeTypedMessageType |

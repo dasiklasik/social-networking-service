@@ -10,7 +10,11 @@ type ProfilePropsType = {
 
 export function Profile(props: ProfilePropsType) {
 
-    const {profile} = props
+    const {
+        profile,
+    } = props
+
+
 
 
     return (

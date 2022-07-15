@@ -1,32 +1,21 @@
 import React from "react";
 import DialogItem from "./DialogItem/DialogItem";
 import MessageItem from "./MessageItem/MessageItem";
-import {actionType, stateType} from "../../redux/state";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
-import {addMessage, changeDialogMessage, changeDialogMessageType} from "../../redux/dialogsReducer";
+import {addMessage, changeDialogMessage} from "../../redux/dialogsReducer";
+import {reduxStoreType} from "../../redux/redux-store";
 
 
 
-const mapStateToProps = (state: stateType) => {
+const mapStateToProps = (state: reduxStoreType) => {
     return {
         dialogsData: state.dialogsPage.dialogsData.map(t => <DialogItem state={t}/>),
         messageData: state.dialogsPage.messagesData.map(t => <MessageItem state={t}/>),
-        newMessageText: state.dialogsPage.newDialogMessageText
+        newMessageText: state.dialogsPage.newDialogMessageText,
+        isAuth: state.auth.isAuth,
     }
 }
-
-
-// const mapDispatchToProps = (dispatch: (action: actionType) => void) => {
-//     return {
-//         changeMessage: (text: string) => {
-//             dispatch(changeTypedDialogMessageActionCreator(text))
-//         },
-//         addMessage: () => {
-//             dispatch(addMessageActionCreator())
-//         }
-//     }
-// }
 
 const propsFunctions = {
     addMessage,

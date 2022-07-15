@@ -35,9 +35,11 @@ export const setUserProfile = (profileInfo: profileInfoType) => {
 
 export const getProfileData = (userId: number) => {
     return (dispatch: Dispatch) => {
+        debugger
         profileAPI.getProfileData(userId)
             .then(response => {
                 dispatch(setUserProfile(response.data))
+
             })
     }
 
