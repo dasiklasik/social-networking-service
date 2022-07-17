@@ -49,7 +49,6 @@ export const usersReducer = (state = initialState, action: actionType) => {
             }
         }
         case USER_TYPES.SET_USERS: {
-            debugger
             return {...state, users: [...action.users]}
         }
         case USER_TYPES.SET_TOTAL_USERS_COUNT: {
@@ -123,7 +122,7 @@ export const setFollowingInProgress = (userId: number, isAdding: boolean) => {
 export const getUsers = (pageNumber: number, pageSize: number) => {
     return (dispatch: Dispatch) => {
         dispatch(setIsFetching(true))
-        usersAPI.getUsers(initialState.currentPage, initialState.pageSize)
+        usersAPI.getUsers(pageNumber, pageSize)
             .then(response => {
                     dispatch(setUsers(response.items))
                     dispatch(setTotalUsersCount(response.totalCount))

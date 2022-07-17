@@ -1,6 +1,5 @@
 import React from "react";
 import s from './ProfileInfo.module.css'
-import nature from "../../../nature.jpg";
 import {profileInfoType} from "../../../redux/state";
 import {Preloader} from "../../Preloader/Preloader";
 import {ProfileStatus} from "./ProfileStatus/ProfileStatus";
@@ -13,13 +12,11 @@ function ProfileInfo(props: ProfileInfoPropsType) {
 
     const {profileInfoData} = props
 
-    console.log(profileInfoData)
-    console.log(!profileInfoData)
-
     if (!profileInfoData) {
         return <Preloader/>
     }
 
+    debugger
     return (
         <div>
             <div className={s.profile}>
@@ -30,7 +27,7 @@ function ProfileInfo(props: ProfileInfoPropsType) {
                 <div className={s.profile_info}>
                     <div>{`${profileInfoData.fullName} `}</div>
                     <div>Web Site: {profileInfoData.contacts.website}</div>
-                    <ProfileStatus status={'Hello'}/>
+                    <ProfileStatus status={profileInfoData.status}/>
                 </div>
             </div>
         </div>

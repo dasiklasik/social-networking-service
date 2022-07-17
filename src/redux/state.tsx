@@ -1,4 +1,4 @@
-import {addPostType, changeTypedMessageType, setUserProfileType} from "./profileReducer";
+import {addPostType, changeStatusType, changeTypedMessageType, setUserProfileType} from "./profileReducer";
 import {addMessageType, changeDialogMessageType} from "./dialogsReducer";
 import {
     changeCurrentPageType, setFollowingInProgressType, setIsFetchingType,
@@ -10,10 +10,9 @@ import {setAuthUserDataType} from "./auth-reducer";
 
 
 export type actionType = addPostType | changeTypedMessageType |
-    addMessageType | changeDialogMessageType  |
+    addMessageType | changeDialogMessageType |
     setUsersType | setTotalUsersCountType | changeCurrentPageType | setIsFetchingType | setUserProfileType
-    | setAuthUserDataType |toggleFollowType | setFollowingInProgressType
-
+    | setAuthUserDataType | toggleFollowType | setFollowingInProgressType | changeStatusType
 
 
 export type storeType = {
@@ -52,26 +51,27 @@ export type postDataType = {
 }
 
 export type profileInfoType = {
-    aboutMe: string|null
+    aboutMe: string
     contacts: {
-        facebook: string|null
-        website: string|null
-        vk: string|null
-        twitter: string|null
-        instagram: string|null
-        youtube: string|null
-        github: string|null
-        mainLink: string|null
+        facebook: string | null
+        website: string | null
+        vk: string | null
+        twitter: string | null
+        instagram: string | null
+        youtube: string | null
+        github: string | null
+        mainLink: string | null
     }
     lookingForAJob: boolean
-    lookingForAJobDescription: string|null
-    fullName: string|null
+    lookingForAJobDescription: string | null
+    fullName: string | null
     userId: string
     photos: {
-        small: string|null
-        large: string|null
-    }
-} | null
+        small: string | null
+        large: string | null
+    },
+    status: string,
+}
 
 export type navbarType = {
     friendsData: Array<friendsDataType>

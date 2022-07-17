@@ -23,17 +23,17 @@ export class ProfileStatus extends React.Component<ProfileStatusPropsType> {
         })
     }
 
-    changeInputValue = (e: ChangeEvent<HTMLInputElement>) => {
-        this.setState({
-            editMode: this.state.editMode,
-            value: e.currentTarget.value,
-        })
-    }
-
     inactiveEditMode = (e: FocusEvent<HTMLInputElement>) => {
         this.setState({
             editMode: false,
             value: this.state.value,
+        })
+    }
+
+    changeInputValue = (e: ChangeEvent<HTMLInputElement>) => {
+        this.setState({
+            editMode: this.state.editMode,
+            value: e.currentTarget.value,
         })
     }
 
@@ -56,6 +56,7 @@ export class ProfileStatus extends React.Component<ProfileStatusPropsType> {
                                 onChange={this.changeInputValue}
                                 value={value}
                                 onBlur={this.inactiveEditMode}
+                                autoFocus
                             />
                         </div>
                         : <span onDoubleClick={this.activateEditMode}>{status}</span>

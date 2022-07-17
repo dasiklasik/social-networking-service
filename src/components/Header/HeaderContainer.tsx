@@ -13,7 +13,6 @@ type HeaderContainerPropsType = {
 class HeaderContainer extends React.Component<HeaderContainerPropsType> {
 
     componentDidMount() {
-        debugger
         this.props.authUser()
     }
 

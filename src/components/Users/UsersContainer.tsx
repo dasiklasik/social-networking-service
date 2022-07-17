@@ -2,7 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import {
     changeCurrentPage, followUser, getUsers, setFollowingInProgress,
-    toggleFollow, unfollowUser,
+    unfollowUser,
     userItemType
 } from "../../redux/usersReducer";
 import {Users} from "./Users";
@@ -35,6 +35,7 @@ class UsersContainer extends React.Component<usersPropsType> {
 
     onPageChanged = (pageNumber: number) => {
         this.props.getUsers(pageNumber, this.props.pageSize)
+        this.props.changeCurrentPage(pageNumber)
     }
 
     render = () => {

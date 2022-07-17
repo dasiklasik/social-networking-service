@@ -22,10 +22,17 @@ export const usersAPI = {
 
 export const profileAPI = {
     getProfileData: (userId: number) => {
-        debugger
         return instance.get(`profile/${userId}`)
             .then(response => response.data)
     },
+    getStatus: (userId: number) => {
+        return instance.get(`profile/status/${userId}`)
+            .then(response => response.data)
+    },
+    setStatus: (status: string) => {
+        return instance.put('status', {status})
+            .then(response => response.data)
+    }
 }
 
 export const authAPI = {
