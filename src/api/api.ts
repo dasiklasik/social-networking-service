@@ -1,4 +1,6 @@
 import axios from "axios";
+import {userItemType} from "../redux/usersReducer";
+import {profileInfoType} from "../redux/state";
 
 
 const instance = axios.create({
@@ -8,36 +10,75 @@ const instance = axios.create({
 })
 
 
+
+type getUsersType = {
+    error: string | null
+    items: Array<userItemType>
+    totalCount: number
+}
+
+type followUserType = {
+    resultCode: number
+    messages: string[]
+    data: {}
+}
+
+type unfollowUserType = {
+    resultCode: number
+    messages: string[]
+    data: {}
+}
+
+type setStatusType = {
+    resultCode: number
+    messages: string[]
+    data: {}
+}
+
+type getAuthType = {
+    resultCode: number
+    messages: string[]
+    data: {
+        id: number
+        email: string
+        login: string
+    }
+}
+
+
 export const usersAPI = {
     getUsers: (pageNumber: number = 1, pageSize: number = 10) => {
-        return instance.get(`users?count=${pageSize}&page=${pageNumber}`).then(response => response.data)
+        return instance.get<getUsersType>(`users?count=${pageSize}&page=${pageNumber}`)
+            .then(response =>  response.data)
     },
     followUser: (userId: number) => {
-        return instance.post(`follow/${userId}`)
+        return instance.post<followUserType>(`follow/${userId}`)
+            .then(response => response.data)
     },
     unfollowUser: (userId: number) => {
-        return instance.delete(`follow/${userId}`)
+        return instance.delete<unfollowUserType>(`follow/${userId}`)
+            .then(response => response.data)
     }
 }
 
 export const profileAPI = {
     getProfileData: (userId: number) => {
-        return instance.get(`profile/${userId}`)
+        return instance.get<profileInfoType>(`profile/${userId}`)
             .then(response => response.data)
     },
     getStatus: (userId: number) => {
-        return instance.get(`profile/status/${userId}`)
+        return instance.get<string>(`profile/status/${userId}`)
             .then(response => response.data)
     },
     setStatus: (status: string) => {
-        return instance.put('status', {status})
+        return instance.put<setStatusType>('status', {status})
             .then(response => response.data)
     }
 }
 
 export const authAPI = {
     getAuth: () => {
-        return instance.get('auth/me')
+        return instance.get<getAuthType>('auth/me')
             .then(response => response.data)
     }
 }

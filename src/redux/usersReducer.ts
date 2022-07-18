@@ -17,7 +17,7 @@ export type userItemType = {
     id: number
     uniqueUrlName: string | null
     photos: { small: string | null, large: string | null }
-    status: string| null
+    status: string | null
     followed: boolean
 }
 
@@ -43,7 +43,8 @@ export const usersReducer = (state = initialState, action: actionType) => {
     let copyState = {...state, users: [...state.users]}
     switch (action.type) {
         case USER_TYPES.TOGGLE_FOLLOW: {
-            return {...state,
+            return {
+                ...state,
                 users: state.users.map(u => u.id === action.userId ?
                     {...u, followed: action.isFollowing} : u)
             }
