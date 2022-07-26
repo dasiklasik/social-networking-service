@@ -5,6 +5,8 @@ import {navBarReducer} from "./navbarReducer";
 import {usersReducer} from "./usersReducer";
 import {authReducer} from "./auth-reducer";
 import thunkMiddleWare from "redux-thunk";
+import { reducer as formReducer } from 'redux-form'
+
 
 
 
@@ -14,6 +16,7 @@ let reducer = combineReducers({
     dialogsPage: dialogsReducer,
     usersPage: usersReducer,
     auth: authReducer,
+    form: formReducer,
 })
 
 export type reduxStoreType = ReturnType<typeof reducer>
@@ -22,6 +25,8 @@ export type reduxStoreType = ReturnType<typeof reducer>
 
 export const store = createStore(reducer, applyMiddleware(thunkMiddleWare))
 
+//@ts-ignore
+window.store = store
 
 
 
