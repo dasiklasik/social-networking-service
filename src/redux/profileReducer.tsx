@@ -47,12 +47,14 @@ export const getProfileData = (userId: number) => {
         profileAPI.getProfileData(userId)
             .then(response => {
                 dispatch(setUserProfile(response))
-                return profileAPI.getStatus(userId)
             })
-            .then(response => {
-                dispatch(changeStatus(response))
-            })
+
     }
+}
+
+export const getProfileStatus = (userId: number) => (dispatch: Dispatch) => {
+    profileAPI.getStatus(userId)
+        .then(response => dispatch(changeStatus(response)))
 }
 
 export const setProfileStatus = (status: string) => {
@@ -60,7 +62,7 @@ export const setProfileStatus = (status: string) => {
         profileAPI.setStatus(status)
             .then(response => {
                 if (response.resultCode === 0) {
-                    changeStatus(status)
+                    dispatch(changeStatus(status))
                 }
             })
     }
@@ -87,14 +89,14 @@ const initialState: profilePageType = {
         lookingForAJob: false,
         lookingForAJobDescription: '',
         fullName: '',
-        userId: '1',
+        userId: '',
         photos: {
             small: '',
             large: '',
         },
-        status: '',
     },
     newPostText: '',
+    status: 'hi',
 }
 
 export const profileReducer = (state: profilePageType = initialState, action: actionType): profilePageType => {
@@ -112,11 +114,11 @@ export const profileReducer = (state: profilePageType = initialState, action: ac
             }
             return newState
         case PROFILE_TYPES.SET_USER_PROFILE: {
-            return {...newState, profileInfo: {...action.profileInfo, status: ''}}
+            return {...newState, profileInfo: {...action.profileInfo}}
         }
         case PROFILE_TYPES.CHANGE_STATUS: {
             let newState = {...state}
-            return {...newState, profileInfo: {...newState.profileInfo, status: action.status}}
+            return {...newState, status: action.status}
         }
         default:
             return newState

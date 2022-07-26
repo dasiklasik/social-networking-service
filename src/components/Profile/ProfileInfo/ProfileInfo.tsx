@@ -6,6 +6,7 @@ import {ProfileStatus} from "./ProfileStatus/ProfileStatus";
 
 type ProfileInfoPropsType = {
     profileInfoData: profileInfoType
+    status: string
     setProfileStatus: (status: string) => void
 }
 
@@ -14,6 +15,7 @@ function ProfileInfo(props: ProfileInfoPropsType) {
     const {
         profileInfoData,
         setProfileStatus,
+        status,
     } = props
 
     if (!profileInfoData) {
@@ -31,7 +33,7 @@ function ProfileInfo(props: ProfileInfoPropsType) {
                 <div className={s.profile_info}>
                     <div>{`${profileInfoData.fullName} `}</div>
                     <div>Web Site: {profileInfoData.contacts.website}</div>
-                    <ProfileStatus status={profileInfoData.status} setProfileStatus={ setProfileStatus}/>
+                    <ProfileStatus status={status} setProfileStatus={ setProfileStatus}/>
                 </div>
             </div>
         </div>

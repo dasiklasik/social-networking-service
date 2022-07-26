@@ -1,7 +1,7 @@
 import React from "react";
 import {Profile} from "./Profile";
 import {connect} from "react-redux";
-import {getProfileData, setProfileStatus} from "../../redux/profileReducer";
+import {getProfileData, getProfileStatus, setProfileStatus} from "../../redux/profileReducer";
 import {profileInfoType} from "../../redux/state";
 import {Params, useParams} from "react-router-dom";
 import {reduxStoreType} from "../../redux/redux-store";
@@ -10,9 +10,11 @@ import {compose} from "@reduxjs/toolkit";
 
 type ProfileContainerPropsType = {
     profile: profileInfoType
+    status: string
     getProfileData: (userId: number) => void
     url: Readonly<Params<string>>
     setProfileStatus: (status: string) => void
+    getProfileStatus: (userId: number) => void
 }
 
 
@@ -24,6 +26,7 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType> {
             this.props.profile?.userId ? userId = this.props.profile.userId : userId = '2'
         }
         this.props.getProfileData(+userId)
+        this.props.getProfileStatus(+userId)
     }
 
     render() {
@@ -31,6 +34,7 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType> {
         return (
             <Profile
                 profile={this.props.profile}
+                status={this.props.status}
                 setProfileStatus={this.props.setProfileStatus}
             />
         )
@@ -40,24 +44,26 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType> {
 const mapStateToProps = (state: reduxStoreType) => {
     return {
         profile: state.profilePage.profileInfo,
+        status: state.profilePage.status,
     }
 }
 
 type ProfileContainerWithUrlPropsType = {
     profile: profileInfoType
+    status: string
     getProfileData: (userId: number) => void
     setProfileStatus: (status: string) => void
+    getProfileStatus: (userId: number) => void
 }
 
 const ProfileContainerWithUrl = (props: ProfileContainerWithUrlPropsType) => {
     const url = useParams()
-
     return (
         <ProfileContainer {...props} url={url}/>
     )
 }
 
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, {getProfileData, setProfileStatus}),
+    connect(mapStateToProps, {getProfileData, setProfileStatus, getProfileStatus}),
     withAuthRedirect,
 )(ProfileContainerWithUrl)

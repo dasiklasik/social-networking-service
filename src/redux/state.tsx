@@ -70,7 +70,6 @@ export type profileInfoType = {
         small: string | null
         large: string | null
     },
-    status: string,
 }
 
 export type navbarType = {
@@ -81,6 +80,7 @@ export type profilePageType = {
     postData: Array<postDataType>
     profileInfo: profileInfoType
     newPostText: string
+    status: string
 }
 
 export type dialogsPageType = {
