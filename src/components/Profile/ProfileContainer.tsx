@@ -1,7 +1,7 @@
 import React from "react";
 import {Profile} from "./Profile";
 import {connect} from "react-redux";
-import {getProfileData} from "../../redux/profileReducer";
+import {getProfileData, setProfileStatus} from "../../redux/profileReducer";
 import {profileInfoType} from "../../redux/state";
 import {Params, useParams} from "react-router-dom";
 import {reduxStoreType} from "../../redux/redux-store";
@@ -12,6 +12,7 @@ type ProfileContainerPropsType = {
     profile: profileInfoType
     getProfileData: (userId: number) => void
     url: Readonly<Params<string>>
+    setProfileStatus: (status: string) => void
 }
 
 
@@ -30,6 +31,7 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType> {
         return (
             <Profile
                 profile={this.props.profile}
+                setProfileStatus={this.props.setProfileStatus}
             />
         )
     }
@@ -44,6 +46,7 @@ const mapStateToProps = (state: reduxStoreType) => {
 type ProfileContainerWithUrlPropsType = {
     profile: profileInfoType
     getProfileData: (userId: number) => void
+    setProfileStatus: (status: string) => void
 }
 
 const ProfileContainerWithUrl = (props: ProfileContainerWithUrlPropsType) => {
@@ -55,6 +58,6 @@ const ProfileContainerWithUrl = (props: ProfileContainerWithUrlPropsType) => {
 }
 
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, {getProfileData}),
+    connect(mapStateToProps, {getProfileData, setProfileStatus}),
     withAuthRedirect,
 )(ProfileContainerWithUrl)

@@ -2,49 +2,50 @@ import React, {ChangeEvent, FocusEvent} from "react";
 
 type ProfileStatusPropsType = {
     status: string
+    setProfileStatus: (status: string) => void
 }
 
 type stateType = {
     editMode: boolean
-    value: string
+    status: string
 }
 
 export class ProfileStatus extends React.Component<ProfileStatusPropsType> {
 
     state: stateType = {
         editMode: false,
-        value: this.props.status
+        status: this.props.status,
     }
 
     activateEditMode = () => {
         this.setState({
             editMode: true,
-            value: this.state.value,
+            status: this.state.status,
         })
     }
 
     inactiveEditMode = (e: FocusEvent<HTMLInputElement>) => {
         this.setState({
             editMode: false,
-            value: this.state.value,
+            status: this.state.status,
         })
+        this.props.setProfileStatus(this.state.status)
     }
 
     changeInputValue = (e: ChangeEvent<HTMLInputElement>) => {
         this.setState({
             editMode: this.state.editMode,
-            value: e.currentTarget.value,
+            status: e.currentTarget.value,
         })
     }
 
     render() {
-        const {
-            status
-        } = this.props
 
         const {
-            value,
+            status,
         } = this.state
+
+
 
 
         return (
@@ -54,7 +55,7 @@ export class ProfileStatus extends React.Component<ProfileStatusPropsType> {
                         <div>
                             <input
                                 onChange={this.changeInputValue}
-                                value={value}
+                                value={status}
                                 onBlur={this.inactiveEditMode}
                                 autoFocus
                             />

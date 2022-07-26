@@ -5,13 +5,15 @@ import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import {profileInfoType} from "../../redux/state";
 
 type ProfilePropsType = {
-    profile: profileInfoType;
+    profile: profileInfoType
+    setProfileStatus: (status: string) => void
 }
 
 export function Profile(props: ProfilePropsType) {
 
     const {
         profile,
+        setProfileStatus,
     } = props
 
 
@@ -19,7 +21,7 @@ export function Profile(props: ProfilePropsType) {
 
     return (
         <main className={s.main_content}>
-            <ProfileInfo profileInfoData={profile}/>
+            <ProfileInfo profileInfoData={profile} setProfileStatus={setProfileStatus}/>
             <PostsWrapperContainer/>
         </main>
     )

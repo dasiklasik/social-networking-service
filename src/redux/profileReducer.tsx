@@ -46,9 +46,7 @@ export const getProfileData = (userId: number) => {
     return (dispatch: Dispatch) => {
         profileAPI.getProfileData(userId)
             .then(response => {
-
                 dispatch(setUserProfile(response))
-                debugger
                 return profileAPI.getStatus(userId)
             })
             .then(response => {
@@ -57,9 +55,14 @@ export const getProfileData = (userId: number) => {
     }
 }
 
-export const setProfileStatus = () => {
+export const setProfileStatus = (status: string) => {
     return (dispatch: Dispatch) => {
-
+        profileAPI.setStatus(status)
+            .then(response => {
+                if (response.resultCode === 0) {
+                    changeStatus(status)
+                }
+            })
     }
 }
 
@@ -109,11 +112,11 @@ export const profileReducer = (state: profilePageType = initialState, action: ac
             }
             return newState
         case PROFILE_TYPES.SET_USER_PROFILE: {
-            return {...newState, profileInfo: action.profileInfo}
+            return {...newState, profileInfo: {...action.profileInfo, status: ''}}
         }
         case PROFILE_TYPES.CHANGE_STATUS: {
             let newState = {...state}
-            return {...newState, profileInfo: {...newState.profileInfo, aboutMe: action.status}}
+            return {...newState, profileInfo: {...newState.profileInfo, status: action.status}}
         }
         default:
             return newState

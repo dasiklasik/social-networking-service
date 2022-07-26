@@ -71,7 +71,7 @@ export const profileAPI = {
             .then(response => response.data)
     },
     setStatus: (status: string) => {
-        return instance.put<setStatusType>('status', {status})
+        return instance.put<setStatusType>('profile/status/', {status})
             .then(response => response.data)
     }
 }
