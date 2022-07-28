@@ -7,44 +7,28 @@ export type postFormType = {
     postText: string
 }
 
-export type postFormPropsType = {
-    addPost: () => void
-    newPostText: string
-    changeTypedMessage: (text: string) => void
-}
-
-const PostForm: React.FC<InjectedFormProps<postFormType, postFormPropsType> & postFormPropsType> = (props) => {
+const PostForm: React.FC<InjectedFormProps<postFormType>> = (props) => {
 
     const {
-        addPost,
-        changeTypedMessage,
-        newPostText,
         handleSubmit
     } = props
 
-    const onClickHandler = () => {
-        addPost()
-    }
-
-    const onTextChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        changeTypedMessage(e.currentTarget.value)
-    }
 
     return (
         <div className={s.post_form}>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <Field name={'postText'} value={newPostText} onChange={onTextChange} component={'textarea'}/>
+                    <Field name={'postText'} component={'textarea'}/>
                 </div>
                 <div>
-                    <button type={'submit'} onClick={onClickHandler}>Send</button>
+                    <button type={'submit'}>Send</button>
                 </div>
             </form>
         </div>
     )
 }
 
-export const PostFormContainer = reduxForm<postFormType, postFormPropsType>({
+export const PostFormContainer = reduxForm<postFormType>({
     form: 'post'
 })(PostForm)
 

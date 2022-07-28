@@ -16,10 +16,11 @@ export type setUserProfileType = ReturnType<typeof setUserProfile>
 export type changeStatusType = ReturnType<typeof changeStatus>
 
 
-export const addPost = () => {
+export const addPost = (text: string) => {
     return {
-        type: PROFILE_TYPES.ADD_POST as const,
-    }
+        type: PROFILE_TYPES.ADD_POST,
+        text,
+    } as const
 }
 export const changeTypedMessage = (message: string) => {
     return {
@@ -103,11 +104,12 @@ export const profileReducer = (state: profilePageType = initialState, action: ac
     let newState = {...state}
     switch (action.type) {
         case PROFILE_TYPES.ADD_POST:
-            newState.postData = [...state.postData]
-            newState.postData.push({id: 5, message: state.newPostText, likesCount: '0'})
-            newState.newPostText = ''
-
-            return newState;
+            const newPost = {
+                id: 3,
+                message: action.text,
+                likesCount: '0',
+            }
+            return {...newState, postData: [newPost, ...newState.postData]}
         case PROFILE_TYPES.CHANGE_TYPED_MESSAGE:
             if (action.message) {
                 newState.newPostText = action.message
