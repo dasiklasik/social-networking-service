@@ -7,9 +7,7 @@ import {Navigate} from "react-router-dom";
 type dialogsPropsType = {
     dialogsData: JSX.Element[]
     messageData: JSX.Element[]
-    addMessage: () => void
-    changeDialogMessage: (text: string) => void
-    newMessageText: string
+    addMessage: (text: string) => void
     isAuth: boolean
 }
 
@@ -20,13 +18,11 @@ function Dialogs(props: dialogsPropsType) {
         dialogsData,
         messageData,
         addMessage,
-        changeDialogMessage,
-        newMessageText,
         isAuth,
     } = props
 
     const submit = (data: messageFormType) => {
-        console.log(data)
+        addMessage(data.dialogMessage)
     }
 
     if(isAuth) return <Navigate to={'/login'}/>
@@ -44,11 +40,7 @@ function Dialogs(props: dialogsPropsType) {
                     <ul className={s.dialog_field}>
                         {messageData}
                     </ul>
-                    <MessageForm
-                        changeMessage={changeDialogMessage}
-                                 newDialogMessageText={newMessageText}
-                        onSubmit={submit}
-                    />
+                    <MessageForm onSubmit={submit}/>
                 </div>
             </div>
         </div>

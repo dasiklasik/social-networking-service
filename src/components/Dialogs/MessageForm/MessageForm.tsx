@@ -8,28 +8,17 @@ export type messageFormType = {
 }
 
 
-type messageFormPropsType = {
-    changeMessage: (text: string) => void
-    newDialogMessageText: string
-}
-
-const MessageForm: React.FC<InjectedFormProps<messageFormType, messageFormPropsType> & messageFormPropsType> = (props) => {
+const MessageForm: React.FC<InjectedFormProps<messageFormType>> = (props) => {
 
     const {
-        changeMessage,
-        newDialogMessageText,
         handleSubmit
     } = props
-
-    const onChangeMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        changeMessage(e.currentTarget.value)
-    }
 
     return (
         <div className={s.message_form}>
             <form>
                 <div>
-                    <Field name={'dialogMessage'} value={newDialogMessageText} onChange={onChangeMessage}
+                    <Field name={'dialogMessage'}
                            component={'textarea'}
                     ></Field>
                 </div>
@@ -41,6 +30,6 @@ const MessageForm: React.FC<InjectedFormProps<messageFormType, messageFormPropsT
     )
 }
 
-export default reduxForm<messageFormType, messageFormPropsType>({
+export default reduxForm<messageFormType>({
     form: 'message'
 })(MessageForm)

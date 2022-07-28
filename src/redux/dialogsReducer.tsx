@@ -1,26 +1,17 @@
 import React from "react";
 import {actionType, dialogsPageType, messagesDataType} from "./state";
 
-
 enum DIALOGS_TYPES {
     ADD_MESSAGE = 'ADD_MESSAGE',
-    CHANGE_TYPED_DIALOG_MESSAGE = 'CHANGE_TYPED_DIALOG_MESSAGE',
 }
-
 
 export type addMessageType = ReturnType<typeof addMessage>
-export type changeDialogMessageType = ReturnType<typeof changeDialogMessage>
 
-export const changeDialogMessage = (message: string) => {
+export const addMessage = (text: string) => {
     return {
-        type: DIALOGS_TYPES.CHANGE_TYPED_DIALOG_MESSAGE as const,
-        message,
-    }
-}
-export const addMessage = () => {
-    return {
-        type: DIALOGS_TYPES.ADD_MESSAGE as const,
-    }
+        type: DIALOGS_TYPES.ADD_MESSAGE,
+        text,
+    } as const
 }
 
 
@@ -34,7 +25,7 @@ const initialState: dialogsPageType = {
         {id: 1, message: 'Hi', myMessage: true},
         {id: 2, message: 'Hello!', myMessage: false},
         {id: 3, message: 'How are you?', myMessage: true},
-        {id: 4, message: 'I havent seen you for 5 years', myMessage: true}
+        {id: 4, message: 'I haven\'t seen you for 5 years', myMessage: true}
     ],
     newDialogMessageText: ''
 }
@@ -42,19 +33,13 @@ const initialState: dialogsPageType = {
 export const dialogsReducer = (state: dialogsPageType = initialState, action: actionType) => {
     let newState = {...state}
     switch (action.type) {
-        case DIALOGS_TYPES.CHANGE_TYPED_DIALOG_MESSAGE:
-            newState.newDialogMessageText = action.message
-            return newState
         case DIALOGS_TYPES.ADD_MESSAGE:
             let newMessage: messagesDataType = {
                 id: 5,
-                message: newState.newDialogMessageText,
+                message: action.text,
                 myMessage: true
             }
-            newState.newDialogMessageText = ''
-            newState.messagesData = [...state.messagesData]
-            newState.messagesData.push(newMessage)
-            return newState
+            return {...newState, messagesData: [...newState.messagesData, newMessage]}
         default:
             return newState
     }
