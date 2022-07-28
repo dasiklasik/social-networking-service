@@ -5,15 +5,6 @@ enum DIALOGS_TYPES {
     ADD_MESSAGE = 'ADD_MESSAGE',
 }
 
-export type addMessageType = ReturnType<typeof addMessage>
-
-export const addMessage = (text: string) => {
-    return {
-        type: DIALOGS_TYPES.ADD_MESSAGE,
-        text,
-    } as const
-}
-
 
 const initialState: dialogsPageType = {
     dialogsData: [
@@ -45,4 +36,11 @@ export const dialogsReducer = (state: dialogsPageType = initialState, action: ac
     }
 
 }
+
+//actions
+export const addMessage = (text: string) => ({type: DIALOGS_TYPES.ADD_MESSAGE, text} as const)
+
+//types
+export type addMessageType = ReturnType<typeof addMessage>
+
 

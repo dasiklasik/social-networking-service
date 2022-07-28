@@ -4,71 +4,9 @@ import {profileAPI} from "../api/api";
 
 enum PROFILE_TYPES {
     ADD_POST = 'ADD_POST',
-    CHANGE_TYPED_MESSAGE = 'CHANGE_TYPED_MESSAGE',
     SET_USER_PROFILE = 'SET_USER_PROFILE',
     CHANGE_STATUS = 'CHANGE_STATUS',
 }
-
-
-export type addPostType = ReturnType<typeof addPost>
-export type changeTypedMessageType = ReturnType<typeof changeTypedMessage>
-export type setUserProfileType = ReturnType<typeof setUserProfile>
-export type changeStatusType = ReturnType<typeof changeStatus>
-
-
-export const addPost = (text: string) => {
-    return {
-        type: PROFILE_TYPES.ADD_POST,
-        text,
-    } as const
-}
-export const changeTypedMessage = (message: string) => {
-    return {
-        type: PROFILE_TYPES.CHANGE_TYPED_MESSAGE as const,
-        message,
-    }
-}
-
-export const setUserProfile = (profileInfo: profileInfoType) => {
-    return {
-        type: PROFILE_TYPES.SET_USER_PROFILE as const,
-        profileInfo,
-    }
-}
-
-export const changeStatus = (status: string) => {
-    return {
-        type: PROFILE_TYPES.CHANGE_STATUS as const,
-        status,
-    }
-}
-
-export const getProfileData = (userId: number) => {
-    return (dispatch: Dispatch) => {
-        profileAPI.getProfileData(userId)
-            .then(response => {
-                dispatch(setUserProfile(response))
-            })
-
-    }
-}
-
-export const getProfileStatus = (userId: number) => (dispatch: Dispatch) => {
-    profileAPI.getStatus(userId)
-        .then(response => dispatch(changeStatus(response)))
-}
-
-export const setProfileStatus = (status: string) => {
-    return (dispatch: Dispatch) => {
-        profileAPI.setStatus(status)
-            .then(response => {
-                if (response.resultCode === 0) {
-                    dispatch(changeStatus(status))
-                }
-            })
-    }
-}
-
 
 const initialState: profilePageType = {
     postData: [
@@ -101,30 +39,54 @@ const initialState: profilePageType = {
 }
 
 export const profileReducer = (state: profilePageType = initialState, action: actionType): profilePageType => {
-    let newState = {...state}
     switch (action.type) {
         case PROFILE_TYPES.ADD_POST:
-            const newPost = {
-                id: 3,
-                message: action.text,
-                likesCount: '0',
-            }
-            return {...newState, postData: [newPost, ...newState.postData]}
-        case PROFILE_TYPES.CHANGE_TYPED_MESSAGE:
-            if (action.message) {
-                newState.newPostText = action.message
-            }
-            return newState
-        case PROFILE_TYPES.SET_USER_PROFILE: {
-            return {...newState, profileInfo: {...action.profileInfo}}
-        }
-        case PROFILE_TYPES.CHANGE_STATUS: {
-            let newState = {...state}
-            return {...newState, status: action.status}
-        }
+            const newPost = {id: 3, message: action.text, likesCount: '0',}
+            return {...state, postData: [newPost, ...state.postData]}
+        case PROFILE_TYPES.SET_USER_PROFILE:
+            return {...state, profileInfo: {...action.profileInfo}}
+        case PROFILE_TYPES.CHANGE_STATUS:
+            return {...state, status: action.status}
         default:
-            return newState
+            return state
     }
 }
+
+
+//actions
+export const addPost = (text: string) =>
+    ({type: PROFILE_TYPES.ADD_POST, text} as const)
+export const setUserProfile = (profileInfo: profileInfoType) =>
+    ({type: PROFILE_TYPES.SET_USER_PROFILE, profileInfo,} as const)
+export const changeStatus = (status: string) =>
+    ({type: PROFILE_TYPES.CHANGE_STATUS, status,} as const)
+
+
+//thunks
+export const getProfileData = (userId: number) => (dispatch: Dispatch) => {
+    profileAPI.getProfileData(userId)
+        .then(response => {
+            dispatch(setUserProfile(response))
+        })
+}
+export const getProfileStatus = (userId: number) => (dispatch: Dispatch) => {
+    profileAPI.getStatus(userId)
+        .then(response => dispatch(changeStatus(response)))
+}
+
+export const setProfileStatus = (status: string) => (dispatch: Dispatch) => {
+    profileAPI.setStatus(status)
+        .then(response => {
+            if (response.resultCode === 0) {
+                dispatch(changeStatus(status))
+            }
+        })
+}
+
+
+//types
+export type addPostType = ReturnType<typeof addPost>
+export type setUserProfileType = ReturnType<typeof setUserProfile>
+export type changeStatusType = ReturnType<typeof changeStatus>
 
 
