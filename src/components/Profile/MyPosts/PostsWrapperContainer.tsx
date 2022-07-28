@@ -14,17 +14,6 @@ const mapStateToProps = (state: stateType) => {
     }
 }
 
-// const mapDispatchToProps = (dispatch: (action: actionType) => void) => {
-//     return {
-//         changeTypedMessage: (text: string) => {
-//             dispatch(changeTypedMessageActionCreator(text))
-//         },
-//         addPost: () => {
-//             dispatch(addPostActionCreator())
-//         }
-//     }
-// }
-
 const propsFunctions = {
     changeTypedMessage,
     addPost,

@@ -1,29 +1,46 @@
 import React, {ChangeEvent} from "react";
 import s from './MessageForm.module.css'
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
+
+
+export type messageFormType = {
+    dialogMessage: string
+}
+
 
 type messageFormPropsType = {
-    addMessage: () => void
     changeMessage: (text: string) => void
     newDialogMessageText: string
 }
 
-export const MessageForm = (props: messageFormPropsType) => {
+const MessageForm: React.FC<InjectedFormProps<messageFormType, messageFormPropsType> & messageFormPropsType> = (props) => {
 
-    const newMessageRef = React.createRef<HTMLTextAreaElement>();
+    const {
+        changeMessage,
+        newDialogMessageText,
+        handleSubmit
+    } = props
 
     const onChangeMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        let text = e.currentTarget.value
-       props.changeMessage(text)
-    }
-
-    const addMessage = () => {
-        props.addMessage()
+        changeMessage(e.currentTarget.value)
     }
 
     return (
         <div className={s.message_form}>
-            <textarea value={props.newDialogMessageText} onChange={onChangeMessage} ref={newMessageRef}></textarea>
-            <button onClick={addMessage}>send</button>
+            <form>
+                <div>
+                    <Field name={'dialogMessage'} value={newDialogMessageText} onChange={onChangeMessage}
+                           component={'textarea'}
+                    ></Field>
+                </div>
+                <div>
+                    <button type={'submit'} onClick={handleSubmit}>send</button>
+                </div>
+            </form>
         </div>
     )
 }
+
+export default reduxForm<messageFormType, messageFormPropsType>({
+    form: 'message'
+})(MessageForm)

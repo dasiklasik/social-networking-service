@@ -18,7 +18,6 @@ export function Profile(props: ProfilePropsType) {
         setProfileStatus,
     } = props
 
-
     return (
         <main className={s.main_content}>
             <ProfileInfo

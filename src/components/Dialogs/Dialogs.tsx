@@ -1,6 +1,6 @@
 import React from "react";
 import s from './Dialogs.module.css'
-import {MessageForm} from "./MessageForm/MessageForm";
+import MessageForm, {messageFormType} from "./MessageForm/MessageForm";
 import {Navigate} from "react-router-dom";
 
 
@@ -25,7 +25,9 @@ function Dialogs(props: dialogsPropsType) {
         isAuth,
     } = props
 
-    debugger
+    const submit = (data: messageFormType) => {
+        console.log(data)
+    }
 
     if(isAuth) return <Navigate to={'/login'}/>
 
@@ -42,8 +44,11 @@ function Dialogs(props: dialogsPropsType) {
                     <ul className={s.dialog_field}>
                         {messageData}
                     </ul>
-                    <MessageForm addMessage={addMessage} changeMessage={changeDialogMessage}
-                                 newDialogMessageText={newMessageText}/>
+                    <MessageForm
+                        changeMessage={changeDialogMessage}
+                                 newDialogMessageText={newMessageText}
+                        onSubmit={submit}
+                    />
                 </div>
             </div>
         </div>

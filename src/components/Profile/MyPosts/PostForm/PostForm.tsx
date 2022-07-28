@@ -1,34 +1,50 @@
 import React, {ChangeEvent} from "react";
 import s from './../PostsWrapper.module.css'
+import {InjectedFormProps, reduxForm, Field} from "redux-form";
 
-type postFormPropsType = {
+
+export type postFormType = {
+    postText: string
+}
+
+export type postFormPropsType = {
     addPost: () => void
     newPostText: string
     changeTypedMessage: (text: string) => void
 }
 
-function PostForm({addPost, newPostText, ...props}: postFormPropsType) {
+const PostForm: React.FC<InjectedFormProps<postFormType, postFormPropsType> & postFormPropsType> = (props) => {
 
-    const newPostRef = React.createRef<HTMLTextAreaElement>()
+    const {
+        addPost,
+        changeTypedMessage,
+        newPostText,
+        handleSubmit
+    } = props
 
     const onClickHandler = () => {
         addPost()
     }
 
     const onTextChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.changeTypedMessage(e.currentTarget.value)
+        changeTypedMessage(e.currentTarget.value)
     }
 
     return (
         <div className={s.post_form}>
-            <textarea value={newPostText} ref={newPostRef}
-                      onChange={onTextChange}>
-
-            </textarea>
-            <button onClick={onClickHandler}>Send</button>
+            <form onSubmit={handleSubmit}>
+                <div>
+                    <Field name={'postText'} value={newPostText} onChange={onTextChange} component={'textarea'}/>
+                </div>
+                <div>
+                    <button type={'submit'} onClick={onClickHandler}>Send</button>
+                </div>
+            </form>
         </div>
     )
 }
 
-export default PostForm;
+export const PostFormContainer = reduxForm<postFormType, postFormPropsType>({
+    form: 'post'
+})(PostForm)
 
