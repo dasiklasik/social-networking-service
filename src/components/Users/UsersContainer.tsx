@@ -6,7 +6,7 @@ import {
     userItemType
 } from "../../redux/usersReducer";
 import {Users} from "./Users";
-import {Preloader} from "../Preloader/Preloader";
+import {Preloader} from "../common/Preloader/Preloader";
 import {reduxStoreType} from "../../redux/redux-store";
 
 type usersPropsType = {

@@ -1,4 +1,4 @@
-import {addPostType, changeStatusType, changeTypedMessageType, setUserProfileType} from "./profileReducer";
+import {addPostType, changeStatusType, setUserProfileType} from "./profileReducer";
 import {addMessageType} from "./dialogsReducer";
 import {
     changeCurrentPageType, setFollowingInProgressType, setIsFetchingType,
@@ -9,7 +9,7 @@ import {
 import {setAuthUserDataType} from "./auth-reducer";
 
 
-export type actionType = addPostType | changeTypedMessageType |
+export type actionType = addPostType |
     addMessageType |
     setUsersType | setTotalUsersCountType | changeCurrentPageType | setIsFetchingType | setUserProfileType
     | setAuthUserDataType | toggleFollowType | setFollowingInProgressType | changeStatusType
