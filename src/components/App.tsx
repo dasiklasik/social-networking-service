@@ -9,8 +9,8 @@ import UsersContainer from './Users/UsersContainer';
 import {Routes} from 'react-router-dom'
 import ProfileContainerWithUrl from './Profile/ProfileContainer'
 import HeaderContainer from './Header/HeaderContainer';
-import {Login} from "./Login/Login";
 import DialogsContainer from './Dialogs/DialogsContainer';
+import { LoginContainer } from './Login/LoginContainer';
 
 
 function App() {
@@ -30,7 +30,7 @@ function App() {
                     <Route path="/music" element={<Music/>}/>
                     <Route path="/settings" element={<Settings/>}/>
                     <Route path="/users" element={<UsersContainer/>}/>
-                    <Route path="/login" element={<Login/>}/>
+                    <Route path="/login" element={<LoginContainer/>}/>
                 </Routes>
             </div>
 

@@ -1,13 +1,25 @@
 import React from "react";
 import {formDataType, LoginForm} from "./LoginForm";
 import {reduxForm} from "redux-form";
+import { Navigate } from "react-router-dom";
 
+type LoginPropsType = {
+    login: (formData: formDataType) => void
+    isAuth: boolean
+}
 
-export const Login = () => {
+export const Login = (props: LoginPropsType) => {
+
+    const {
+        login,
+        isAuth,
+    } = props
 
     const submit = (formData: formDataType) => {
-        console.log('login:' + formData.login)
+        login(formData)
     }
+
+    if (isAuth) return <Navigate to={'/profile'}/>
 
     return (
         <div>
@@ -20,4 +32,6 @@ export const Login = () => {
 const  LoginFormContainer = reduxForm<formDataType >({
     form: 'login'
 })(LoginForm)
+
+
 

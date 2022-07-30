@@ -6,13 +6,13 @@ import {
     setUsersType, toggleFollowType,
     userItemType
 } from "./usersReducer";
-import {setAuthUserDataType} from "./auth-reducer";
+import {logoutUserType, setAuthUserDataType} from "./auth-reducer";
 
 
 export type actionType = addPostType |
     addMessageType |
     setUsersType | setTotalUsersCountType | changeCurrentPageType | setIsFetchingType | setUserProfileType
-    | setAuthUserDataType | toggleFollowType | setFollowingInProgressType | changeStatusType
+    | setAuthUserDataType | toggleFollowType | setFollowingInProgressType | changeStatusType |logoutUserType
 
 
 export type storeType = {
