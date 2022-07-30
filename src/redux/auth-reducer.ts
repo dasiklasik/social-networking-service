@@ -2,6 +2,7 @@ import {AnyAction, Dispatch, ThunkDispatch} from "@reduxjs/toolkit";
 import {authAPI} from "../api/api";
 import {formDataType} from "../components/Login/LoginForm";
 import {reduxStoreType} from "./redux-store";
+import {stopSubmit} from "redux-form";
 
 enum AUTH_TYPES {
     SET_AUTH_USER_DATA = 'SET_AUTH_USER_DATA',
@@ -49,7 +50,11 @@ export const authUser = () => (dispatch: Dispatch) => {
 export const login = (formData: formDataType) => (dispatch: ThunkDispatch<reduxStoreType, void, AnyAction>) => {
     authAPI.login(formData)
         .then(response => {
-                dispatch(authUser())
+                if (response.resultCode === 0) {
+                    dispatch(authUser())
+                } else {
+                    dispatch(stopSubmit('login', {_error: response.messages[0]}))
+                }
             }
         )
 

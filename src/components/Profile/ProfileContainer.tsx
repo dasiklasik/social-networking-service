@@ -15,7 +15,7 @@ type ProfileContainerPropsType = {
     url: Readonly<Params<string>>
     setProfileStatus: (status: string) => void
     getProfileStatus: (userId: number) => void
-    userId: number
+    authUserId: number
 }
 
 
@@ -24,7 +24,7 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType> {
     componentDidMount() {
         let userId: number | string | undefined = this.props.url['userId']
         if (userId === undefined) {
-            this.props.userId ? userId = this.props.userId : userId = '2'
+            this.props.authUserId ? userId = this.props.authUserId : userId = '2'
         }
         this.props.getProfileData(+userId)
         this.props.getProfileStatus(+userId)
@@ -48,7 +48,7 @@ type ProfileContainerWithUrlPropsType = {
     getProfileData: (userId: number) => void
     setProfileStatus: (status: string) => void
     getProfileStatus: (userId: number) => void
-    userId: number
+    authUserId: number
 }
 
 const ProfileContainerWithUrl = (props: ProfileContainerWithUrlPropsType) => {
@@ -62,11 +62,10 @@ const mapStateToProps = (state: reduxStoreType) => {
     return {
         profile: state.profilePage.profileInfo,
         status: state.profilePage.status,
-        userId: state.auth.id
+        authUserId: state.auth.id
     }
 }
 
 export default compose<React.ComponentType>(
     connect(mapStateToProps, {getProfileData, setProfileStatus, getProfileStatus}),
-    withAuthRedirect,
 )(ProfileContainerWithUrl)

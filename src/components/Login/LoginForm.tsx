@@ -2,6 +2,7 @@ import React from "react";
 import {Field, InjectedFormProps} from "redux-form";
 import {SuperInput} from "../common/formsControls/FormsControls";
 import {required} from "../../utils/validators";
+import styles from './LoginForm.module.css'
 
 export type formDataType = {
     email: string
@@ -30,6 +31,9 @@ export const LoginForm: React.FC<InjectedFormProps<formDataType>> = (props) => {
             <div>
                 <Field name={'rememberMe'} type={'checkbox'} component={'input'}/>remember me
             </div>
+            {props.error ? <div className={styles.formError}>
+                {props.error}
+            </div> : null}
             <div>
                 <button type={'submit'}>login</button>
             </div>
