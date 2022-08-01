@@ -1,11 +1,10 @@
 import React from "react";
 import {Profile} from "./Profile";
 import {connect} from "react-redux";
-import {getProfileData, getProfileStatus, setProfileStatus} from "../../redux/profileReducer";
+import {getProfileData, getProfileStatus, setProfileStatus} from "../../redux/reducers/profileReducer";
 import {profileInfoType} from "../../redux/state";
 import {Navigate, Params, useParams} from "react-router-dom";
 import {reduxStoreType} from "../../redux/redux-store";
-import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "@reduxjs/toolkit";
 
 type ProfileContainerPropsType = {

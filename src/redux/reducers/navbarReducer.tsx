@@ -1,4 +1,4 @@
-import {actionType, navbarType} from "./state";
+import {actionType, navbarType} from "../state";
 
 
 const initialState: navbarType = {

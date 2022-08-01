@@ -1,6 +1,6 @@
-import {actionType, usersInfo,} from "./state";
+import {actionType, usersInfo,} from "../state";
 import {Dispatch} from "@reduxjs/toolkit";
-import {usersAPI} from "../api/api";
+import {usersAPI} from "../../api/api";
 
 enum USER_TYPES {
     TOGGLE_FOLLOW = 'TOGGLE_FOLLOW',
@@ -63,7 +63,7 @@ export const setFollowingInProgress = (userId: number, isAdding: boolean) =>
 
 
 //thunks
-export const getUsers = (pageNumber: number, pageSize: number) => (dispatch: Dispatch) => {
+export const fetchUsers = (pageNumber: number, pageSize: number) => (dispatch: Dispatch) => {
     dispatch(setIsFetching(true))
     usersAPI.getUsers(pageNumber, pageSize)
         .then(response => {

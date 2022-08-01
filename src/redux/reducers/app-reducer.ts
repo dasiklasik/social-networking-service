@@ -1,5 +1,5 @@
 import {AnyAction, ThunkDispatch} from "@reduxjs/toolkit";
-import {reduxStoreType} from "./redux-store";
+import {reduxStoreType} from "../redux-store";
 import {authUser} from "./auth-reducer";
 
 enum APP_TYPES {

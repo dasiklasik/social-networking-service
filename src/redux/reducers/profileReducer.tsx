@@ -1,6 +1,6 @@
-import {actionType, profileInfoType, profilePageType} from "./state";
+import {actionType, profileInfoType, profilePageType} from "../state";
 import {Dispatch} from "@reduxjs/toolkit";
-import {profileAPI} from "../api/api";
+import {profileAPI} from "../../api/api";
 
 enum PROFILE_TYPES {
     ADD_POST = 'ADD_POST',

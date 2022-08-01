@@ -13,7 +13,7 @@ import DialogsContainer from './Dialogs/DialogsContainer';
 import { LoginContainer } from './Login/LoginContainer';
 import {connect} from "react-redux";
 import {reduxStoreType} from "../redux/redux-store";
-import {initialize} from "../redux/app-reducer";
+import {initialize} from "../redux/reducers/app-reducer";
 import {Preloader} from "./common/Preloader/Preloader";
 
 type AppPropsType = {

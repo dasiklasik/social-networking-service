@@ -1,5 +1,5 @@
 import React from "react";
-import {actionType, dialogsPageType, messagesDataType} from "./state";
+import {actionType, dialogsPageType, messagesDataType} from "../state";
 
 enum DIALOGS_TYPES {
     ADD_MESSAGE = 'ADD_MESSAGE',

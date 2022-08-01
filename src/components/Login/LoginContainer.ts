@@ -1,5 +1,5 @@
 import {reduxStoreType} from "../../redux/redux-store";
-import {login} from "../../redux/auth-reducer";
+import {login} from "../../redux/reducers/auth-reducer";
 import {connect} from "react-redux";
 import {Login} from "./Login";
 

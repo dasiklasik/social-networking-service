@@ -1,4 +1,4 @@
-import {userItemType} from "../../redux/usersReducer";
+import {userItemType} from "../../redux/reducers/usersReducer";
 import s from "./Users.module.css";
 import {UserItem} from "./UserItem/UserItem";
 import React from "react";

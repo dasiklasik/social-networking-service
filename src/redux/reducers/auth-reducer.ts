@@ -1,7 +1,7 @@
 import {AnyAction, Dispatch, ThunkDispatch} from "@reduxjs/toolkit";
-import {authAPI} from "../api/api";
-import {formDataType} from "../components/Login/LoginForm";
-import {reduxStoreType} from "./redux-store";
+import {authAPI} from "../../api/api";
+import {formDataType} from "../../components/Login/LoginForm";
+import {reduxStoreType} from "../redux-store";
 import {stopSubmit} from "redux-form";
 
 enum AUTH_TYPES {
