@@ -3,7 +3,7 @@ import {Profile} from "./Profile";
 import {connect} from "react-redux";
 import {getProfileData, getProfileStatus, setProfileStatus} from "../../redux/profileReducer";
 import {profileInfoType} from "../../redux/state";
-import {Params, useParams} from "react-router-dom";
+import {Navigate, Params, useParams} from "react-router-dom";
 import {reduxStoreType} from "../../redux/redux-store";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "@reduxjs/toolkit";
@@ -31,7 +31,7 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType> {
     }
 
     render() {
-
+        if (!this.props.url['userId'] && !this.props.authUserId) return <Navigate to={'/login'}/>
         return (
             <Profile
                 profile={this.props.profile}

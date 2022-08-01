@@ -7,15 +7,10 @@ import {reduxStoreType} from "../../redux/redux-store";
 type HeaderContainerPropsType = {
     isAuth: boolean
     login: string | null
-    authUser: () => void
     logout: () => void
 }
 
 class HeaderContainer extends React.Component<HeaderContainerPropsType> {
-
-    componentDidMount() {
-        this.props.authUser()
-    }
 
     render() {
         return (
@@ -36,7 +31,6 @@ const mapStateToProps = (state: reduxStoreType) => {
 }
 
 const funcProps = {
-    authUser,
     logout,
 }
 

@@ -39,7 +39,7 @@ export const logoutUser = () =>
 
 //thunks
 export const authUser = () => (dispatch: Dispatch) => {
-    authAPI.getAuth()
+    return authAPI.getAuth()
         .then(response => {
             if (response.resultCode === 0) {
                 dispatch(setAuthUserData(response.data))
