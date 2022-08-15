@@ -8,8 +8,7 @@ import {connect} from "react-redux";
 
 const mapStateToProps = (state: stateType) => {
     return {
-        posts: state.profilePage.postData
-            .map(p => <Post id={p.id} message={p.message} likesCount={p.likesCount}/>),
+        posts: state.profilePage.postData,
     }
 }
 

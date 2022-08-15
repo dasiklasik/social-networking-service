@@ -1,15 +1,16 @@
 import React from "react";
 import s from './PostsWrapper.module.css'
 import {PostFormContainer, postFormType} from "./PostForm/PostForm";
+import {postDataType} from "../../../redux/state";
+import { Post } from "./Post/Post";
 
 type PostsWrapperPropsType = {
-    posts: JSX.Element[]
+    posts: Array<postDataType>
     addPost: (text: string) => void
 }
 
 
-
-export function PostsWrapper(props: PostsWrapperPropsType) {
+export const PostsWrapper = React.memo((props: PostsWrapperPropsType) => {
 
     const {addPost} = props
 
@@ -17,16 +18,18 @@ export function PostsWrapper(props: PostsWrapperPropsType) {
         addPost(data.postText)
     }
 
+    const posts = props.posts.map(p => <Post id={p.id} message={p.message} likesCount={p.likesCount}/>)
+
     return (
         <div className={s.posts}>
             <h3>My posts</h3>
             <PostFormContainer
                 onSubmit={submit}
             />
-            {props.posts}
+            {posts}
         </div>
     )
-}
+})
 
 
 

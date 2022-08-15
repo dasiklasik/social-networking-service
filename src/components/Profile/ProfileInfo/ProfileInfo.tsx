@@ -2,7 +2,6 @@ import React from "react";
 import s from './ProfileInfo.module.css'
 import {profileInfoType} from "../../../redux/state";
 import {Preloader} from "../../common/Preloader/Preloader";
-import {ProfileStatus} from "./ProfileStatus/ProfileStatus";
 import {ProfileStatusWithHooks} from "./ProfileStatus/ProfileStatusWithHooks";
 
 type ProfileInfoPropsType = {
@@ -10,6 +9,7 @@ type ProfileInfoPropsType = {
     status: string
     setProfileStatus: (status: string) => void
 }
+
 
 function ProfileInfo(props: ProfileInfoPropsType) {
 
@@ -34,7 +34,7 @@ function ProfileInfo(props: ProfileInfoPropsType) {
                 <div className={s.profile_info}>
                     <div>{`${profileInfoData.fullName} `}</div>
                     <div>Web Site: {profileInfoData.contacts.website}</div>
-                    <ProfileStatusWithHooks status={status} setProfileStatus={ setProfileStatus}/>
+                    <ProfileStatusWithHooks status={status} setProfileStatus={setProfileStatus}/>
                 </div>
             </div>
         </div>
