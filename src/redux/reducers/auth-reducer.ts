@@ -32,7 +32,6 @@ export const authReducer = (state = initialState, action: actionType) => {
 //actions
 export const setAuthUserData = (payload: { id: number, email: string, login: string }) =>
     ({type: AUTH_TYPES.SET_AUTH_USER_DATA, payload} as const)
-
 export const logoutUser = () =>
     ({type: AUTH_TYPES.LOGOUT_USER} as const)
 

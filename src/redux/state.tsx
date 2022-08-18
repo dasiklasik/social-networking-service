@@ -1,18 +1,19 @@
-import {addPostType, changeStatusType, setUserProfileType} from "./reducers/profileReducer";
-import {addMessageType} from "./reducers/dialogsReducer";
+import {addPostType, changeStatusType, deletePostType, setUserProfileType} from "./reducers/profile-reducer";
+import {addMessageType} from "./reducers/dialogs-reducer";
 import {
     changeCurrentPageType, setFollowingInProgressType, setIsFetchingType,
     setTotalUsersCountType,
     setUsersType, toggleFollowType,
     userItemType
-} from "./reducers/usersReducer";
+} from "./reducers/users-reducer";
 import {logoutUserType, setAuthUserDataType} from "./reducers/auth-reducer";
 
 
 export type actionType = addPostType |
     addMessageType |
     setUsersType | setTotalUsersCountType | changeCurrentPageType | setIsFetchingType | setUserProfileType
-    | setAuthUserDataType | toggleFollowType | setFollowingInProgressType | changeStatusType |logoutUserType
+    | setAuthUserDataType | toggleFollowType | setFollowingInProgressType | changeStatusType | logoutUserType
+    | deletePostType
 
 
 export type storeType = {

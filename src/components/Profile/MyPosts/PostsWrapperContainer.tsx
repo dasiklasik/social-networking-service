@@ -2,7 +2,7 @@ import React from "react";
 import {PostsWrapper} from "./PostsWrapper";
 import {stateType} from "../../../redux/state";
 import {Post} from "./Post/Post";
-import {addPost} from "../../../redux/reducers/profileReducer";
+import {addPost} from "../../../redux/reducers/profile-reducer";
 import {connect} from "react-redux";
 
 

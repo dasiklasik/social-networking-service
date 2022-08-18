@@ -4,7 +4,7 @@ import {
     changeCurrentPage, followUser, fetchUsers,
     unfollowUser,
     userItemType
-} from "../../redux/reducers/usersReducer";
+} from "../../redux/reducers/users-reducer";
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
 import {reduxStoreType} from "../../redux/redux-store";

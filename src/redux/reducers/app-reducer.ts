@@ -22,7 +22,7 @@ export const appReducer = (state = initialState, action: actionType) => {
 }
 
 //actions
-const initializedSuccess = () => ({type: APP_TYPES.INITIALIZED_SUCCESS} as const)
+export const initializedSuccess = () => ({type: APP_TYPES.INITIALIZED_SUCCESS} as const)
 
 //thunks
 export const initialize = () => (dispatch: ThunkDispatch<reduxStoreType, void, AnyAction>) => {

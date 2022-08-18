@@ -1,6 +1,6 @@
 import React from "react";
 import s from './UserItem.module.css'
-import {userItemType} from "../../../redux/reducers/usersReducer";
+import {userItemType} from "../../../redux/reducers/users-reducer";
 import {NavLink} from "react-router-dom";
 
 type userItemPropsType = {

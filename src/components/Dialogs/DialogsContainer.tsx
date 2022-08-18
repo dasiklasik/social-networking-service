@@ -3,7 +3,7 @@ import DialogItem from "./DialogItem/DialogItem";
 import MessageItem from "./MessageItem/MessageItem";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
-import {addMessage} from "../../redux/reducers/dialogsReducer";
+import {addMessage} from "../../redux/reducers/dialogs-reducer";
 import {reduxStoreType} from "../../redux/redux-store";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "@reduxjs/toolkit";

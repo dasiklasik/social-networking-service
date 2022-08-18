@@ -1,5 +1,5 @@
 import axios from "axios";
-import {userItemType} from "../redux/reducers/usersReducer";
+import {userItemType} from "../redux/reducers/users-reducer";
 import {profileInfoType} from "../redux/state";
 
 

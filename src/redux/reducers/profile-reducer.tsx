@@ -4,6 +4,7 @@ import {profileAPI} from "../../api/api";
 
 enum PROFILE_TYPES {
     ADD_POST = 'ADD_POST',
+    DELETE_POST = 'DELETE_POST',
     SET_USER_PROFILE = 'SET_USER_PROFILE',
     CHANGE_STATUS = 'CHANGE_STATUS',
 }
@@ -43,6 +44,8 @@ export const profileReducer = (state: profilePageType = initialState, action: ac
         case PROFILE_TYPES.ADD_POST:
             const newPost = {id: 3, message: action.text, likesCount: '0',}
             return {...state, postData: [newPost, ...state.postData]}
+        case PROFILE_TYPES.DELETE_POST:
+            return {...state, postData: state.postData.filter(p => p.id !== action.id)}
         case PROFILE_TYPES.SET_USER_PROFILE:
             return {...state, profileInfo: {...action.profileInfo}}
         case PROFILE_TYPES.CHANGE_STATUS:
@@ -56,10 +59,13 @@ export const profileReducer = (state: profilePageType = initialState, action: ac
 //actions
 export const addPost = (text: string) =>
     ({type: PROFILE_TYPES.ADD_POST, text} as const)
+export const deletePost = (id: number) =>
+    ({type: PROFILE_TYPES.DELETE_POST, id} as const)
 export const setUserProfile = (profileInfo: profileInfoType) =>
     ({type: PROFILE_TYPES.SET_USER_PROFILE, profileInfo,} as const)
 export const changeStatus = (status: string) =>
     ({type: PROFILE_TYPES.CHANGE_STATUS, status,} as const)
+
 
 
 //thunks
@@ -88,5 +94,6 @@ export const setProfileStatus = (status: string) => (dispatch: Dispatch) => {
 export type addPostType = ReturnType<typeof addPost>
 export type setUserProfileType = ReturnType<typeof setUserProfile>
 export type changeStatusType = ReturnType<typeof changeStatus>
+export type deletePostType = ReturnType<typeof deletePost>
 
 
