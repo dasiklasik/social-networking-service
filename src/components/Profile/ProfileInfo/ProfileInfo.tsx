@@ -23,7 +23,6 @@ function ProfileInfo(props: ProfileInfoPropsType) {
         return <Preloader/>
     }
 
-
     return (
         <div>
             <div className={s.profile}>

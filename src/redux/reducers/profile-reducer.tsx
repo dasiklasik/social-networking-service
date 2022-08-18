@@ -3,10 +3,10 @@ import {Dispatch} from "@reduxjs/toolkit";
 import {profileAPI} from "../../api/api";
 
 enum PROFILE_TYPES {
-    ADD_POST = 'ADD_POST',
-    DELETE_POST = 'DELETE_POST',
-    SET_USER_PROFILE = 'SET_USER_PROFILE',
-    CHANGE_STATUS = 'CHANGE_STATUS',
+    ADD_POST = 'social_network/profile/ADD_POST',
+    DELETE_POST = 'social_network/profile/DELETE_POST',
+    SET_USER_PROFILE = 'social_network/profile/SET_USER_PROFILE',
+    CHANGE_STATUS = 'social_network/profile/CHANGE_STATUS',
 }
 
 const initialState: profilePageType = {
@@ -67,26 +67,21 @@ export const changeStatus = (status: string) =>
     ({type: PROFILE_TYPES.CHANGE_STATUS, status,} as const)
 
 
-
 //thunks
-export const getProfileData = (userId: number) => (dispatch: Dispatch) => {
-    profileAPI.getProfileData(userId)
-        .then(response => {
-            dispatch(setUserProfile(response))
-        })
+export const getProfileData = (userId: number) => async (dispatch: Dispatch) => {
+    const response = await profileAPI.getProfileData(userId)
+    dispatch(setUserProfile(response))
 }
-export const getProfileStatus = (userId: number) => (dispatch: Dispatch) => {
-    profileAPI.getStatus(userId)
-        .then(response => dispatch(changeStatus(response)))
+export const getProfileStatus = (userId: number) => async (dispatch: Dispatch) => {
+    const response = await profileAPI.getStatus(userId)
+    dispatch(changeStatus(response))
 }
 
-export const setProfileStatus = (status: string) => (dispatch: Dispatch) => {
-    profileAPI.setStatus(status)
-        .then(response => {
-            if (response.resultCode === 0) {
-                dispatch(changeStatus(status))
-            }
-        })
+export const setProfileStatus = (status: string) => async (dispatch: Dispatch) => {
+    const response = await profileAPI.setStatus(status)
+    if (response.resultCode === 0) {
+        dispatch(changeStatus(status))
+    }
 }
 
 

@@ -5,8 +5,8 @@ import {reduxStoreType} from "../redux-store";
 import {stopSubmit} from "redux-form";
 
 enum AUTH_TYPES {
-    SET_AUTH_USER_DATA = 'SET_AUTH_USER_DATA',
-    LOGOUT_USER = 'LOGOUT_USER',
+    SET_AUTH_USER_DATA = 'social_network/auth/SET_AUTH_USER_DATA',
+    LOGOUT_USER = 'social_network/auth/LOGOUT_USER',
 }
 
 const initialState: authStateType = {
@@ -37,33 +37,27 @@ export const logoutUser = () =>
 
 
 //thunks
-export const authUser = () => (dispatch: Dispatch) => {
-    return authAPI.getAuth()
-        .then(response => {
-            if (response.resultCode === 0) {
-                dispatch(setAuthUserData(response.data))
-            }
-        })
+export const authUser = () => async (dispatch: Dispatch) => {
+    const response = await authAPI.getAuth()
+    if (response.resultCode === 0) {
+        dispatch(setAuthUserData(response.data))
+    }
 }
 
-export const login = (formData: formDataType) => (dispatch: ThunkDispatch<reduxStoreType, void, AnyAction>) => {
-    authAPI.login(formData)
-        .then(response => {
-                if (response.resultCode === 0) {
-                    dispatch(authUser())
-                } else {
-                    dispatch(stopSubmit('login', {_error: response.messages[0]}))
-                }
-            }
-        )
-
+export const login = (formData: formDataType) => async (dispatch: ThunkDispatch<reduxStoreType, void, AnyAction>) => {
+    const response = await authAPI.login(formData)
+    if (response.resultCode === 0) {
+        dispatch(authUser())
+    } else {
+        dispatch(stopSubmit('login', {_error: response.messages[0]}))
+    }
 }
 
-export const logout = () => (dispatch: Dispatch) => {
-    return authAPI.logout()
-        .then(response => {
-            dispatch(logoutUser())
-        })
+export const logout = () => async (dispatch: Dispatch) => {
+    const response = await authAPI.logout()
+    if (response.resultCode === 0) {
+        dispatch(logoutUser())
+    }
 }
 
 

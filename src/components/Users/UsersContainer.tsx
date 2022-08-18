@@ -13,8 +13,8 @@ import {
     getIsFetching,
     getPageSize,
     getTotalUsersCount, getUsers,
-} from "../../redux/selectors/userSelectors";
-import {getIsAuth} from "../../redux/selectors/authSelector";
+} from "../../redux/selectors/user-selectors";
+import {getIsAuth} from "../../redux/selectors/auth-selector";
 
 type usersPropsType = {
     users: Array<userItemType>

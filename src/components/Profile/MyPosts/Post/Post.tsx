@@ -7,8 +7,6 @@ type PostPropsType = {
     likesCount: string
 }
 
-
-
 export function Post(props: PostPropsType) {
 
     return (
@@ -17,7 +15,6 @@ export function Post(props: PostPropsType) {
             <div>{props.message}</div>
             <div>{props.likesCount} likes</div>
             <div><span>like</span><span> displike</span></div>
-
         </div>
 
     )

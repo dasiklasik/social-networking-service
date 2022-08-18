@@ -9,10 +9,7 @@ type PostsWrapperPropsType = {
     addPost: (text: string) => void
 }
 
-
-export const PostsWrapper = React.memo((props: PostsWrapperPropsType) => {
-
-    const {addPost} = props
+export const PostsWrapper = React.memo(({addPost, ...props}: PostsWrapperPropsType) => {
 
     const submit = (data: postFormType) => {
         addPost(data.postText)

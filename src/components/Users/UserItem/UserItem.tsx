@@ -2,6 +2,7 @@ import React from "react";
 import s from './UserItem.module.css'
 import {userItemType} from "../../../redux/reducers/users-reducer";
 import {NavLink} from "react-router-dom";
+import {UserImage} from "./UserImage/UserImage";
 
 type userItemPropsType = {
     userInfo: userItemType
@@ -35,18 +36,13 @@ export const UserItem = (props: userItemPropsType) => {
         <div>
             <div className={s.wrapper}>
                 <div>
-                    <NavLink to={'/profile/' + userInfo.id.toString()}>
-                        <img className={s.avatar} src={userInfo.photos.small ? userInfo.photos.small :
-                            'https://avatarko.ru/img/kartinka/17/kot_naushniki_16067.jpg'} alt={''}/>
-                    </NavLink>
-
+                    <UserImage userId={userInfo.id} userSmallFoto={userInfo.photos.small}/>
                     {isAuth && userInfo.followed ?
                         <button disabled={followingInProgress.some(u => u === userInfo.id)}
                                 onClick={onUnfollowHandler}>Unfollow</button> :
                         isAuth ? <button disabled={followingInProgress.some(u => u === userInfo.id)}
                                          onClick={onFollowHandler}>Follow</button> : null
                     }
-
                 </div>
                 <div className={s.desc}>
                     <div>

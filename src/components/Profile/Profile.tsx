@@ -10,7 +10,7 @@ type ProfilePropsType = {
     setProfileStatus: (status: string) => void
 }
 
-export function Profile(props: ProfilePropsType) {
+export const Profile = (props: ProfilePropsType) => {
 
     const {
         profile,

@@ -1,6 +1,8 @@
 import React, {DetailedHTMLProps, InputHTMLAttributes, TextareaHTMLAttributes} from "react";
 import {WrappedFieldProps} from "redux-form/lib/Field";
 import styles from './FormsControls.module.css'
+import {Field} from "redux-form";
+import {required} from "../../../utils/validators";
 
 type DefaultTextareaPropsType = DetailedHTMLProps<TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement>
 type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
@@ -40,4 +42,21 @@ export const SuperInput = ({input, meta, ...props}: SuperInputPropsType) => {
     return <FormControl input={input} meta={meta} hasError={hasError}>
         <input className={errorClassName} {...props} {...input}/>
     </FormControl>
+}
+
+
+type CreateFormFieldType =  {
+    name: string
+    type: string
+    component: string | Function
+    placeholder?: string
+    validate?: Array<Function>
+}
+
+export const CreateFormField = (props: CreateFormFieldType) => {
+    return (
+        <div>
+            <Field {...props}/>
+        </div>
+    )
 }

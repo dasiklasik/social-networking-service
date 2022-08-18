@@ -8,7 +8,7 @@ type HeaderPropsType = {
     login: string | null
 }
 
-export function Header(props: HeaderPropsType) {
+export const Header = (props: HeaderPropsType) => {
 
     const {
         isAuth,
@@ -22,8 +22,10 @@ export function Header(props: HeaderPropsType) {
                 src={'https://fs.getcourse.ru/fileservice/file/download/a/33058/sc/207/h/14f49ae4d692824ba22fbf13a797ed88.png'}
                 alt={'logo'}/>
             <div className={s.loginBlock}>
-                {isAuth ? <><span>Welcome {login}</span><button onClick={logout}>Log out</button></>
-                    :<NavLink to={'/login'}>Login</NavLink> }
+                {isAuth ? <><span>Welcome {login}</span>
+                        <button onClick={logout}>Log out</button>
+                    </>
+                    : <NavLink to={'/login'}>Login</NavLink>}
             </div>
         </header>
     )

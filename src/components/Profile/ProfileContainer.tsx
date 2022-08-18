@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {Profile} from "./Profile";
 import {connect} from "react-redux";
 import {getProfileData, getProfileStatus, setProfileStatus} from "../../redux/reducers/profile-reducer";
@@ -11,49 +11,40 @@ type ProfileContainerPropsType = {
     profile: profileInfoType
     status: string
     getProfileData: (userId: number) => void
-    url: Readonly<Params<string>>
     setProfileStatus: (status: string) => void
     getProfileStatus: (userId: number) => void
     authUserId: number
 }
 
+const ProfileContainer = (props: ProfileContainerPropsType) => {
 
-class ProfileContainer extends React.Component<ProfileContainerPropsType> {
+    const {
+        profile,
+        getProfileData,
+        getProfileStatus,
+        status,
+        setProfileStatus,
+        authUserId,
+    } = props
 
-    componentDidMount() {
-        let userId: number | string | undefined = this.props.url['userId']
+    useEffect(() => {
+        let userId: number | string | undefined = url['userId']
         if (userId === undefined) {
-            this.props.authUserId ? userId = this.props.authUserId : userId = '2'
+            authUserId ? userId = authUserId : userId = '2'
         }
-        this.props.getProfileData(+userId)
-        this.props.getProfileStatus(+userId)
-    }
+        getProfileData(+userId)
+        getProfileStatus(+userId)
+    }, [])
 
-    render() {
-        if (!this.props.url['userId'] && !this.props.authUserId) return <Navigate to={'/login'}/>
-        return (
-            <Profile
-                profile={this.props.profile}
-                status={this.props.status}
-                setProfileStatus={this.props.setProfileStatus}
-            />
-        )
-    }
-}
-
-type ProfileContainerWithUrlPropsType = {
-    profile: profileInfoType
-    status: string
-    getProfileData: (userId: number) => void
-    setProfileStatus: (status: string) => void
-    getProfileStatus: (userId: number) => void
-    authUserId: number
-}
-
-const ProfileContainerWithUrl = (props: ProfileContainerWithUrlPropsType) => {
     const url = useParams()
+
+    if (!url['userId'] && !authUserId) return <Navigate to={'/login'}/>
     return (
-        <ProfileContainer {...props} url={url}/>
+        <Profile
+            profile={profile}
+            status={status}
+            setProfileStatus={setProfileStatus}
+        />
     )
 }
 
@@ -67,4 +58,4 @@ const mapStateToProps = (state: reduxStoreType) => {
 
 export default compose<React.ComponentType>(
     connect(mapStateToProps, {getProfileData, setProfileStatus, getProfileStatus}),
-)(ProfileContainerWithUrl)
+)(ProfileContainer)

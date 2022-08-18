@@ -12,7 +12,7 @@ type dialogsPropsType = {
 }
 
 
-function Dialogs(props: dialogsPropsType) {
+export const Dialogs = (props: dialogsPropsType) => {
 
     const {
         dialogsData,
@@ -46,5 +46,3 @@ function Dialogs(props: dialogsPropsType) {
         </div>
     )
 }
-
-export default Dialogs;

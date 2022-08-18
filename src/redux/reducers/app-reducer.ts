@@ -3,7 +3,7 @@ import {reduxStoreType} from "../redux-store";
 import {authUser} from "./auth-reducer";
 
 enum APP_TYPES {
-    INITIALIZED_SUCCESS = 'INITIALIZED_SUCCESS',
+    INITIALIZED_SUCCESS = 'social_network/app/INITIALIZED_SUCCESS',
 }
 
 const initialState: initialStateType = {
@@ -17,7 +17,8 @@ export const appReducer = (state = initialState, action: actionType) => {
                 ...state,
                 initialized: true,
             }
-        default: return state
+        default:
+            return state
     }
 }
 
@@ -25,11 +26,9 @@ export const appReducer = (state = initialState, action: actionType) => {
 export const initializedSuccess = () => ({type: APP_TYPES.INITIALIZED_SUCCESS} as const)
 
 //thunks
-export const initialize = () => (dispatch: ThunkDispatch<reduxStoreType, void, AnyAction>) => {
-    dispatch(authUser())
-        .then(response => {
-            dispatch(initializedSuccess())
-        })
+export const initialize = () => async (dispatch: ThunkDispatch<reduxStoreType, void, AnyAction>) => {
+    await dispatch(authUser())
+    dispatch(initializedSuccess())
 }
 
 //types
